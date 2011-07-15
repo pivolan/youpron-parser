@@ -9,6 +9,7 @@ class TestController < ActionController::Base
 		@niger = "sdfffweweew"
 		massive = {'vas'=>'erter', 'kol'=>'$$%%'}
 		test = {}
+		nix = []
 		for key, value in massive
 			test[key] = massive[key]
 			puts key
