@@ -29,6 +29,7 @@ GEM
       activesupport (= 3.0.9)
     activesupport (3.0.9)
     arel (2.0.10)
+    bson (1.3.1)
     builder (2.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
@@ -39,6 +40,14 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    mongo (1.3.1)
+      bson (>= 1.3.1)
+    mongo_mapper (0.9.1)
+      activemodel (~> 3.0)
+      activesupport (~> 3.0)
+      plucky (~> 0.3.8)
+    plucky (0.3.8)
+      mongo (~> 1.3)
     polyglot (0.3.1)
     rack (1.2.3)
     rack-mount (0.6.14)
@@ -70,4 +79,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  mongo_mapper
   rails (= 3.0.9)
