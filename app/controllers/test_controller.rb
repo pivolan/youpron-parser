@@ -1,9 +1,9 @@
 class TestController < ActionController::Base
-	layout 'application'
 
 	def test
-		@test = "test"
-	end 
+    @incUser = Incrementor[:user].inc
+    @incVideo = Incrementor[:video].inc
+	end
 
 	def test2
 		@vasya = "kol"
