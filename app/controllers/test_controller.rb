@@ -1,11 +1,12 @@
 class TestController < ActionController::Base
+	layout 'application'
 
 	def test
 		@test = "test"
-	end
+	end 
 
 	def test2
-		@vasya = "kolya"
+		@vasya = "kol"
 		@niger = "sdfffweweew"
 		massive = {'vas'=>'erter', 'kol'=>'$$%%'}
 		test = {}

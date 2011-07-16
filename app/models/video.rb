@@ -9,7 +9,7 @@ class User
   key :rating, Float
   key :date, DateTime
   many :comments
-  many :categorys
+  many :categories
   many :downloads
   many :actors
 
