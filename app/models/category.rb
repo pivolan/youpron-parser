@@ -3,6 +3,4 @@ class Category
 
   key :name, String
 
-  belongs_to :video
-
 end

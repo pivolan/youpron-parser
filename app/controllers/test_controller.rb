@@ -1,8 +1,7 @@
 class TestController < ActionController::Base
 
 	def test
-    @incUser = Incrementor[:user].inc
-    @incVideo = Incrementor[:video].inc
+		@date = Integer(DateTime.strptime('October 3, 2006', "%B %e, %Y"))
 	end
 
 	def test2
