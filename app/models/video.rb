@@ -1,4 +1,4 @@
-class User
+class Video
   include MongoMapper::Document
 
   key :name, String
@@ -10,7 +10,7 @@ class User
   key :date, DateTime
   many :comments
   many :tags
-  many :categories
+  many :categorys
   many :downloads
   many :actors
 

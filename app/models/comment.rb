@@ -1,4 +1,4 @@
-class User
+class Comment
   include MongoMapper::Document
 
   key :name, String

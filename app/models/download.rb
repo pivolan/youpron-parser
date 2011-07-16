@@ -1,4 +1,4 @@
-class User
+class Download
   include MongoMapper::Document
 
   key :name, String

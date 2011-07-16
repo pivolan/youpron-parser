@@ -1,4 +1,4 @@
-class User
+class Actor
   include MongoMapper::Document
 
   key :name, String

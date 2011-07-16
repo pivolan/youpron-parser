@@ -1,4 +1,4 @@
-class User
+class Image
   include MongoMapper::Document
 
   key :url, String
