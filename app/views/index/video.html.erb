@@ -6,13 +6,12 @@
 		<div class="view-content">
 <% i=1
 	 @list.each do |item| %>
-			<div class="views-row <%= cycle("views-row-odd", "views-row-even") -%> <% if @list.first==item  %>views-row-first<% elsif(@list.last==item) %> views-row-last <% end %>">
 				<div class="screens-thumbs-index thumb-<%= i %>">
 					<div class="thumb">
 						<a href="/video/<%= item._id.to_s %>"><img id='' class='bluga-thumbnail medium2' src='<%= item.images[0].to_s %>'/></a><br/>
 
 						<div class="indexlink">
-							<a href="/video/<%= item._id.to_s %>" rel="bookmark" title="<%= item.name.to_s %>"><%= item.name.length>24? item.name.to_s[0..24]+'...': item.name.to_s %></a>
+							<a href="/video/<%= item._id.to_s %>" rel="bookmark" title="<%= item.name.to_s %>"><%= item.name.to_s %></a>
 
 							<div class="nodetype"><a><%= item.duration.to_s %></a></div>
 						</div>
@@ -20,7 +19,6 @@
 					<!-- /.thumb -->
 
 				</div>
-			</div>
 <% i+=1
 	 end %>
 

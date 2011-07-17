@@ -1271,7 +1271,7 @@ table tr.even {
 /* ads */
 .advert-main {
 	padding: 10px 0;
-	width: 950px;
+	width: 988px;
 	text-align: center;
 }
 
@@ -1423,7 +1423,7 @@ body {
 
 /* #main-menu */
 #main-menu {
-  width: 950px;
+  width: 988px;
 }
 
 #header #logo h1 {
@@ -1855,9 +1855,10 @@ body.home #content #content-main {
 /* .screens-thumbs-index */
 .screens-thumbs-index {
 	float: left;
-	margin: 0 13px 13px 0;
+	margin: 0 10px 13px 10px;
 }
 
+/*
 .span-18 .thumb-3,
 .span-18 .thumb-6,
 .span-18 .thumb-9,
@@ -1869,15 +1870,18 @@ body.home #content #content-main {
 {
   margin-right: 0 !important;
 }
+*/
 
-.span-24 .thumb-4, 
+/*
+.span-24 .thumb-4,
 .span-24 .thumb-8,
 .span-24 .thumb-12,
 .span-24 .thumb-16,
 .span-24 .thumb-20,
 .span-24 .thumb-24
 { margin-right: 0 !important; }
-  
+*/
+
 
 /* all thumbs */
 
@@ -1958,6 +1962,7 @@ body.home #content #content-main {
 	display: block;
 	color: #333;
 	font-weight: bold;
+	font-size: 15px;
 	padding: 5px 10px 0 10px;
 }
 
@@ -2010,10 +2015,15 @@ div.bluga-waiting.medium2 {
 }
 
 /* .nodetype */
+div.nodetype {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+}
 .screens-thumbs-index .nodetype a {
 	display: block;
 	color: #999;
-	text-align: left;
+	text-align: right;
 	padding-top: 2px;
 }
 
