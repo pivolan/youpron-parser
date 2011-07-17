@@ -1862,14 +1862,20 @@ body.home #content #content-main {
 .span-18 .thumb-6,
 .span-18 .thumb-9,
 .span-18 .thumb-12,
-.span-18 .thumb-15 {
+.span-18 .thumb-15,
+.span-18 .thumb-18,
+.span-18 .thumb-21,
+.span-18 .thumb-23
+{
   margin-right: 0 !important;
 }
 
 .span-24 .thumb-4, 
 .span-24 .thumb-8,
 .span-24 .thumb-12,
-.span-24 .thumb-16
+.span-24 .thumb-16,
+.span-24 .thumb-20,
+.span-24 .thumb-24
 { margin-right: 0 !important; }
   
 
@@ -2353,7 +2359,14 @@ div.notebook-image img,
 .store .thumb-6,
 .store .thumb-8,
 .store .thumb-10,
-.store .thumb-12 {
+.store .thumb-12,
+.store .thumb-14,
+.store .thumb-16,
+.store .thumb-18,
+.store .thumb-20,
+.store .thumb-22,
+.store .thumb-24,
+{
   margin-right: 0;
   padding-right: 0;
 }
