@@ -9,7 +9,7 @@ class User
 
 	def generate_short_url
 		dict = (0..9).to_a + ('a'..'z').to_a
-		new_short_url = Array.new(6) { (dict[rand(35)]) }.join until User.where(:short_url => new_short_url).count == 0
+		new_short_url = Array.new(4) { (dict[rand(35)]) }.join until User.where(:short_url => new_short_url).count == 0
 		@short_url = new_short_url
 		return new_short_url
 	end
