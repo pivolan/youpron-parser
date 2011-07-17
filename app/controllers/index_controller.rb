@@ -4,4 +4,17 @@ class IndexController < ApplicationController
 	def index
 
 	end
+	def login
+
+	end
+
+	def video
+		@list = Video.fields(:name, :images, :date, :duration).paginate(
+						:order			=>	:_id.desc,
+						:per_page   =>	24,
+						:page				=>	1
+		)
+
+
+	end
 end
