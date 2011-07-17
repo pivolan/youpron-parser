@@ -16,6 +16,6 @@ class TestController < ActionController::Base
 			puts value
 		end
 		@test = test
-  end
+	end
 
 end
