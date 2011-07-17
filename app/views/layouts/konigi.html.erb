@@ -1,366 +1,451 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
- <html xmlns="http://www.w3.org/1999/xhtml">
- <head>
- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <title>pivo.ruby | Porno</title>
- <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
- <link rel="schema.DCTERMS" href="http://purl.org/dc/terms/" />
- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <meta name="DC.title" content="konigi" />
- <meta name="DC.creator" content="Michael Angeles" />
-
- <meta name="DC.subject" content="user experience, information architecture, interaction design, visual design, interface design, uxd, ixd, ia, research, competitive analysis, competitive research, company information" />
- <meta name="DC.publisher" content="Konigi" />
- <meta name="DC.format" content="text/html; charset=utf-8" />
- <meta name="DC.identifier" scheme="DCTERMS.URI" content="http://konigi.com" />
- <meta name="keywords" content="user experience, information architecture, interaction design, visual design, interface design, uxd, ixd, ia, research, competitive analysis, competitive research, company information" />
- <meta name="robots" content="all" />
- <meta name="microid" content="mailto+http:sha1:a60b34090c47ab5249f4fb39ac7d6b28b3bc56b0" />
- <meta name="readability-verification" content="wtREAL8jsr4ds84b9urFTUnx9qC9u4UEXMKs3FTD"/>
- <link rel="alternate" type="application/rss+xml" title="Konigi - Complete Feed" href="http://feeds2.feedburner.com/konigi" />
-
- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
- <%= stylesheet_link_tag 'konigi/core.css', 'konigi/css_4278727a67acd471320c5f6a4f8be004.css', 'konigi/reset', 'konigi/grid'  %>
- <%= stylesheet_link_tag 'konigi/jquery.fancybox' %>
-
- </head>
- <body class="top konigi-5-0 home" id="home" >
-
- <div id="wrapper">
-
- <div id="header-wrapper">
- <div id="header" class="container">
-
- <div id="main-menu" class="container clear">
-
-	 <div id="logo" class="column span-4"><h1><a href="/">KONIGI</a></h1></div>
-  
-         
-    
-	 <div id="nav" class="column span-20 last tright">
-    
-      
-		 <div id="gnav">
-			 <ul style="float: right;">
-
-				 <li id="gnav-home"><a href="/" title="Home">Home</a></li>
-				 <li id="gnav-notebook"><a href="/notebook/latest" title="Blog">Blog</a></li>
-				 <li id="gnav-showcase"><a href="/interface/latest" title="Interface Showcase">Showcase</a></li>
-				 <li id="gnav-tools"><a href="/tools/overview" title="Tools">Tools</a></li>
-				 <li id="gnav-wiki"><a href="/wiki" title="Wiki">Wiki</a></li>
-				 <li id="gnav-store" class="last"><a href="/store" title="Store">Store</a></li>
-
-				 <li id="hdaccount"><a href="/user" id="umenu-tog">Account</a></li>
-				 <li id="hdsearch"><a href="/search/google">Search</a></li>
-				 <li id="hdcart"><a href="https://www.e-junkie.com/ecom/gb.php?c=cart;cl=48049;ejc=2">Cart</a></li>
-								 </ul>
-		 </div>
-      
-            
-	 </div>
-    
-	 <!--
-
-	 <div id="nav-tools" class="column span-6 last">
-			 <div id="site-search">
-							 </div>
-	 </div>
-	 -->
-         
-		 </div>
-
-
- </div></div>
-
-
-
-
- <!-- #menu-login -->
- <div id="menu-login" class="menu">
- <div class="container clear">
-  
-		 <div class="column span-18 border">
-		 <h3>Sign In</h3>
-		 <form action="/user/login" method="post" id="user-login">
-			 <span class="login_text">My username or email is</span>
-			 <input type="text" maxlength="60" name="name" id="edit-name"  size="15" value="" tabindex="1" class="form-text required" /></label>
-
-			 <label for="edit-pass"><span class="login_text">and my password is </span>
-			 <input type="password" maxlength="" name="pass" id="edit-pass"  size="15"  tabindex="2" class="form-text required" /></label>
-			 <input type="hidden" name="form_id" id="edit-user-login" value="user_login"  />
-			 <input type="submit" name="op" value="Sign me in"  tabindex="3" id="edit-submit" class="form-submit" />
-			 <input type="hidden" name="destination" value="" />
-		 </form>
-		 <br clear="both" />
-		 <p class="small"><a href="/user/password">Forget your password?</a></p>
-
-	 </div>
-	 <div class="column span-5">
-		 <div class="padlr10">
-		 <h3>Don't have an account?</h3>
-		 <p>Sign up is free and takes 30 seconds. <a href="/user/register">Sign up now.</a></p>
-		 </div>
-	 </div>
+				"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>pivo.ruby | Porno</title>
+	<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"/>
+	<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/"/>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="DC.title" content="konigi"/>
+	<meta name="DC.creator" content="Michael Angeles"/>
 
-	 <div class="column span-1 last">
-		 <div class="menu-close ico-x"></div>
-	 </div>
-    
- </div>
- </div>
- <!-- /#menu-login -->
+	<meta name="DC.subject" content="user experience, information architecture, interaction design, visual design, interface design, uxd, ixd, ia, research, competitive analysis, competitive research, company information"/>
+	<meta name="DC.publisher" content="Konigi"/>
+	<meta name="DC.format" content="text/html; charset=utf-8"/>
+	<meta name="DC.identifier" scheme="DCTERMS.URI" content="http://konigi.com"/>
+	<meta name="keywords" content="user experience, information architecture, interaction design, visual design, interface design, uxd, ixd, ia, research, competitive analysis, competitive research, company information"/>
+	<meta name="robots" content="all"/>
+	<meta name="microid" content="mailto+http:sha1:a60b34090c47ab5249f4fb39ac7d6b28b3bc56b0"/>
+	<meta name="readability-verification" content="wtREAL8jsr4ds84b9urFTUnx9qC9u4UEXMKs3FTD"/>
+	<link rel="alternate" type="application/rss+xml" title="Konigi - Complete Feed" href="http://feeds2.feedburner.com/konigi"/>
 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<%= stylesheet_link_tag 'konigi/core.css', 'konigi/css_4278727a67acd471320c5f6a4f8be004.css', 'konigi/reset', 'konigi/grid' %>
+	<%= stylesheet_link_tag 'konigi/jquery.fancybox' %>
 
+</head>
+<body class="top konigi-5-0 home" id="home">
 
+<div id="wrapper">
 
-  
+<div id="header-wrapper">
+	<div id="header" class="container">
 
- <!-- #main -->
- <div id="body-wrapper">
- <div id="body" class="container">
+		<div id="main-menu" class="container clear">
 
-   
+			<div id="logo" class="column span-4"><h1><a href="/">KONIGI</a></h1></div>
 
-   
 
-	 <div id="content">
+			<div id="nav" class="column span-20 last tright">
 
- <!-- #hero.container -->
 
- <div id="hero" class="container clear">
-    
-			 <div id="hero1" class="column span-18">
-		 <h2>Tools for Ideation</h2>
-		 <p class="desc">News, resources, and tools for ux designers</p>
-	 </div>
+				<div id="gnav">
+					<ul style="float: right;">
 
-			 <div id="hero2" class="column span-6 last">
+						<li id="gnav-home"><a href="/" title="Home">Home</a></li>
+						<li id="gnav-notebook"><a href="/notebook/latest" title="Blog">Blog</a></li>
+						<li id="gnav-showcase"><a href="/interface/latest" title="Interface Showcase">Showcase</a></li>
+						<li id="gnav-tools"><a href="/tools/overview" title="Tools">Tools</a></li>
+						<li id="gnav-wiki"><a href="/wiki" title="Wiki">Wiki</a></li>
+						<li id="gnav-store" class="last"><a href="/store" title="Store">Store</a></li>
 
-	 </div>
-  
- </div>
+						<li id="hdaccount"><a href="/user" id="umenu-tog">Account</a></li>
+						<li id="hdsearch"><a href="/search/google">Search</a></li>
+						<li id="hdcart"><a href="https://www.e-junkie.com/ecom/gb.php?c=cart;cl=48049;ejc=2">Cart</a></li>
+					</ul>
+				</div>
 
- <!-- /#hero.container -->
 
- <hr />
+			</div>
 
- <div id="content-main" class="container">
+			<!--
 
-	 <div class="column span-24 last">
+				 <div id="nav-tools" class="column span-6 last">
+						 <div id="site-search">
+										 </div>
+				 </div>
+				 -->
 
-       
-      
-			 <!-- start main content -->
+		</div>
 
-			 <div class="view view-home view-id-home view-display-id-page_1 view-dom-id-1">
-    
-  
-  
-		 <div class="view-content">
-			 <div class="views-row views-row-1 views-row-odd views-row-first">
-    
 
- <div class="screens-thumbs-index thumb-1">
- <div class="thumb">
- <div class="indexlink-big"><a href="/notebook/can-you-guess-what" rel="bookmark">Can you guess what this is?</a><br /><div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div></div>  </div><!-- /.thumb -->
+	</div>
+</div>
 
- </div>
 
-  
- </div>
- <div class="views-row views-row-2 views-row-even">
-    
- <div class="screens-thumbs-index thumb-2">
- <div class="thumb">
- <div class="indexlink-big"><a href="/wiki/user-interface-galleries" rel="bookmark" title="Permanent Link to User Interface Galleries">User Interface Galleries</a><br /><div class="nodetype"><a href="/wiki" class="type">In Wiki</a></div></div>  </div><!-- /.thumb -->
- </div>
+<!-- #menu-login -->
+<div id="menu-login" class="menu">
+	<div class="container clear">
 
- </div>
- <div class="views-row views-row-3 views-row-odd">
-    
+		<div class="column span-18 border">
+			<h3>Sign In</h3>
 
- <div class="screens-thumbs-index thumb-3">
- <div class="thumb">
- <div class="indexlink-big"><a href="/notebook/articulating-your-preferred-use-case" rel="bookmark">Articulating Your Preferred Use Case</a><br /><div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div></div>  </div><!-- /.thumb -->
- </div>
+			<form action="/user/login" method="post" id="user-login">
+				<span class="login_text">My username or email is</span>
+				<input type="text" maxlength="60" name="name" id="edit-name" size="15" value="" tabindex="1" class="form-text required"/></label>
 
-  
- </div>
- <div class="views-row views-row-4 views-row-even">
-    
+				<label for="edit-pass"><span class="login_text">and my password is </span>
+					<input type="password" maxlength="" name="pass" id="edit-pass" size="15" tabindex="2" class="form-text required"/></label>
+				<input type="hidden" name="form_id" id="edit-user-login" value="user_login"/>
+				<input type="submit" name="op" value="Sign me in" tabindex="3" id="edit-submit" class="form-submit"/>
+				<input type="hidden" name="destination" value=""/>
+			</form>
+			<br clear="both"/>
 
- <div class="screens-thumbs-index thumb-4">
- <div class="thumb">
- <div class="indexlink-big"><a href="/notebook/persona-email-client-prototype" rel="bookmark">Persona Email Client Prototype</a><br /><div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div></div>  </div><!-- /.thumb -->
- </div>
+			<p class="small"><a href="/user/password">Forget your password?</a></p>
 
-  
- </div>
+		</div>
+		<div class="column span-5">
+			<div class="padlr10">
+				<h3>Don't have an account?</h3>
 
- <div class="views-row views-row-5 views-row-odd">
-    
+				<p>Sign up is free and takes 30 seconds. <a href="/user/register">Sign up now.</a></p>
+			</div>
+		</div>
 
- <div class="screens-thumbs-index thumb-5">
- <div class="thumb">
- <a href="/notebook/miniajax-rich-ui-showcase"><img id='bluga-thumbnail-2512' class='bluga-thumbnail medium2' src='http://www.konigi.com/files/konigi/bluga/wt4e1b018a5178a_medium2.jpg'/></a><br /><div class="indexlink"><a href="/notebook/miniajax-rich-ui-showcase" rel="bookmark">MiniAjax: Rich UI Showcase</a><div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div></div>  </div><!-- /.thumb -->
- </div>
-
-  
- </div>
- <div class="views-row views-row-6 views-row-even">
-
-    
- <div class="screens-thumbs-index thumb-6">
- <div class="thumb">
- <a href="/tools/submissions/usaura-free-5-second-tests"><img id='bluga-thumbnail-2511' class='bluga-thumbnail medium2' src='http://www.konigi.com/files/konigi/bluga/wt4e1706de356d0_medium2.jpg'/></a><br /><div class="indexlink"><a href="/tools/submissions/usaura-free-5-second-tests" rel="bookmark" title="Usaura is a free service for conducting 5-second tests. Upload a screenshot. Enter a question asking your respondents to respond by clicking somewhere on your screenshot. Copy the test url to give to ...">Usaura: Free 5-second tests</a><div class="nodetype"><a href="/tools/overview" class="type">In Tools</a></div></div>  </div><!-- /.thumb -->
- </div>
-
-  
- </div>
- <div class="views-row views-row-7 views-row-odd">
-    
-
- <div class="screens-thumbs-index thumb-7">
-
- <div class="thumb">
- <div class="indexlink-big"><a href="/notebook/creating-google-menubar-application" rel="bookmark">Creating a Google+ Menubar Application</a><br /><div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div></div>  </div><!-- /.thumb -->
- </div>
-
-  
- </div>
- <div class="views-row views-row-8 views-row-even">
-    
-
-
- <div class="screens-thumbs-index thumb-8">
- <div class="thumb">
-
- <a href="/tools/css-techniques-horizontal-rules"><img src="http://media.konigi.com/tools/thumbs/hr.png" /></a><br /><div class="indexlink"><a href="/tools/css-techniques-horizontal-rules" rel="bookmark" title="Permanent Link to CSS Techniques for Horizontal Rules">CSS Techniques for Horizontal Rules</a><div class="nodetype"><a href="/tools/overview" class="type">In Tools</a></div></div>  </div><!-- /.thumb -->
- </div>
-
-
- </div>
- <div class="views-row views-row-9 views-row-odd">
-    
-
- <div class="screens-thumbs-index thumb-9">
- <div class="thumb">
-
- <div class="indexlink-big"><a href="/notebook/jeff-smith-id-sketch-demos-core77" rel="bookmark">Jeff Smith ID Sketch Demos on Core77</a><br /><div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div></div>  </div><!-- /.thumb -->
- </div>
-
-  
- </div>
- <div class="views-row views-row-10 views-row-even">
-    
-
- <div class="screens-thumbs-index thumb-10">
- <div class="thumb">
- <div class="indexlink-big"><a href="/notebook/being-without-chasing-grateful-dead-vs-top-40" rel="bookmark">Being Without Chasing: The Grateful Dead vs. The Top 40</a><br /><div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div></div>  </div><!-- /.thumb -->
-
- </div>
-
-  
- </div>
- <div class="views-row views-row-11 views-row-odd">
-    
-
- <div class="screens-thumbs-index thumb-11">
- <div class="thumb">
- <div class="indexlink-big"><a href="/notebook/fred-wilson-subconscious-information-processing" rel="bookmark">Fred Wilson on Subconscious Information Processing</a><br /><div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div></div>  </div><!-- /.thumb -->
- </div>
-
-  
- </div>
- <div class="views-row views-row-12 views-row-even views-row-last">
-    
-
- <div class="screens-thumbs-index thumb-12">
- <div class="thumb">
- <a href="/notebook/project-rimino-future-mobile-experience"><img id='bluga-thumbnail-2508' class='bluga-thumbnail medium2' src='http://www.konigi.com/files/konigi/bluga/wt4df9fd278b018_medium2.jpg'/></a><br /><div class="indexlink"><a href="/notebook/project-rimino-future-mobile-experience" rel="bookmark">Project Rimino, The Future of Mobile Experien ...</a><div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div></div>  </div><!-- /.thumb -->
- </div>
-
-  
- </div>
-	 </div>
-  
-		 <div class="item-list"><ul class="pager"><li class="pager-current first">1</li>
- <li class="pager-item"><a href="/home?page=1" title="Go to page 2" class="active">2</a></li>
- <li class="pager-item"><a href="/home?page=2" title="Go to page 3" class="active">3</a></li>
- <li class="pager-item"><a href="/home?page=3" title="Go to page 4" class="active">4</a></li>
- <li class="pager-item"><a href="/home?page=4" title="Go to page 5" class="active">5</a></li>
- <li class="pager-item"><a href="/home?page=5" title="Go to page 6" class="active">6</a></li>
-
- <li class="pager-item"><a href="/home?page=6" title="Go to page 7" class="active">7</a></li>
- <li class="pager-item"><a href="/home?page=7" title="Go to page 8" class="active">8</a></li>
- <li class="pager-item"><a href="/home?page=8" title="Go to page 9" class="active">9</a></li>
- <li class="pager-ellipsis">…</li>
- <li class="pager-next"><a href="/home?page=1" title="Go to next page" class="active">next ›</a></li>
- <li class="pager-last last"><a href="/home?page=154" title="Go to last page" class="active">last »</a></li>
- </ul></div>
-  
-  
-  
-  
- </div>         <!-- end main content -->
-        
-		 <!--<div class="clear more-link"><a href="/home/gallery/latest">Explore the latest entries</a></div>-->
-
-       
-	 </div>
-          
- </div>
-  
- </div>
-    
- </div></div>
-
-  
-
- <!-- #footer -->
- <div id="footer-wrapper" class="clear">
- <div id="footer" class="container clear">
- <div class="column span-12">
-	 <span id="ftcopyright">&copy; 2011 <a href="/">Konigi</a></span>
-	 <a href="#" onclick="$('#wrapper').addClass('unicorns');$('body').addClass('unibg');">&middot;</a>
-
-			 <a href="/page/about-site">About</a>
-	 &middot;
-	 <a href="/page/advertising">Advertising</a>
-	 &middot;
-	 <a href="/sitemap">Tags</a>
-	 &middot;
-	 <a href="/a-z-index">A-Z</a>
-	 &middot;
-	 <a href="/muse">Muse</a>
-
- </div>
- <div class="column span-12 last txt-right">
-	 <span id="phone">347-744-9880</span> &middot;
-	 <span id="email">
+		<div class="column span-1 last">
+			<div class="menu-close ico-x"></div>
+		</div>
+
+	</div>
+</div>
+<!-- /#menu-login -->
+
+
+<!-- #main -->
+<div id="body-wrapper">
+	<div id="body" class="container">
+
+
+		<div id="content">
+
+			<!-- #hero.container -->
+
+			<div id="hero" class="container clear">
+
+				<div id="hero1" class="column span-18">
+					<h2>Tools for Ideation</h2>
+
+					<p class="desc">News, resources, and tools for ux designers</p>
+				</div>
+
+				<div id="hero2" class="column span-6 last">
+
+				</div>
+
+			</div>
+
+			<!-- /#hero.container -->
+
+			<hr/>
+
+			<div id="content-main" class="container">
+
+				<div class="column span-24 last">
+
+
+					<!-- start main content -->
+
+					<div class="view view-home view-id-home view-display-id-page_1 view-dom-id-1">
+
+
+						<div class="view-content">
+							<div class="views-row views-row-1 views-row-odd views-row-first">
+
+
+								<div class="screens-thumbs-index thumb-1">
+									<div class="thumb">
+										<div class="indexlink-big">
+											<a href="/notebook/can-you-guess-what" rel="bookmark">Can you guess what this is?</a><br/>
+
+											<div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div>
+										</div>
+									</div>
+									<!-- /.thumb -->
+
+								</div>
+
+
+							</div>
+							<div class="views-row views-row-2 views-row-even">
+
+								<div class="screens-thumbs-index thumb-2">
+									<div class="thumb">
+										<div class="indexlink-big">
+											<a href="/wiki/user-interface-galleries" rel="bookmark" title="Permanent Link to User Interface Galleries">User
+												Interface Galleries</a><br/>
+
+											<div class="nodetype"><a href="/wiki" class="type">In Wiki</a></div>
+										</div>
+									</div>
+									<!-- /.thumb -->
+								</div>
+
+							</div>
+							<div class="views-row views-row-3 views-row-odd">
+
+
+								<div class="screens-thumbs-index thumb-3">
+									<div class="thumb">
+										<div class="indexlink-big">
+											<a href="/notebook/articulating-your-preferred-use-case" rel="bookmark">Articulating Your
+												Preferred Use Case</a><br/>
+
+											<div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div>
+										</div>
+									</div>
+									<!-- /.thumb -->
+								</div>
+
+
+							</div>
+							<div class="views-row views-row-4 views-row-even">
+
+
+								<div class="screens-thumbs-index thumb-4">
+									<div class="thumb">
+										<div class="indexlink-big">
+											<a href="/notebook/persona-email-client-prototype" rel="bookmark">Persona Email Client
+												Prototype</a><br/>
+
+											<div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div>
+										</div>
+									</div>
+									<!-- /.thumb -->
+								</div>
+
+
+							</div>
+
+							<div class="views-row views-row-5 views-row-odd">
+
+
+								<div class="screens-thumbs-index thumb-5">
+									<div class="thumb">
+										<a href="/notebook/miniajax-rich-ui-showcase"><img id='bluga-thumbnail-2512' class='bluga-thumbnail medium2' src='http://www.konigi.com/files/konigi/bluga/wt4e1b018a5178a_medium2.jpg'/></a><br/>
+
+										<div class="indexlink">
+											<a href="/notebook/miniajax-rich-ui-showcase" rel="bookmark">MiniAjax: Rich UI Showcase</a>
+
+											<div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div>
+										</div>
+									</div>
+									<!-- /.thumb -->
+								</div>
+
+
+							</div>
+							<div class="views-row views-row-6 views-row-even">
+
+
+								<div class="screens-thumbs-index thumb-6">
+									<div class="thumb">
+										<a href="/tools/submissions/usaura-free-5-second-tests"><img id='bluga-thumbnail-2511' class='bluga-thumbnail medium2' src='http://www.konigi.com/files/konigi/bluga/wt4e1706de356d0_medium2.jpg'/></a><br/>
+
+										<div class="indexlink">
+											<a href="/tools/submissions/usaura-free-5-second-tests" rel="bookmark" title="Usaura is a free service for conducting 5-second tests. Upload a screenshot. Enter a question asking your respondents to respond by clicking somewhere on your screenshot. Copy the test url to give to ...">Usaura:
+												Free 5-second tests</a>
+
+											<div class="nodetype"><a href="/tools/overview" class="type">In Tools</a></div>
+										</div>
+									</div>
+									<!-- /.thumb -->
+								</div>
+
+
+							</div>
+							<div class="views-row views-row-7 views-row-odd">
+
+
+								<div class="screens-thumbs-index thumb-7">
+
+									<div class="thumb">
+										<div class="indexlink-big">
+											<a href="/notebook/creating-google-menubar-application" rel="bookmark">Creating a Google+ Menubar
+												Application</a><br/>
+
+											<div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div>
+										</div>
+									</div>
+									<!-- /.thumb -->
+								</div>
+
+
+							</div>
+							<div class="views-row views-row-8 views-row-even">
+
+
+								<div class="screens-thumbs-index thumb-8">
+									<div class="thumb">
+
+										<a href="/tools/css-techniques-horizontal-rules"><img src="http://media.konigi.com/tools/thumbs/hr.png"/></a><br/>
+
+										<div class="indexlink">
+											<a href="/tools/css-techniques-horizontal-rules" rel="bookmark" title="Permanent Link to CSS Techniques for Horizontal Rules">CSS
+												Techniques for Horizontal Rules</a>
+
+											<div class="nodetype"><a href="/tools/overview" class="type">In Tools</a></div>
+										</div>
+									</div>
+									<!-- /.thumb -->
+								</div>
+
+
+							</div>
+							<div class="views-row views-row-9 views-row-odd">
+
+
+								<div class="screens-thumbs-index thumb-9">
+									<div class="thumb">
+
+										<div class="indexlink-big">
+											<a href="/notebook/jeff-smith-id-sketch-demos-core77" rel="bookmark">Jeff Smith ID Sketch Demos on
+												Core77</a><br/>
+
+											<div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div>
+										</div>
+									</div>
+									<!-- /.thumb -->
+								</div>
+
+
+							</div>
+							<div class="views-row views-row-10 views-row-even">
+
+
+								<div class="screens-thumbs-index thumb-10">
+									<div class="thumb">
+										<div class="indexlink-big">
+											<a href="/notebook/being-without-chasing-grateful-dead-vs-top-40" rel="bookmark">Being Without
+												Chasing: The Grateful Dead vs. The Top 40</a><br/>
+
+											<div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div>
+										</div>
+									</div>
+									<!-- /.thumb -->
+
+								</div>
+
+
+							</div>
+							<div class="views-row views-row-11 views-row-odd">
+
+
+								<div class="screens-thumbs-index thumb-11">
+									<div class="thumb">
+										<div class="indexlink-big">
+											<a href="/notebook/fred-wilson-subconscious-information-processing" rel="bookmark">Fred Wilson on
+												Subconscious Information Processing</a><br/>
+
+											<div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div>
+										</div>
+									</div>
+									<!-- /.thumb -->
+								</div>
+
+
+							</div>
+							<div class="views-row views-row-12 views-row-even views-row-last">
+
+
+								<div class="screens-thumbs-index thumb-12">
+									<div class="thumb">
+										<a href="/notebook/project-rimino-future-mobile-experience"><img id='bluga-thumbnail-2508' class='bluga-thumbnail medium2' src='http://www.konigi.com/files/konigi/bluga/wt4df9fd278b018_medium2.jpg'/></a><br/>
+
+										<div class="indexlink">
+											<a href="/notebook/project-rimino-future-mobile-experience" rel="bookmark">Project Rimino, The
+												Future of Mobile Experien ...</a>
+
+											<div class="nodetype"><a href="/notebook/latest" class="type">In Notebook</a></div>
+										</div>
+									</div>
+									<!-- /.thumb -->
+								</div>
+
+
+							</div>
+						</div>
+
+						<div class="item-list">
+							<ul class="pager">
+								<li class="pager-current first">1</li>
+								<li class="pager-item"><a href="/home?page=1" title="Go to page 2" class="active">2</a></li>
+								<li class="pager-item"><a href="/home?page=2" title="Go to page 3" class="active">3</a></li>
+								<li class="pager-item"><a href="/home?page=3" title="Go to page 4" class="active">4</a></li>
+								<li class="pager-item"><a href="/home?page=4" title="Go to page 5" class="active">5</a></li>
+								<li class="pager-item"><a href="/home?page=5" title="Go to page 6" class="active">6</a></li>
+
+								<li class="pager-item"><a href="/home?page=6" title="Go to page 7" class="active">7</a></li>
+								<li class="pager-item"><a href="/home?page=7" title="Go to page 8" class="active">8</a></li>
+								<li class="pager-item"><a href="/home?page=8" title="Go to page 9" class="active">9</a></li>
+								<li class="pager-ellipsis">…</li>
+								<li class="pager-next"><a href="/home?page=1" title="Go to next page" class="active">next ›</a></li>
+								<li class="pager-last last"><a href="/home?page=154" title="Go to last page" class="active">last »</a>
+								</li>
+							</ul>
+						</div>
+
+
+					</div>
+					<!-- end main content -->
+
+					<!--<div class="clear more-link"><a href="/home/gallery/latest">Explore the latest entries</a></div>-->
+
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+
+<!-- #footer -->
+<div id="footer-wrapper" class="clear">
+	<div id="footer" class="container clear">
+		<div class="column span-12">
+			<span id="ftcopyright">&copy; 2011 <a href="/">Konigi</a></span>
+			<a href="#" onclick="$('#wrapper').addClass('unicorns');$('body').addClass('unibg');">&middot;</a>
+
+			<a href="/page/about-site">About</a>
+			&middot;
+			<a href="/page/advertising">Advertising</a>
+			&middot;
+			<a href="/sitemap">Tags</a>
+			&middot;
+			<a href="/a-z-index">A-Z</a>
+			&middot;
+			<a href="/muse">Muse</a>
+
+		</div>
+		<div class="column span-12 last txt-right">
+			<span id="phone">347-744-9880</span> &middot;
+			<span id="email">
 	 </span>
-	 &middot;
-	 <span id="fttwitter"><a href="http://twitter.com/konigi">Twitter</a></span>
-	 &middot;
+			&middot;
+			<span id="fttwitter"><a href="http://twitter.com/konigi">Twitter</a></span>
+			&middot;
 
-	 <span id="ftemail"><a href="http://feedburner.google.com/fb/a/mailverify?uri=konigi&amp;loc=en_US">Subscribe by Email</a></span>
-	 &middot;
-	 <span id="ftrss"><a href="http://feeds2.feedburner.com/konigi">RSS</a></span>
- </div>
- </div></div>
+			<span id="ftemail"><a href="http://feedburner.google.com/fb/a/mailverify?uri=konigi&amp;loc=en_US">Subscribe by
+				Email</a></span>
+			&middot;
+			<span id="ftrss"><a href="http://feeds2.feedburner.com/konigi">RSS</a></span>
+		</div>
+	</div>
+</div>
 
 
+</div>
+<!-- /#wrapper -->
 
- 
+<div id="footer-links-wrapper" class="clear">
 
- </div><!-- /#wrapper -->
+</div>
 
- <div id="footer-links-wrapper" class="clear">
-  
- </div>
+<div id="stub"></div>
 
- <div id="stub"></div>
-
- </body>
- </html>
+</body>
+</html>
