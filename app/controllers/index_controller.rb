@@ -15,4 +15,13 @@ class IndexController < ApplicationController
 						:page				=>  params[:page]
 		)
 	end
+
+	def view
+		id = params[:id]
+		@video = Video.find(Integer(id))
+		if @video.present?
+			@title = @video.name
+		end
+	end
+
 end

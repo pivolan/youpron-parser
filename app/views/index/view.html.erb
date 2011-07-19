@@ -1,0 +1,122 @@
+<div class="column span-24 last">
+    </div>
+
+  <div class="column span-16">
+
+  <div class="copy padright10">
+	<object type="application/x-shockwave-flash" data="/player/uppod.swf" width="635" height="380" style="margin-top:20px;">
+		<param name="bgcolor" value="#ffffff" />
+		<param name="allowFullScreen" value="true" />
+		<param name="allowScriptAccess" value="always" />
+		<param name="wmode" value="transparent" />
+		<param name="movie" value="<%=h @video.url %>" />
+		<param name="flashvars" value="st=/player/video72-1132.txt&amp;file=<%=h @video.url %>" />
+	</object>
+  </div><!-- /.copy -->
+
+
+
+  </div><!-- /.column -->
+
+
+<div class="column span-8 last metadata">
+
+<% if @sponsor.present? %>
+    <div class="container clear advert-node">
+    <div class="column span-2 label">
+      Sponsor
+    </div>
+
+    <div class="column span-6 last">
+    </div><!-- /.column .node-ad -->
+
+  </div><!-- /.container -->
+<% end %>
+
+	<% if @video.duration.present? %>
+    <div class="container clear advert-node">
+    <div class="column span-2 label">
+      Duration
+    </div>
+
+    <div class="column span-6 last">
+			<%= @video.duration%>
+    </div><!-- /.column .node-ad -->
+
+  </div><!-- /.container -->
+<% end %>
+
+	<% if @video.date.present? %>
+    <div class="container clear advert-node">
+    <div class="column span-2 label">
+      Date
+    </div>
+
+    <div class="column span-6 last">
+			<%= @video.date%>
+    </div><!-- /.column .node-ad -->
+
+  </div><!-- /.container -->
+<% end %>
+
+	<% if @video.rating.present? %>
+    <div class="container clear advert-node">
+    <div class="column span-2 label">
+      Rating
+    </div>
+
+    <div class="column span-6 last">
+			<%= @video.rating%>
+    </div><!-- /.column .node-ad -->
+
+  </div><!-- /.container -->
+<% end %>
+
+	<% if @video.view.present? %>
+    <div class="container clear advert-node">
+    <div class="column span-2 label">
+      Views
+    </div>
+
+    <div class="column span-6 last">
+			<%= @video.view%>
+    </div><!-- /.column .node-ad -->
+
+  </div><!-- /.container -->
+<% end %>
+
+
+  <div class="container clear">
+    <div class="column span-2 label">
+      URL
+    </div>
+
+    <div class="column span-5 metaurl">
+      <a href="<%= @video.url %>">Download</a>
+    </div>
+  </div>
+
+
+<% if @tags.present? %>
+  <div class="container clear">
+
+    <div class="column span-2 label">
+      Tags
+    </div>
+
+    <div class="column span-6 last tags">
+    <ul class="tags">
+    <ul class="links inline">
+			<% @video.tags.each do |tag| %>
+				<li><a href="/tag/<% tag %>" rel="tag"><% tag %></a></li>
+			<% end %>
+</ul>
+    </ul>
+    </div>
+
+  </div><!-- /.container -->
+<% end %>
+
+
+</div><!-- /.metadata -->
+

@@ -921,7 +921,7 @@ a#switch_oFCK_1 {
 }
 
 #content .pager, #content .apager, #content .pagination {
-	text-align: left;
+	text-align: center;
 }
 
 .pagination .disabled {
