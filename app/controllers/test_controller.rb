@@ -11,7 +11,25 @@ class TestController < ApplicationController
 			@users = users
 			if users.count == 1
 				session[:id] = users[0]._id
-				cookies[:uid] = users[0].cookie_id
+				cookies[:uid] = {
+								:value=>users[0].cookie_id,
+								:expires => 1.year.from_now
+				}
+			end
+		end
+		login
+	end
+
+	def login
+		if params[:url].present?
+			users = User.where(:cookie_id => params[:url]).all
+			@users = users
+			if users.count == 1
+				session[:id] = users[0]._id
+				cookies[:uid] = {
+								:value=>users[0].cookie_id,
+								:expires => 1.year.from_now
+				}
 			end
 		end
 		login

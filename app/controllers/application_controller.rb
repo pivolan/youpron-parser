@@ -19,10 +19,8 @@ class ApplicationController < ActionController::Base
 					cookies.delete(:uid)
 					session[:id] = nil
 				end
-			end
-
-			if !cookies[:uid].present?
-				new_id = User.new.id
+			else
+				new_id = User.generate_cookie_id
 				user = User.create(
 								:_id => Incrementor[:user].inc,
 								:cookie_id => new_id
