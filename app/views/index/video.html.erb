@@ -8,7 +8,7 @@
 	 @list.each do |item| %>
 				<div class="screens-thumbs-index thumb-<%= i %>">
 					<div class="thumb">
-						<a href="/video/<%= item._id.to_s %>"><img id='' class='bluga-thumbnail medium2' src='<%= item.images[0].to_s %>'/></a><br/>
+						<a href="/video/<%= item._id.to_s %>"><img id='' class='bluga-thumbnail medium2' src='<%= item.images[0].to_s %>'  data-images="<%= item.images.as_json %>" /></a><br/>
 
 						<div class="indexlink">
 							<a href="/video/<%= item._id.to_s %>" rel="bookmark" title="<%= item.name.to_s %>"><%= item.name.to_s %></a>
@@ -27,22 +27,7 @@
 		</div>
 
 		<div class="item-list">
-			<ul class="pager">
-				<li class="pager-current first">1</li>
-				<li class="pager-item"><a href="/home?page=1" title="Go to page 2" class="active">2</a></li>
-				<li class="pager-item"><a href="/home?page=2" title="Go to page 3" class="active">3</a></li>
-				<li class="pager-item"><a href="/home?page=3" title="Go to page 4" class="active">4</a></li>
-				<li class="pager-item"><a href="/home?page=4" title="Go to page 5" class="active">5</a></li>
-				<li class="pager-item"><a href="/home?page=5" title="Go to page 6" class="active">6</a></li>
-
-				<li class="pager-item"><a href="/home?page=6" title="Go to page 7" class="active">7</a></li>
-				<li class="pager-item"><a href="/home?page=7" title="Go to page 8" class="active">8</a></li>
-				<li class="pager-item"><a href="/home?page=8" title="Go to page 9" class="active">9</a></li>
-				<li class="pager-ellipsis">…</li>
-				<li class="pager-next"><a href="/home?page=1" title="Go to next page" class="active">next ›</a></li>
-				<li class="pager-last last"><a href="/home?page=154" title="Go to last page" class="active">last »</a>
-				</li>
-			</ul>
+			<%= will_paginate @list %>
 		</div>
 
 
