@@ -1,0 +1,40 @@
+<div class="column span-24 last">
+	<!-- start main content -->
+	<div class="view view-home view-id-home view-display-id-page_1 view-dom-id-1">
+
+
+		<div class="view-content">
+<% i=1
+	 @list.each do |item| %>
+				<div class="screens-thumbs-index thumb-<%= i %>">
+					<div class="thumb">
+						<a href="/video/<%= item._id.to_s %>"><img id='' class='bluga-thumbnail medium2' src='<%= item.images[0].to_s %>'  data-images="<%= item.images.as_json %>" /></a><br/>
+
+						<div class="indexlink">
+							<a href="/video/<%= item._id.to_s %>" rel="bookmark" title="<%= item.name.to_s %>"><%= item.name.to_s %></a>
+
+							<div class="nodetype"><a><%= item.duration.to_s %></a></div>
+						</div>
+					</div>
+					<!-- /.thumb -->
+
+				</div>
+<% i+=1
+	 end %>
+
+
+			</div>
+		</div>
+
+		<div class="item-list">
+			<%= will_paginate @list %>
+		</div>
+
+
+	</div>
+	<!-- end main content -->
+
+	<!--<div class="clear more-link"><a href="/home/gallery/latest">Explore the latest entries</a></div>-->
+
+
+</div>

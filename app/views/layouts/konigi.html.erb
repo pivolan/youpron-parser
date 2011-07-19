@@ -1,0 +1,184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+				"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>pivo.ruby | Porno | <%= session[:id] %></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<%= stylesheet_link_tag 'konigi/core.css', 'konigi/css_4278727a67acd471320c5f6a4f8be004.css', 'konigi/reset.css', 'konigi/grid.css' %>
+	<%= stylesheet_link_tag 'konigi/style.css' %>
+
+</head>
+<body class="top konigi-5-0 home" id="home">
+<div class="header"><a href="/test/get_short_url">Получить короткую ссылку для входа на сайт</a> user_id: <%= session[:id] %></div>
+<div id="wrapper">
+
+<div id="header-wrapper">
+	<div id="header" class="container">
+
+		<div id="main-menu" class="container clear">
+
+			<div id="logo" class="column span-4"><h1><a href="/">KONIGI</a></h1></div>
+
+
+			<div id="nav" class="column span-20 last tright">
+
+
+				<div id="gnav">
+					<ul style="float: right;">
+
+						<li id="gnav-home"><a href="/" title="Home">Home</a></li>
+						<li id="gnav-notebook"><a href="/notebook/latest" title="Blog">Blog</a></li>
+						<li id="gnav-showcase"><a href="/interface/latest" title="Interface Showcase">Showcase</a></li>
+						<li id="gnav-tools"><a href="/tools/overview" title="Tools">Tools</a></li>
+						<li id="gnav-wiki"><a href="/wiki" title="Wiki">Wiki</a></li>
+						<li id="gnav-store" class="last"><a href="/store" title="Store">Store</a></li>
+
+						<li id="hdaccount"><a href="/user" id="umenu-tog">Account</a></li>
+						<li id="hdsearch"><a href="/search/google">Search</a></li>
+						<li id="hdcart"><a href="https://www.e-junkie.com/ecom/gb.php?c=cart;cl=48049;ejc=2">Cart</a></li>
+					</ul>
+				</div>
+
+
+			</div>
+
+			<!--
+
+				 <div id="nav-tools" class="column span-6 last">
+						 <div id="site-search">
+										 </div>
+				 </div>
+				 -->
+
+		</div>
+
+
+	</div>
+</div>
+
+
+<!-- #menu-login -->
+<!--<div id="menu-login" class="menu">
+	<div class="container clear">
+
+		<div class="column span-18 border">
+			<h3>Sign In</h3>
+
+			<form action="/user/login" method="post" id="user-login">
+				<span class="login_text">My username or email is</span>
+				<input type="text" maxlength="60" name="name" id="edit-name" size="15" value="" tabindex="1" class="form-text required"/></label>
+
+				<label for="edit-pass"><span class="login_text">and my password is </span>
+					<input type="password" maxlength="" name="pass" id="edit-pass" size="15" tabindex="2" class="form-text required"/></label>
+				<input type="hidden" name="form_id" id="edit-user-login" value="user_login"/>
+				<input type="submit" name="op" value="Sign me in" tabindex="3" id="edit-submit" class="form-submit"/>
+				<input type="hidden" name="destination" value=""/>
+			</form>
+			<br clear="both"/>
+
+			<p class="small"><a href="/user/password">Forget your password?</a></p>
+
+		</div>
+		<div class="column span-5">
+			<div class="padlr10">
+				<h3>Don't have an account?</h3>
+
+				<p>Sign up is free and takes 30 seconds. <a href="/user/register">Sign up now.</a></p>
+			</div>
+		</div>
+
+		<div class="column span-1 last">
+			<div class="menu-close ico-x"></div>
+		</div>
+
+	</div>
+</div>-->
+<!-- /#menu-login -->
+
+
+<!-- #main -->
+<div id="body-wrapper">
+	<div id="body" class="container">
+
+
+		<div id="content">
+
+			<!-- #hero.container -->
+<!--
+			<div id="hero" class="container clear">
+
+				<div id="hero1" class="column span-18">
+					<h2>Tools for Ideation</h2>
+
+					<p class="desc">News, resources, and tools for ux designers</p>
+				</div>
+
+				<div id="hero2" class="column span-6 last">
+
+				</div>
+
+			</div>
+
+			&lt;!&ndash; /#hero.container &ndash;&gt;
+
+			<hr/>
+-->
+
+			<div id="content-main" class="container">
+
+			<%= yield -%>
+
+			</div>
+
+		</div>
+
+	</div>
+</div>
+
+
+<!-- #footer -->
+<div id="footer-wrapper" class="clear">
+	<div id="footer" class="container clear">
+		<div class="column span-12">
+			<span id="ftcopyright">&copy; 2011 <a href="/">Konigi</a></span>
+			<a href="#" onclick="$('#wrapper').addClass('unicorns');$('body').addClass('unibg');">&middot;</a>
+
+			<a href="/page/about-site">About</a>
+			&middot;
+			<a href="/page/advertising">Advertising</a>
+			&middot;
+			<a href="/sitemap">Tags</a>
+			&middot;
+			<a href="/a-z-index">A-Z</a>
+			&middot;
+			<a href="/muse">Muse</a>
+
+		</div>
+		<div class="column span-12 last txt-right">
+			<span id="phone">347-744-9880</span> &middot;
+			<span id="email">
+	 </span>
+			&middot;
+			<span id="fttwitter"><a href="http://twitter.com/konigi">Twitter</a></span>
+			&middot;
+
+			<span id="ftemail"><a href="http://feedburner.google.com/fb/a/mailverify?uri=konigi&amp;loc=en_US">Subscribe by
+				Email</a></span>
+			&middot;
+			<span id="ftrss"><a href="http://feeds2.feedburner.com/konigi">RSS</a></span>
+		</div>
+	</div>
+</div>
+
+
+</div>
+<!-- /#wrapper -->
+
+<div id="footer-links-wrapper" class="clear">
+
+</div>
+
+<div id="stub"></div>
+
+</body>
+</html>
