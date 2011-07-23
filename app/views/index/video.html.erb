@@ -12,7 +12,7 @@
 							<img id='img_<%= item._id.to_s %>' class='bluga-thumbnail medium2 circle' src='<%= item.images[0].to_s %>'  data-images="<%= item.images.as_json %>" /></a><br/>
 
 						<div class="indexlink">
-							<a href="/index/view/<%= item._id.to_s %>" rel="bookmark" title="<%= item.name.to_s %>"><%= item.name.to_s %></a>
+							<a href="/index/view/<%= item._id.to_s %>" rel="bookmark" title="<%= item.name.to_s %>"><%= item.name.to_s.capitalize %></a>
 
 							<div class="nodetype"><a><%= item.duration.to_s %></a></div>
 						</div>

@@ -11,7 +11,11 @@ class CronController < ActionController::Base
 
 			# Открываем сайт
 		site = 'http://www.youporn.com'
-		site_param = ''
+		if params[:page].present?
+			site_param = '?page=' + params[:page].to_s
+		else
+			site_param = '?page=1'
+		end
 		cookie = {"Cookie"=>"age_check=1"}
 		doc = Nokogiri::HTML(open(site+site_param, cookie))
 
@@ -36,13 +40,12 @@ class CronController < ActionController::Base
 				next
 			end
 			video_link = player_scan[0][0].to_s
-			doc_link = Nokogiri::HTML(open(video_link, cookie)).css('location').text
-			video_file_link = doc_link.to_s
-
-			is_exists = Video.count(:url => video_file_link)
+			is_exists = Video.count(:xml_url => video_link)
 			if is_exists>0
 				next
 			end
+			doc_link = Nokogiri::HTML(open(video_link, cookie)).css('location').text
+			video_file_link = doc_link.to_s
 
 			video = Video.create(
 							:_id => Incrementor[:video].inc,
@@ -50,21 +53,25 @@ class CronController < ActionController::Base
 							:view => 0,
 							:rating => 0,
 							:duration => video_duration,
-							:url => video_file_link
+							:url => video_file_link,
+							:xml_url => video_link
 			)
 
 				#ссылки для скачивания
-			video_downloads = {}
+			video_downloads = []
 			downloads = doc.css('#download ul li')
 			i = 0
 			downloads.each do |download|
 				download_link = download.css('a').attribute('href').to_s
 				download_name = download.css('p').text.strip
-				video.downloads[i] = Download.new(
+				video_downloads[i] = Download.new(
 								:name => download_name.sub(/\n/, '').to_s,
 								:url => download_link
 				)
 				i+=1
+			end
+			if video_downloads
+				video.downloads = video_downloads
 			end
 				#video.downloads << video_downloads
 				#Достаем превьюшки

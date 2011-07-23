@@ -1,5 +1,5 @@
 class Download
-  include MongoMapper::Document
+  include MongoMapper::EmbeddedDocument
 
   key :name, String
   key :url, String

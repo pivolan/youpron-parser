@@ -3,15 +3,9 @@
 
   <div class="column span-16">
 
-  <div class="copy padright10">
-	<object type="application/x-shockwave-flash" data="/player/uppod.swf" width="635" height="380" style="margin-top:20px;">
-		<param name="bgcolor" value="#ffffff" />
-		<param name="allowFullScreen" value="true" />
-		<param name="allowScriptAccess" value="always" />
-		<param name="wmode" value="transparent" />
-		<param name="movie" value="<%=h @video.url %>" />
-		<param name="flashvars" value="st=/player/video72-1132.txt&amp;file=<%=h @video.url %>" />
-	</object>
+  <div class="copy padright10" id="video_player">
+
+
   </div><!-- /.copy -->
 
 
@@ -53,7 +47,7 @@
     </div>
 
     <div class="column span-6 last">
-			<%= @video.date%>
+			<%= @video.date.strftime("%B %d, %Y")%>
     </div><!-- /.column .node-ad -->
 
   </div><!-- /.container -->
@@ -85,17 +79,19 @@
   </div><!-- /.container -->
 <% end %>
 
-
+ <% if @video.downloads %>
   <div class="container clear">
     <div class="column span-2 label">
       URL
     </div>
 
     <div class="column span-5 metaurl">
-      <a href="<%= @video.url %>">Download</a>
+			<% @video.downloads.each do |download| %>
+      	<a href="<%= download.url %>"><%= download.name %></a><br/>
+			<% end %>
     </div>
   </div>
-
+<% end %>
 
 <% if @tags.present? %>
   <div class="container clear">
@@ -119,4 +115,29 @@
 
 
 </div><!-- /.metadata -->
-
+<script src="/javascripts/jquery.xdomainajax.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		xml_to_url('<%= @video.xml_url %>');
+	});
+	function xml_to_url(url)
+	{
+		$.get(url.replace(/\?(.*)/,'').trim(),{'xml':'1'}, function(res){
+			var base_url = encodeURIComponent($(res.responseText).text().replace("Untitled",'').replace(' flv ','').trim());
+			show_player(base_url);
+		});
+	}
+	function show_player(base_url)
+	{
+		console.log(base_url);
+		player_obj = '<object type="application/x-shockwave-flash" data="/player/uppod.swf" width="600" height="400" style="margin-top:20px;">' +
+			'<param name="bgcolor" value="#ffffff" />' +
+			'<param name="allowFullScreen" value="true" />' +
+			'<param name="allowScriptAccess" value="always" />' +
+			'<param name="wmode" value="transparent" />' +
+			'<param name="movie" value="'+base_url+'" />' +
+			'<param name="flashvars" value="st=/player/video72-1132.txt&amp;file=' + base_url + '" />' +
+		'</object>';
+		$('#video_player').html(player_obj);
+	}
+</script>
