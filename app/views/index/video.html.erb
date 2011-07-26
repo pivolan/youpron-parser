@@ -3,13 +3,13 @@
 	<div class="view view-home view-id-home view-display-id-page_1 view-dom-id-1">
 
 
-		<div class="view-content">
+		<div class="view-content" id="video-list">
 <% i=1
 	 @list.each do |item| %>
 				<div class="screens-thumbs-index thumb-<%= i %>">
 					<div class="thumb">
 						<a href="/index/view/<%= item._id.to_s %>">
-							<img id='img_<%= item._id.to_s %>' class='bluga-thumbnail medium2 circle' src='<%= item.images[0].to_s %>'  data-images="<%= item.images.as_json %>" /></a><br/>
+							<img id='img_<%= item._id.to_s %>' class='bluga-thumbnail medium2 circle' src='<%= item.images[0].to_s %>'  data-images='<%= item.images.as_json %>' /></a><br/>
 
 						<div class="indexlink">
 							<a href="/index/view/<%= item._id.to_s %>" rel="bookmark" title="<%= item.name.to_s %>"><%= item.name.to_s.capitalize %></a>
@@ -30,12 +30,9 @@
 		<div class="item-list">
 			<%= will_paginate @list %>
 		</div>
-
+	<div id="loading" class='hidden'>
+		<p>Loading...</p>
+	</div>
 
 	</div>
 	<!-- end main content -->
-
-	<!--<div class="clear more-link"><a href="/home/gallery/latest">Explore the latest entries</a></div>-->
-
-
-</div>

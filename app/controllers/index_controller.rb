@@ -14,6 +14,10 @@ class IndexController < ApplicationController
 						:per_page   =>	24,
 						:page				=>  params[:page]
 		)
+		respond_to do |format|
+			format.any
+			format.json { render :json => @list }
+		end
 	end
 
 	def view

@@ -3023,3 +3023,6 @@ body.unibg {
 #wrapper.unicorns.evil {
   background: #000 url(/sites/konigi.com/img/evil.jpg) no-repeat 50% 0;
 }
+#loading {
+	text-align : center;
+}

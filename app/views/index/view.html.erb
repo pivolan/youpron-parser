@@ -5,6 +5,7 @@
 
   <div class="copy padright10" id="video_player">
 
+		Loading...
 
   </div><!-- /.copy -->
 
@@ -79,7 +80,7 @@
   </div><!-- /.container -->
 <% end %>
 
- <% if @video.downloads %>
+ <% if @video.downloads.size %>
   <div class="container clear">
     <div class="column span-2 label">
       URL
@@ -129,7 +130,6 @@
 	}
 	function show_player(base_url)
 	{
-		console.log(base_url);
 		player_obj = '<object type="application/x-shockwave-flash" data="/player/uppod.swf" width="600" height="400" style="margin-top:20px;">' +
 			'<param name="bgcolor" value="#ffffff" />' +
 			'<param name="allowFullScreen" value="true" />' +

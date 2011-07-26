@@ -8,9 +8,21 @@
 	<%= stylesheet_link_tag 'konigi/style.css' %>
 	<script type="text/javascript" src="/javascripts/jquery-1.6.2.min.js"></script>
 	<script type="text/javascript" src="/javascripts/jquery.plugins.js"></script>
+	<script type="text/javascript" src="/javascripts/application.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$('.circle').circle();
+			//$('.circle').circle();
+			$('.circle').live('mouseover', function()
+			{
+				Changer.init($(this));
+				var id = $(this).attr('id');
+				Changer.startCounter(id);
+			});
+			$('.circle').live('mouseout', function()
+			{
+				var id = $(this).attr('id');
+				Changer.stopCounter(id);
+			});
 		});
 	</script>
 </head>
