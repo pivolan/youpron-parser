@@ -44,8 +44,8 @@ class ProfileController < ApplicationController
 			@short_url = @user.short_url
 		else
 			@short_url = @user.generate_short_url
+			@user.save!
 		end
-		@user.save!
 	end
 
 end

@@ -1,0 +1,4 @@
+<% for id, value in @playlists do %>
+	<p><a href="<%= url_for :action=>:add_random_video, :id => id %>">add random video in playlist</a></p>
+<% end %>
+<a href="<%= url_for :action=>:create_random %>">create_random playlist</a>

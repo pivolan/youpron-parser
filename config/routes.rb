@@ -56,5 +56,5 @@ RubyNew::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   match ':controller(/:action(.:format))'
   match ':controller(/:action(/:id(.:format)))'
-	match ':short_url', :to=>'profile#short_url'
+	match ':short_url', :to=>'profile#short_url_login', :as=>:short
 end

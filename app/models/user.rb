@@ -6,6 +6,7 @@ class User
 	key :lastname, String
 	key :cookie_id, String
 	key :short_url, String
+	key :seen, Array
 
 	def generate_short_url
 		dict = (0..9).to_a + ('a'..'z').to_a
