@@ -4,9 +4,6 @@ class IndexController < ApplicationController
 	def index
 
 	end
-	def login
-
-	end
 
 	def video
 		@list = Video.fields(:name, :images, :date, :duration).paginate(
@@ -26,6 +23,10 @@ class IndexController < ApplicationController
 		if @video.present?
 			@title = @video.name
 		end
+	end
+
+	def carousel
+
 	end
 
 end

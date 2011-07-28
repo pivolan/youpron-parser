@@ -28,7 +28,8 @@
 </head>
 <body class="top konigi-5-0 home" id="home">
 <div class="header">
-  <a href="/test/get_short_url">Получить короткую ссылку для входа на сайт</a>
+  <span><%= session[:from] %></span>
+  <a href="<%=url_for :controller=>:profile, :action=>:get_short_url %>">Получить короткую ссылку для входа на сайт</a>
   user_id: <%= session[:id] %></div>
 <div id="wrapper">
 

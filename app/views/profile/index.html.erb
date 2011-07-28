@@ -1,0 +1,5 @@
+<p>user: <%=@user.firstname %> <%=@user.lastname %></p>
+<p>id:  <%=@user._id %></p>
+<p>cookie_id:  <%=@user.cookie_id %></p>
+<p>url_cookie: <a href="<%=url_for :action => :long_url_login, :url=>@user.cookie_id, :only_path => false %>"><%=url_for :action => :long_url_login, :url=>@user.cookie_id, :only_path => false %></a></p>
+<p>short_url:  <%=@user.firstname %></p>

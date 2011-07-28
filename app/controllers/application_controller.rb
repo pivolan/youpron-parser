@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
+	protect_from_forgery
 	before_filter :login
 
 	def login
@@ -15,6 +15,11 @@ class ApplicationController < ActionController::Base
 				users = User.where(:cookie_id => cookies[:uid]).all
 				if users.count == 1
 					session[:id] = users[0]._id
+					session[:from] = 'cookie'
+					cookies[:uid] = {
+									:value=>cookies[:uid],
+									:expires => 1.year.from_now
+					}
 				else
 					cookies.delete(:uid)
 					session[:id] = nil
@@ -26,7 +31,11 @@ class ApplicationController < ActionController::Base
 								:cookie_id => new_id
 				)
 				@id = session[:id] = user._id
-				cookies[:uid] = new_id
+				cookies[:uid] = {
+								:value=>new_id,
+								:expires => 1.year.from_now
+				}
+				session[:from] = 'new generated'
 			end
 		end
 		@user = user
