@@ -1,7 +1,8 @@
 class Comment
-  include MongoMapper::Document
+  include MongoMapper::EmbeddedDocument
 
   key :name, String
   key :message, String
+	key :published, Time
 
 end

@@ -19,7 +19,22 @@ class IndexController < ApplicationController
 
 	def view
 		id = params[:id]
-		@video = Video.find(Integer(id))
+		video = Video.find(Integer(id))
+		comments = video.comments.sort_by(&:published).reverse
+
+		if !params[:name].blank? && !params[:message].blank? then
+			comment = Comment.new(
+											:name => params[:name],
+											:message => params[:message],
+											:published => Time.current
+							)
+			video.comments.push(comment)
+			video.save
+			#video.reload
+			redirect_to :back
+		end
+		@video = video
+		@comments = comments
 		if @video.present?
 			@title = @video.name
 		end

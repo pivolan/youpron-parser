@@ -222,7 +222,7 @@ h5 a, h5 a:link, h5 a:visited {
 }
 
 #content-main h2, h3, h4, h5 {
-  margin-bottom: 0.86em;
+  /*margin-bottom: 0.86em;*/
 }
 
 /* font colors */
@@ -1035,9 +1035,9 @@ table#attachments a {
 /* ============================================== */
 /* messages */
 #message {
-	margin: 0 0 40px 0;
-	background: #76818C;
-	color: #fff;
+	/*margin: 0 0 40px 0;*/
+	/*background: #76818C;*/
+	/*color: #fff;*/
 	font-weight: normal;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -1085,7 +1085,46 @@ div.message {
 	border: none;
 	padding: 10px 0 !important;
 }
-
+div.comments {
+	margin-top: 10px;
+}
+.m0 {
+	margin: 0px;
+}
+div.new_comment {
+	/*margin-top: 10px;*/
+	width: 600px;
+	border-top: 1px dotted #ccc;
+}
+div.row {
+	margin-top: 10px;
+	display: block;
+}
+div.row label {
+	display: inline-block;
+	float: left;
+	width: 100px;
+}
+div.row input[type=text], div.row textarea {
+	width: 400px;
+}
+div.row textarea {
+	height: 70px;
+}
+div.row input[type="submit"] {
+	width: 70px;
+}
+.name {
+	font-size: 14px;
+	font-style: italic;
+}
+.date {
+	font-size: 14px;
+	font-weight: bold;
+}
+div.comment {
+	margin-bottom: 10px;
+}
 /* tagadelic cloud */
 a.tagadelic {
 	padding: 0 10px 10px 0;

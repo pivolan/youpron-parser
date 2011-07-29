@@ -9,8 +9,38 @@
 
   </div><!-- /.copy -->
 
+	<div class="comments">
+		<% if @comments.count>0 then %>
+		<h2 class="m0">Comments:</h2>
+			<% @comments.each do |comment| %>
+			<div class="comment">
+				<span class="name"><%= comment.name %></span>&nbsp;
+				<span class="date"><%= comment.published.strftime("%d %B, %Y %H:%M") %></span>
+				<span class="message">
+					<p><%= comment.message %></p>
+				</span>
+			</div>
+			<% end %>
+		<% end %>
 
-
+		<div class="new_comment">
+			<h3>New comment:</h3>
+			<form method="post" action="">
+				<div class="row">
+					<%= label_tag(:name, "Name:") %>
+					<%= text_field_tag(:name) %>
+				</div>
+				<div class="row">
+					<%= label_tag(:message, "Message:") %>
+					<%= text_area_tag(:message) %>
+				</div>
+				<div class="row">
+					<%= label_tag("") %>
+					<%= submit_tag("Post") %>
+				</div>
+			</form>
+		</div>
+	</div>
   </div><!-- /.column -->
 
 
