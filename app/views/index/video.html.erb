@@ -8,8 +8,17 @@
 	 @list.each do |item| %>
 				<div class="screens-thumbs-index thumb-<%= i %>">
 					<div class="thumb">
-						<a href="/index/view/<%= item._id.to_s %>">
-							<img id='img_<%= item._id.to_s %>' class='bluga-thumbnail medium2 circle' src='<%= item.images[0].to_s %>'  data-images='<%= item.images.as_json %>' /></a><br/>
+						<div class="img-div">
+							<a href="/index/view/<%= item._id.to_s %>" class="show" data-video="<%= item._id.to_s %>">
+								<img id='img_<%= item._id.to_s %>' class='bluga-thumbnail medium2 circle' src='<%= item.images[0].to_s %>'  data-images='<%= item.images.as_json %>' />
+							</a>
+							<div class="favorite">
+								<a class="afavorite add_favorite" title="В избранное"></a>
+								<a class="aplaylist add_playlist" title="В плейлист"></a>
+							</div>
+						</div>
+
+						<br/>
 
 						<div class="indexlink">
 							<a href="/index/view/<%= item._id.to_s %>" rel="bookmark" title="<%= item.name.to_s %>"><%= item.name.to_s.capitalize %></a>
@@ -35,3 +44,54 @@
 	</div>
 	</div>
 	<!-- end main content -->
+<script type="text/javascript">
+$(document).ready(function(){
+//Автоподгрузка при скроллинге
+	Common.initScrolling();
+//Добавляем к картинкам кнопки в избранное и в плейлист
+	//$('.show').showdetails();
+//прокрутка картинок
+	$('.circle').live('mouseover', function()
+	{
+		Changer.init($(this));
+		var id = $(this).attr('id');
+		Changer.startCounter(id);
+	});
+	$('.circle').live('mouseout', function()
+	{
+		var id = $(this).attr('id');
+		Changer.stopCounter(id);
+	});
+//Кнопки добавить в изюранное и в плейлист
+	$('.img-div').live('mouseover', function(){
+		$(this).children('.favorite').show();
+	});
+	$('.img-div').live('mouseout', function(){
+		$(this).children('.favorite').hide();
+	});
+//  Клик на В избранное
+	$('.afavorite').live('click', function(event){
+		var video = $(this).parent().parent().children('a').attr('data-video');
+		if ($(this).hasClass('add_favorite'))
+		{
+			$.post('/index/favorite',{'id':video, 'act':'add'}, function(data){
+				console.log(data);
+			});
+			$(this).addClass('favorited').removeClass('add_favorite');
+		}
+		else
+		{
+			$.post('/index/favorite',{'id':video, 'act':'del'}, function(data){
+				console.log(data);
+			});
+			$(this).addClass('add_favorite').removeClass('favorited');
+		}
+		event.preventDefault();
+	});
+// Клик на В плейлист
+	$('.aplaylist').live('click', function(event){
+		console.log()
+		event.preventDefault();
+	});
+});
+</script>

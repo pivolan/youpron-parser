@@ -10,20 +10,7 @@
 	<script type="text/javascript" src="/javascripts/jquery.plugins.js"></script>
 	<script type="text/javascript" src="/javascripts/application.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			//$('.circle').circle();
-			$('.circle').live('mouseover', function()
-			{
-				Changer.init($(this));
-				var id = $(this).attr('id');
-				Changer.startCounter(id);
-			});
-			$('.circle').live('mouseout', function()
-			{
-				var id = $(this).attr('id');
-				Changer.stopCounter(id);
-			});
-		});
+
 	</script>
 </head>
 <body class="top konigi-5-0 home" id="home">

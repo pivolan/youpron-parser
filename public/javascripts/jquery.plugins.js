@@ -39,6 +39,7 @@ var Changer = {
 	}
 }
 
+//Листалка картинок
 $.fn.circle = function() {
 	this.each(function(){
 		Changer.init($(this));
@@ -53,4 +54,25 @@ $.fn.circle = function() {
 			Changer.stopCounter(id);
 		});
 	});
+}
+
+//Добавление кнопок добавить в плейлист и в избранное
+$.fn.showdetails = function()
+{
+	this.each(function(){
+		var elem = $(this);
+		var favorites = '<div class="favorite">' +
+						'<a class="afavorite add_favorite" title="В избранное"></a>' +
+						'<a class="aplaylist add_playlist" title="В плейлист"></a>'
+						'</div>';
+		elem.append(favorites);
+		elem.mouseover(function(){
+			elem.children('.favorite').show();
+		});
+		elem.mouseout(function(){
+			elem.children('.favorite').hide();
+		});
+	});
+
+
 }

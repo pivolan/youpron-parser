@@ -10,8 +10,32 @@
   </div><!-- /.copy -->
 
 	<div class="comments">
+		<h2 class="m0">Comments: <a class="dotted">Add</a></h2>
+
+			<div class="new_comment invisible" id="add_comment">
+				<h3>New comment:</h3>
+				<form method="post" action="" id="postform">
+					<%= hidden_field_tag('id', @video.id) %>
+					<div class="row">
+						<%= label_tag(:name, "Name:") %>
+						<%= text_field_tag(:name) %>
+					</div>
+					<div class="row">
+						<%= label_tag(:message, "Message:") %>
+						<%= text_area_tag(:message) %>
+					</div>
+					<div class="row">
+						<%= label_tag("") %>
+						<%= tag('input', {
+										:type => 'button',
+										:id => 'post',
+										:name => 'post',
+										:value => 'Post'
+						}) %>
+					</div>
+				</form>
+			</div>
 		<% if @comments.count>0 then %>
-		<h2 class="m0">Comments:</h2>
 			<% @comments.each do |comment| %>
 			<div class="comment">
 				<span class="name"><%= comment.name %></span>&nbsp;
@@ -23,23 +47,6 @@
 			<% end %>
 		<% end %>
 
-		<div class="new_comment">
-			<h3>New comment:</h3>
-			<form method="post" action="">
-				<div class="row">
-					<%= label_tag(:name, "Name:") %>
-					<%= text_field_tag(:name) %>
-				</div>
-				<div class="row">
-					<%= label_tag(:message, "Message:") %>
-					<%= text_area_tag(:message) %>
-				</div>
-				<div class="row">
-					<%= label_tag("") %>
-					<%= submit_tag("Post") %>
-				</div>
-			</form>
-		</div>
 	</div>
   </div><!-- /.column -->
 
@@ -150,7 +157,32 @@
 <script src="/javascripts/jquery.xdomainajax.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		//Создание флеш плеера с видео
 		xml_to_url('<%= @video.xml_url %>');
+
+		//Отправка комментария
+		$('#post').click(function(){
+			var data = $("#postform").serialize();
+			if ($.trim($('#name').val())!='' && $.trim($('#message').val())!='')
+			{
+				$(this).attr('disabled','disabled');
+				$.post('/index/view.json', data, function(result){
+					if (result.result=='ok')
+					{
+						$('.comment:first').before(Common.getComment(result.data));
+						$('#postform')[0].reset();
+					}
+					$('#post').removeAttr('disabled');
+					$('a.dotted:first').click();
+				}, 'json');
+			}
+		});
+
+		//Скрытие, отображение формы
+		$('a.dotted').click(function(){
+			$('#add_comment').toggleClass('invisible');
+		});
+
 	});
 	function xml_to_url(url)
 	{
