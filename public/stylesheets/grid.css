@@ -36,12 +36,12 @@
    
 .column {
   float: left;
-  margin-right: 10px;
+  /*margin-bottom: 10px;*/
 }
 
 
 /* The last column in a row needs this class. */
-.last { margin-right: 0; }
+.last { margin-right: 0; text-align: left}
 
 /* Use these classes to set the width of a column. */
 .span-1   { width: 30px; }

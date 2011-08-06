@@ -519,7 +519,7 @@ li.leaf {
 	list-style-image: none;
 } 
 
-#content .metadata ul,
+.metadata ul,
 ul.links, 
 ul.nobull,
 #content .box ul,
@@ -566,30 +566,34 @@ dl dd {
 	color: #292C30;
 }
 
-#content .metadata {
+.metadata {
 	color: #666;
 }
+div.metadata {
+	width: 600px;
+	margin: 0 auto;
+}
 
-#notebook-latest #content .metadata {
+#notebook-latest .metadata {
   border-top: 1px solid #ededed;
 }
 
-#content .metadata .label {
+.metadata .label {
 	font-size: 0.8333em;
-	color: #ccc;
+	color: #555;
 	text-transform: uppercase;
 }
 
-#content .metadata .container {
+.metadata .container {
 	padding: 5px 0 0 0;
 	border-bottom: 1px solid #eee;
 }
 
-#content .metadata .column {
+.metadata .column {
 	padding-bottom: 3px;
 }
 
-#content .metadata .body p {
+.metadata .body p {
   margin-bottom: .5em;
 }
 
@@ -597,12 +601,12 @@ dl dd {
 	display: none;
 }
 
-#content .metadata .metapub .picture {
+.metadata .metapub .picture {
   float: right;
   width: 25px;
 }
 
-#content .metadata .metapub .picture img {
+.metadata .metapub .picture img {
   width: 25px;
 }
 
@@ -1089,8 +1093,11 @@ div.message {
 	padding: 10px 0 !important;
 }
 div.comments {
-	margin-top: 10px;
-	width: 600px;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+	/*margin-top: 10px;*/
+	width: 580px;
 }
 .m0 {
 	margin: 0px;
@@ -3152,3 +3159,16 @@ a.dotted:hover {
 	height: 164px;
 
 }
+.mb10 {
+	margin-bottom: 10px;
+}
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+/*
+.tab {
+	height: 280px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}*/

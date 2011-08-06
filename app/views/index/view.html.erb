@@ -1,6 +1,6 @@
-  <div class="column span-16">
+  <div class="span-16 mb10 center">
 
-  <div class="copy padright10" id="video_player">
+  <div class="copy" id="video_player">
 
 		Loading...
 
@@ -11,7 +11,7 @@
 		<a class="tab1">Comments</a>
 	</div>
 
-	<div id="div_tab1" class="comments invisible">
+	<div id="div_tab1" class="comments invisible tab">
 		<h2 class="m0">Comments: <a class="dotted">Add</a></h2>
 
 			<div class="new_comment invisible" id="add_comment">
@@ -52,9 +52,9 @@
 		 </div>
 	</div>
 
-	<div id="div_tab2" class="metadata">
+	<div id="div_tab2" class="metadata tab">
 		<% if @sponsor.present? %>
-				<div class="clear advert-node">
+				<div class="container2 clear advert-node">
 				<div class="column span-2 label">
 					Sponsor
 				</div>
@@ -66,7 +66,7 @@
 		<% end %>
 
 			<% if @video.duration.present? %>
-				<div class=" clear advert-node">
+				<div class="container2 clear advert-node">
 				<div class="column span-2 label">
 					Duration
 				</div>
@@ -79,12 +79,12 @@
 		<% end %>
 
 			<% if @video.date.present? %>
-				<div class=" clear advert-node">
+				<div class="container2 clear advert-node">
 				<div class="column span-2 label">
 					Date
 				</div>
 
-				<div class=" span-6 last">
+				<div class="column span-6 last">
 					<%= @video.date.strftime("%B %d, %Y")%>
 				</div><!-- /.column .node-ad -->
 
@@ -92,7 +92,7 @@
 		<% end %>
 
 			<% if @video.rating.present? %>
-				<div class=" clear advert-node">
+				<div class="container2 clear advert-node">
 				<div class="column span-2 label">
 					Rating
 				</div>
@@ -105,7 +105,7 @@
 		<% end %>
 
 			<% if @video.view.present? %>
-				<div class=" clear advert-node">
+				<div class="container2 clear advert-node">
 				<div class="column span-2 label">
 					Views
 				</div>
@@ -118,12 +118,12 @@
 		<% end %>
 
 		 <% if @video.downloads.size %>
-			<div class=" clear">
+			<div class="container2 clear">
 				<div class="column span-2 label">
 					URL
 				</div>
 
-				<div class="column span-5 metaurl">
+				<div class="column span-5 last">
 					<% @video.downloads.each do |download| %>
 						<a href="<%= download.url %>"><%= download.name %></a><br/>
 					<% end %>
@@ -132,7 +132,7 @@
 		<% end %>
 
 		<% if @tags.present? %>
-			<div class=" clear">
+			<div class="container2 clear">
 
 				<div class="column span-2 label">
 					Tags
@@ -150,7 +150,6 @@
 
 			</div><!-- /.container -->
 		<% end %>
-			<p><a href="<%= url_for :back %>"> назад </a></p>
 
 	</div>
 
@@ -169,7 +168,6 @@
 	$(document).ready(function(){
 		//Создание флеш плеера с видео
 		xml_to_url('<%= @video.xml_url %>');
-
 		//Отправка комментария
 		$('#post').click(function(){
 			var data = $("#postform").serialize();

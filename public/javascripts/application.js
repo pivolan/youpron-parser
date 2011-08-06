@@ -18,7 +18,7 @@ var Common =
 						'<div class="screens-thumbs-index thumb-' + i + '">' +
 						'<div class="thumb">' +
 						'<div class="img-div">' +
-						'	<a href="/index/view/' + data[id].id + '" class="show" data-video="' + data[id].id + '">' +
+						'	<a href="/index/view/' + data[id].id + '" class="show" onclick="Common.colorbox($(this))" data-video="' + data[id].id + '">' +
 						'		<img id="img_' + data[id].id + '" class="bluga-thumbnail medium2 circle" src="' + data[id].images[0] + '" data-images=\'' + JSON.stringify(data[id].images) + '\'" />'+
 						'	</a>' +
 						'	<div class="favorite">' +
@@ -103,8 +103,19 @@ var Common =
 				$('#video-list').append( Common.getVideo(data) );
 				body.data('status', '');
 				$('#loading').css('display', 'none');
-				$('a.show').colorbox({'width':'680px', 'height': '800px', 'overflow-x':'hidden'});
 			}, 'json');
 		}
+	},
+
+	colorbox : function(elem)
+	{
+		if (!elem.hasClass('cnoxElement'))
+		{
+			elem.colorbox({'width':'680px', 'height': 'auto'});
+		}
+	},
+	colorboxResize : function()
+	{
+		$.fn.colorbox.resize()
 	}
 }

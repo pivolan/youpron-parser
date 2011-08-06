@@ -263,10 +263,10 @@
 				settings.w = setSize(settings.initialWidth, 'x');
 				settings.h = setSize(settings.initialHeight, 'y');
 				publicMethod.position();
-				
+
 				if (isIE6) {
 					$window.bind('resize.' + event_ie6 + ' scroll.' + event_ie6, function () {
-						$overlay.css({width: $window.width(), height: $window.height(), top: $window.scrollTop(), left: $window.scrollLeft()});
+						$overlay.css({width: $window.width(), height: 'auto', top: $window.scrollTop(), left: $window.scrollLeft()});
 					}).trigger('resize.' + event_ie6);
 				}
 				
@@ -469,7 +469,7 @@
 		function modalDimensions(that) {
 			// loading overlay height has to be explicitly set for IE6.
 			$topBorder[0].style.width = $bottomBorder[0].style.width = $content[0].style.width = that.style.width;
-			$loadingOverlay[0].style.height = $loadingOverlay[1].style.height = $content[0].style.height = $leftBorder[0].style.height = $rightBorder[0].style.height = that.style.height;
+			$loadingOverlay[0].style.height = $loadingOverlay[1].style.height = $content[0].style.height = $leftBorder[0].style.height = $rightBorder[0].style.height = 'auto';//that.style.height;
 		}
 		
 		$box.dequeue().animate({width: settings.w + loadedWidth, height: settings.h + loadedHeight, top: top, left: left}, {
@@ -520,7 +520,7 @@
 				settings.h = $child.height();
 				$child.replaceWith($child.children()); // ditch the temporary wrapper div used in height calculation
 			}
-			$loaded.css({height: settings.h});
+			$loaded.css({height: 'auto'});
 			
 			publicMethod.position(settings.transition === "none" ? 0 : settings.speed);
 		}
@@ -549,8 +549,8 @@
 		
 		$loaded.hide()
 		.appendTo($loadingBay.show())// content has to be appended to the DOM for accurate size calculations.
-		.css({width: getWidth(), overflow: settings.scrolling ? 'auto' : 'hidden'})
-		.css({height: getHeight()})// sets the height independently from the width in case the new width influences the value of height.
+		.css({width: getWidth(), overflow: 'visible'})
+		.css({height: 'auto'})// sets the height independently from the width in case the new width influences the value of height.
 		.prependTo($content);
 		
 		$loadingBay.hide();
