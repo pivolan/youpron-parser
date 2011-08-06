@@ -9,7 +9,12 @@
 
   </div><!-- /.copy -->
 
-	<div class="comments">
+	<div class="tabs">
+		<a class="tab2">Info</a>
+		<a class="tab1">Comments</a>
+	</div>
+
+	<div id="div_tab1" class="comments invisible">
 		<h2 class="m0">Comments: <a class="dotted">Add</a></h2>
 
 			<div class="new_comment invisible" id="add_comment">
@@ -35,6 +40,7 @@
 					</div>
 				</form>
 			</div>
+		<div class="comments_list">
 		<% if @comments.count>0 then %>
 			<% @comments.each do |comment| %>
 			<div class="comment">
@@ -46,114 +52,118 @@
 			</div>
 			<% end %>
 		<% end %>
+		 </div>
+	</div>
+
+	<div id="div_tab2" class="metadata">
+		<% if @sponsor.present? %>
+				<div class="container clear advert-node">
+				<div class="column span-2 label">
+					Sponsor
+				</div>
+
+				<div class="column span-6 last">
+				</div><!-- /.column .node-ad -->
+
+			</div><!-- /.container -->
+		<% end %>
+
+			<% if @video.duration.present? %>
+				<div class="container clear advert-node">
+				<div class="column span-2 label">
+					Duration
+				</div>
+
+				<div class="column span-6 last">
+					<%= @video.duration%>
+				</div><!-- /.column .node-ad -->
+
+			</div><!-- /.container -->
+		<% end %>
+
+			<% if @video.date.present? %>
+				<div class="container clear advert-node">
+				<div class="column span-2 label">
+					Date
+				</div>
+
+				<div class="column span-6 last">
+					<%= @video.date.strftime("%B %d, %Y")%>
+				</div><!-- /.column .node-ad -->
+
+			</div><!-- /.container -->
+		<% end %>
+
+			<% if @video.rating.present? %>
+				<div class="container clear advert-node">
+				<div class="column span-2 label">
+					Rating
+				</div>
+
+				<div class="column span-6 last">
+					<%= @video.rating%>
+				</div><!-- /.column .node-ad -->
+
+			</div><!-- /.container -->
+		<% end %>
+
+			<% if @video.view.present? %>
+				<div class="container clear advert-node">
+				<div class="column span-2 label">
+					Views
+				</div>
+
+				<div class="column span-6 last">
+					<%= @video.view%>
+				</div><!-- /.column .node-ad -->
+
+			</div><!-- /.container -->
+		<% end %>
+
+		 <% if @video.downloads.size %>
+			<div class="container clear">
+				<div class="column span-2 label">
+					URL
+				</div>
+
+				<div class="column span-5 metaurl">
+					<% @video.downloads.each do |download| %>
+						<a href="<%= download.url %>"><%= download.name %></a><br/>
+					<% end %>
+				</div>
+			</div>
+		<% end %>
+
+		<% if @tags.present? %>
+			<div class="container clear">
+
+				<div class="column span-2 label">
+					Tags
+				</div>
+
+				<div class="column span-6 last tags">
+				<ul class="tags">
+				<ul class="links inline">
+					<% @video.tags.each do |tag| %>
+						<li><a href="/tag/<% tag %>" rel="tag"><% tag %></a></li>
+					<% end %>
+		</ul>
+				</ul>
+				</div>
+
+			</div><!-- /.container -->
+		<% end %>
+			<p><a href="<%= url_for :back %>"> назад </a></p>
 
 	</div>
-  </div><!-- /.column -->
+
+	</div><!-- /.column -->
 
 
 <div class="column span-8 last metadata">
 
-<% if @sponsor.present? %>
-    <div class="container clear advert-node">
-    <div class="column span-2 label">
-      Sponsor
-    </div>
-
-    <div class="column span-6 last">
-    </div><!-- /.column .node-ad -->
-
-  </div><!-- /.container -->
-<% end %>
-
-	<% if @video.duration.present? %>
-    <div class="container clear advert-node">
-    <div class="column span-2 label">
-      Duration
-    </div>
-
-    <div class="column span-6 last">
-			<%= @video.duration%>
-    </div><!-- /.column .node-ad -->
-
-  </div><!-- /.container -->
-<% end %>
-
-	<% if @video.date.present? %>
-    <div class="container clear advert-node">
-    <div class="column span-2 label">
-      Date
-    </div>
-
-    <div class="column span-6 last">
-			<%= @video.date.strftime("%B %d, %Y")%>
-    </div><!-- /.column .node-ad -->
-
-  </div><!-- /.container -->
-<% end %>
-
-	<% if @video.rating.present? %>
-    <div class="container clear advert-node">
-    <div class="column span-2 label">
-      Rating
-    </div>
-
-    <div class="column span-6 last">
-			<%= @video.rating%>
-    </div><!-- /.column .node-ad -->
-
-  </div><!-- /.container -->
-<% end %>
-
-	<% if @video.view.present? %>
-    <div class="container clear advert-node">
-    <div class="column span-2 label">
-      Views
-    </div>
-
-    <div class="column span-6 last">
-			<%= @video.view%>
-    </div><!-- /.column .node-ad -->
-
-  </div><!-- /.container -->
-<% end %>
-
- <% if @video.downloads.size %>
-  <div class="container clear">
-    <div class="column span-2 label">
-      URL
-    </div>
-
-    <div class="column span-5 metaurl">
-			<% @video.downloads.each do |download| %>
-      	<a href="<%= download.url %>"><%= download.name %></a><br/>
-			<% end %>
-    </div>
-  </div>
-<% end %>
-
-<% if @tags.present? %>
-  <div class="container clear">
-
-    <div class="column span-2 label">
-      Tags
-    </div>
-
-    <div class="column span-6 last tags">
-    <ul class="tags">
-    <ul class="links inline">
-			<% @video.tags.each do |tag| %>
-				<li><a href="/tag/<% tag %>" rel="tag"><% tag %></a></li>
-			<% end %>
-</ul>
-    </ul>
-    </div>
-
-  </div><!-- /.container -->
-<% end %>
-	<p><a href="<%= url_for :back %>"> назад </a></p>
-
-
 </div><!-- /.metadata -->
+
 <script src="/javascripts/jquery.xdomainajax.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -169,7 +179,7 @@
 				$.post('/index/view.json', data, function(result){
 					if (result.result=='ok')
 					{
-						$('.comment:first').before(Common.getComment(result.data));
+						$('.comments_list').prepend(Common.getComment(result.data));
 						$('#postform')[0].reset();
 					}
 					$('#post').removeAttr('disabled');
@@ -183,6 +193,14 @@
 			$('#add_comment').toggleClass('invisible');
 		});
 
+		$('.tab2').click(function(){
+			$("#div_tab1").hide();
+			$("#div_tab2").show();
+		});
+		$('.tab1').click(function(){
+			$("#div_tab1").show();
+			$("#div_tab2").hide();
+		});
 	});
 	function xml_to_url(url)
 	{

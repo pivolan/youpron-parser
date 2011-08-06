@@ -60,7 +60,7 @@ class IndexController < ApplicationController
 				@title = @video.name
 			end
 			respond_to do |format|
-				format.html
+				format.html { render :layout => false }
 				format.json { render :json => @video }
 			end
 

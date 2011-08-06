@@ -83,22 +83,27 @@ var Common =
 			var delta = y / mY;
 			if (delta > 0.8)
 			{
-				var body = $('body');
-				if (body.data('status') != 'loading' && Common.page_blocked==null)
-				{
-					Common.page += 1;
-					body.data('status', 'loading');
-					$('#loading').css('display', 'block');
-					$.get('/index/video.json', {'page': Common.page}, function(data)
-					{
-						$('#video-list').append( Common.getVideo(data) );
-						body.data('status', '');
-						$('#loading').css('display', 'none');
-					}, 'json');
-				}
+				Common.scroll();
 			}
 		});
 		//Скрываем pagination
 		$('.pagination').css('display', 'none');
+	},
+
+	scroll : function()
+	{
+		var body = $('body');
+		if (body.data('status') != 'loading' && Common.page_blocked==null)
+		{
+			Common.page += 1;
+			body.data('status', 'loading');
+			$('#loading').css('display', 'block');
+			$.get('/index/video.json', {'page': Common.page}, function(data)
+			{
+				$('#video-list').append( Common.getVideo(data) );
+				body.data('status', '');
+				$('#loading').css('display', 'none');
+			}, 'json');
+		}
 	}
 }
