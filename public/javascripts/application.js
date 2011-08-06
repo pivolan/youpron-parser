@@ -103,6 +103,7 @@ var Common =
 				$('#video-list').append( Common.getVideo(data) );
 				body.data('status', '');
 				$('#loading').css('display', 'none');
+				$('a.show').colorbox({'width':'680px', 'height': '800px', 'overflow-x':'hidden'});
 			}, 'json');
 		}
 	}
