@@ -18,7 +18,39 @@ class PlaylistController < ApplicationController
 	def add_random_video
 		if params[:id].present?
 			@video = Video.first
-			@user.playlists.find(params[:id])[1] = @video
+			@user.playlists.find(params[:id]).push(@video)
+		end
+	end
+
+	def create_playlist
+		if params[:title].present?
+			@playlist = Playlist.create(
+							:_id => Incrementor[:playlist].inc,
+							:title=> params[:title]
+			)
+			@user.playlists.push(@playlist)
+			@user.save!
+			render :json => @playlist
+		end
+	end
+
+	def add_video_to_playlist
+		if params[:playlist_id].present? && params[:video_id].present?
+			video = Video.find(params[:video_id])
+			if video
+				@user.playlists.find(params[:playlist_id]).push(video)
+				@video = video
+			end
+		end
+	end
+
+	def remove_video_from_playlist
+		if params[:playlist_id].present? && params[:video_id].present?
+			video = Video.find(params[:video_id])
+			if video
+				@user.playlists.find(params[:playlist_id]).delete(video)
+				@video = video
+			end
 		end
 	end
 end

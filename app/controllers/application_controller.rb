@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 	layout 'konigi'
 	protect_from_forgery
-	before_filter :login
+	before_filter :login, :can_view
 
 	def login
 		if session[:id].present?
@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
 			if cookies[:uid].present?
 				users = User.where(:cookie_id => cookies[:uid]).all
 				if users.count == 1
+					user = users[0]
 					session[:id] = users[0]._id
 					session[:from] = 'cookie'
 					cookies[:uid] = {
@@ -40,5 +41,11 @@ class ApplicationController < ActionController::Base
 			end
 		end
 		@user = user
+	end
+
+	def can_view
+		if  !@user.access.present? || !@user.access
+			redirect_to :controller => :index, :action => :null_page
+		end
 	end
 end

@@ -8,6 +8,7 @@ class User
 	key :short_url, String
 	key :seen, Array
 	key :favorites, Array
+	key :access, Boolean
 
 	def generate_short_url
 		dict = (0..9).to_a + ('a'..'z').to_a

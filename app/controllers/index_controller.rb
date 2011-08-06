@@ -1,5 +1,6 @@
 class IndexController < ApplicationController
 	layout 'konigi'
+	skip_before_filter :can_view, :only => [:null_page, :enter, :exit]
 
 	def index
 
@@ -7,9 +8,9 @@ class IndexController < ApplicationController
 
 	def video
 		@list = Video.fields(:name, :images, :date, :duration).paginate(
-						:order			=>	:_id.desc,
-						:per_page   =>	24,
-						:page				=>  params[:page]
+						:order => :_id.desc,
+						:per_page => 24,
+						:page => params[:page]
 		)
 		respond_to do |format|
 			format.html
@@ -70,6 +71,20 @@ class IndexController < ApplicationController
 
 	end
 
+		def null_page
+		render :layout => false
+	end
+
+	def enter
+		@user.access = true
+		@user.save!
+		redirect_to :action=> :video
+	end
+
+	def exit
+		render :layout => false
+	end
+	
 	def favorite
 		result = false
 		if request.post? then

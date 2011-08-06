@@ -4,5 +4,6 @@ class Playlist
   many :videos
 	key :title, String
 	key :description, String
+	key :viewed, Array
 
 end

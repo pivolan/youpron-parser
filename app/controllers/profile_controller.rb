@@ -1,5 +1,6 @@
 class ProfileController < ApplicationController
 	skip_before_filter :login, :only => [:short_url_login, :long_url_login]
+	skip_before_filter :can_view, :only => [:short_url_login, :long_url_login]
 
 	def index
 
@@ -48,4 +49,7 @@ class ProfileController < ApplicationController
 		end
 	end
 
+	def vasya
+		render :layout => false
+	end
 end
