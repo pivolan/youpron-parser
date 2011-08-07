@@ -1,12 +1,15 @@
 class User
   include MongoMapper::Document
 
-  many :playlists
+  many :playlist
+	key :current_playlist, Integer
 	key :firstname, String
 	key :lastname, String
 	key :cookie_id, String
 	key :short_url, String
-	key :seen, Array
+	key :seen, Hash
+	key :clicked, Hash
+	key :complete, Hash
 	key :favorites, Array
 	key :access, Boolean
 

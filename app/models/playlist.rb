@@ -1,7 +1,7 @@
 class Playlist
   include MongoMapper::Document
 
-  many :videos
+  many :video
 	key :title, String
 	key :description, String
 	key :viewed, Array

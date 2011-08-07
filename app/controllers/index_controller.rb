@@ -12,6 +12,10 @@ class IndexController < ApplicationController
 						:per_page => 24,
 						:page => params[:page]
 		)
+		@list.each do |video, index|
+			@user.seen[String(video._id)] = video._id
+		end
+		@user.save!
 		respond_to do |format|
 			format.html
 			format.json { render :json => @list }
@@ -35,6 +39,8 @@ class IndexController < ApplicationController
 								)
 				video.comments.push(comment)
 				video.save
+				@user.firstname = params[:name]
+				@user.save!
 				result = {
 								'result'=>'ok',
 								'data' => {
@@ -58,6 +64,8 @@ class IndexController < ApplicationController
 			@comments = comments
 			if @video.present?
 				@title = @video.name
+				@user.clicked[id] = Integer(id)
+				@user.save!
 			end
 			respond_to do |format|
 				format.html { render :layout => false }
@@ -71,7 +79,7 @@ class IndexController < ApplicationController
 
 	end
 
-		def null_page
+	def null_page
 		render :layout => false
 	end
 
@@ -84,7 +92,7 @@ class IndexController < ApplicationController
 	def exit
 		render :layout => false
 	end
-	
+
 	def favorite
 		result = false
 		if request.post? then

@@ -6,178 +6,109 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<%= stylesheet_link_tag 'core.css', 'css_4278727a67acd471320c5f6a4f8be004.css', 'reset.css', 'grid.css' %>
 	<%= stylesheet_link_tag 'style.css', 'colorbox.css' %>
-	<%= javascript_include_tag 'jquery-1.6.2.min.js', 'jquery.plugins.js', 'application.js', 'jquery.colorbox.js' %>
+	<%= javascript_include_tag 'jquery-1.6.2.min.js', 'jquery.plugins.js', 'application.js', 'jquery.colorbox.js', 'pure_min', 'jquery.mousewheel.min' %>
 	<script type="text/javascript">
 
 	</script>
 </head>
 <body class="top konigi-5-0 home" id="home">
 <div class="header">
-  <span><%= session[:from] %></span>
-  <a href="<%=url_for :controller=>:profile, :action=>:get_short_url %>">Получить короткую ссылку для входа на сайт</a>
-  user_id: <a href="/profile/"><%= session[:id] %></a></div>
+	<span><%= session[:from] %></span>
+	<a href="<%= url_for :controller=>:profile, :action=>:get_short_url %>">Получить короткую ссылку для входа на сайт</a>
+	user_id: <a href="/profile/"><%= session[:id] %></a></div>
 <div id="wrapper">
 
-<div id="header-wrapper">
-	<div id="header" class="container">
+	<div id="header-wrapper">
+		<div id="header" class="container">
 
-		<div id="main-menu" class="container clear">
+			<div id="main-menu" class="container clear">
 
-			<div id="logo" class="column span-4"><h1><a href="/">KONIGI</a></h1></div>
-
-
-			<div id="nav" class="column span-20 last tright">
+				<div id="logo" class="column span-4"><h1><a href="/"><%= image_tag 'logo.png' %></a></h1></div>
 
 
-				<div id="gnav">
-					<ul style="float: right;">
+				<div id="nav" class="column span-20 last tright">
 
-						<li id="gnav-home"><a href="/" title="Home">Home</a></li>
-						<li id="gnav-notebook"><a href="/notebook/latest" title="Blog">Blog</a></li>
-						<li id="gnav-showcase"><a href="/interface/latest" title="Interface Showcase">Showcase</a></li>
-						<li id="gnav-tools"><a href="/tools/overview" title="Tools">Tools</a></li>
-						<li id="gnav-wiki"><a href="/wiki" title="Wiki">Wiki</a></li>
-						<li id="gnav-store" class="last"><a href="/store" title="Store">Store</a></li>
 
-						<li id="hdaccount"><a href="/user" id="umenu-tog">Account</a></li>
-						<li id="hdsearch"><a href="/search/google">Search</a></li>
-						<li id="hdcart"><a href="https://www.e-junkie.com/ecom/gb.php?c=cart;cl=48049;ejc=2">Cart</a></li>
-					</ul>
+					<div id="gnav">
+						<ul style="float: right;">
+
+							<li id="gnav-home"><a href="/" title="Home">Home</a></li>
+							<li id="gnav-notebook">
+								<a href="<%= url_for :controller => :profile, :action => :index %>" title="Profile">Profile</a></li>
+							<li id="gnav-tools">
+								<a href="<%= url_for :controller => :playlist, :action => :index %>" title="Tools">Playlists</a></li>
+							<li id="gnav-wiki"><a href="/wiki" title="Wiki">Wiki</a></li>
+							<li id="gnav-store" class="last"><a href="/store" title="Store">Store</a></li>
+
+							<li id="hdaccount"><a href="/user" id="umenu-tog">Account</a></li>
+							<li id="hdsearch"><a href="/search/google">Search</a></li>
+							<li id="hdcart"><a href="https://www.e-junkie.com/ecom/gb.php?c=cart;cl=48049;ejc=2">Cart</a></li>
+						</ul>
+					</div>
+
+
 				</div>
 
+				<!--
+
+								 <div id="nav-tools" class="column span-6 last">
+										 <div id="site-search">
+														 </div>
+								 </div>
+								 -->
 
 			</div>
 
-			<!--
-
-				 <div id="nav-tools" class="column span-6 last">
-						 <div id="site-search">
-										 </div>
-				 </div>
-				 -->
 
 		</div>
-
-
 	</div>
-</div>
 
-
-<!-- #menu-login -->
-<!--<div id="menu-login" class="menu">
-	<div class="container clear">
-
-		<div class="column span-18 border">
-			<h3>Sign In</h3>
-
-			<form action="/user/login" method="post" id="user-login">
-				<span class="login_text">My username or email is</span>
-				<input type="text" maxlength="60" name="name" id="edit-name" size="15" value="" tabindex="1" class="form-text required"/></label>
-
-				<label for="edit-pass"><span class="login_text">and my password is </span>
-					<input type="password" maxlength="" name="pass" id="edit-pass" size="15" tabindex="2" class="form-text required"/></label>
-				<input type="hidden" name="form_id" id="edit-user-login" value="user_login"/>
-				<input type="submit" name="op" value="Sign me in" tabindex="3" id="edit-submit" class="form-submit"/>
-				<input type="hidden" name="destination" value=""/>
-			</form>
-			<br clear="both"/>
-
-			<p class="small"><a href="/user/password">Forget your password?</a></p>
-
-		</div>
-		<div class="column span-5">
-			<div class="padlr10">
-				<h3>Don't have an account?</h3>
-
-				<p>Sign up is free and takes 30 seconds. <a href="/user/register">Sign up now.</a></p>
-			</div>
-		</div>
-
-		<div class="column span-1 last">
-			<div class="menu-close ico-x"></div>
-		</div>
-
-	</div>
-</div>-->
-<!-- /#menu-login -->
-
-
-<!-- #main -->
-<div id="body-wrapper">
-	<div id="body" class="container">
-		<% if @title.present? %>
-		  <div id="title" class="container">
-          <h1 class="page-title"><%= @title %></h1>
-      </div>
-		<% end %>
-		<div id="content">
-
-			<!-- #hero.container -->
-<!--
-			<div id="hero" class="container clear">
-
-				<div id="hero1" class="column span-18">
-					<h2>Tools for Ideation</h2>
-
-					<p class="desc">News, resources, and tools for ux designers</p>
+	<!-- #main -->
+	<div id="body-wrapper">
+		<div id="body" class="container">
+			<% if @title.present? %>
+				<div id="title" class="container">
+					<h1 class="page-title"><%= @title %></h1>
 				</div>
+			<% end %>
+			<div id="content">
+				<div id="content-main" class="container">
 
-				<div id="hero2" class="column span-6 last">
+					<%= yield -%>
 
 				</div>
 
 			</div>
 
-			&lt;!&ndash; /#hero.container &ndash;&gt;
+		</div>
+	</div>
 
-			<hr/>
--->
 
-			<div id="content-main" class="container">
+	<!-- #footer -->
+	<div id="footer-wrapper" class="clear">
+		<div id="footer" class="container clear">
+			<div class="column span-12">
+				<span id="ftcopyright">&copy; 2011 <a href="/">XVidos</a></span>
+				<a href="#" onclick="$('#wrapper').addClass('unicorns');$('body').addClass('unibg');">&middot;</a>
 
-			<%= yield -%>
+				<a href="/page/about-site">About</a>
+				&middot;
+				<a href="/page/advertising">Advertising</a>
+				&middot;
+				<a href="/sitemap">Tags</a>
+				&middot;
+				<a href="/a-z-index">A-Z</a>
+				&middot;
+				<a href="/muse">Muse</a>
 
 			</div>
-
-		</div>
-
-	</div>
-</div>
-
-
-<!-- #footer -->
-<div id="footer-wrapper" class="clear">
-	<div id="footer" class="container clear">
-		<div class="column span-12">
-			<span id="ftcopyright">&copy; 2011 <a href="/">Konigi</a></span>
-			<a href="#" onclick="$('#wrapper').addClass('unicorns');$('body').addClass('unibg');">&middot;</a>
-
-			<a href="/page/about-site">About</a>
-			&middot;
-			<a href="/page/advertising">Advertising</a>
-			&middot;
-			<a href="/sitemap">Tags</a>
-			&middot;
-			<a href="/a-z-index">A-Z</a>
-			&middot;
-			<a href="/muse">Muse</a>
-
-		</div>
-		<div class="column span-12 last txt-right">
-			<span id="phone">347-744-9880</span> &middot;
-			<span id="email">
-	 </span>
-			&middot;
-			<span id="fttwitter"><a href="http://twitter.com/konigi">Twitter</a></span>
-			&middot;
-
-			<span id="ftemail"><a href="http://feedburner.google.com/fb/a/mailverify?uri=konigi&amp;loc=en_US">Subscribe by
-				Email</a></span>
-			&middot;
-			<span id="ftrss"><a href="http://feeds2.feedburner.com/konigi">RSS</a></span>
+			<div class="column span-12 last txt-right">
+				<span id="phone">347-010-9880</span>
+				&middot;
+				<span id="ftrss"><a href="<%= url_for :controller => :rss, :action => :index %>">RSS</a></span>
+			</div>
 		</div>
 	</div>
-</div>
 
 
 </div>
@@ -188,6 +119,142 @@
 </div>
 
 <div id="stub"></div>
+<div id="playlist" class="playlist">
+	<div class="title_playlist">
+		<span class="title">Playlist</span>
 
+		<div class="select_playlist">
+			<ul>
+				<li onclick="Playlist.create_playlist()">Create +</li>
+				<% @user.playlist.each do |playlist, index| %>
+					<li onclick="Playlist.select_playlist($(this))" data_id="<%= playlist._id %>" class="<%= index==0 ? 'active' :'' %>"><%= playlist.title %></li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+	<div id="slide_button" class="show_hide">Open</div>
+	<div id="playlist_list" class="playlist_list">
+	</div>
+</div>
+<style type="text/css">
+	div.playlist {
+		position: fixed;
+		bottom: 0px;
+		background: #E3E3E3;
+		height: 29px;
+		width: 100%;
+		z-index: 4;
+		padding: 0;
+		margin: 0;
+		font-family: Arial;
+		font-size: 14px;
+		-moz-user-select: none;
+		user-select: none;
+		-khtml-user-select: none;
+	}
+
+	div.playlist.open {
+		height: 139px;
+	}
+
+	div.playlist_list {
+		background: white;
+		height: 110px;
+		position: absolute;
+		top: 29px;
+		padding: 5px 5px 0 0;
+		text-align: left;
+		white-space: nowrap;
+		left:0px;
+	}
+
+	div.playlist_list .pl_video {
+		margin-right: 5px;
+		position: relative;
+	}
+		div.playlist_list .pl_video a.delete {
+			position: absolute;
+			background: url('/images/minus.png');
+			width: 32px;
+			height: 32px;
+			right: 2px;
+			top: -90px;
+			display: none;
+		}
+		div.playlist_list .pl_video:hover a.delete {
+			display: block;
+		}
+
+	div.title_playlist {
+		position: absolute;
+		left: 0px;
+		height: 29px;
+		cursor: pointer;
+		width: auto;
+		padding: 5px 15px 0 5px;
+	}
+
+	div.title_playlist:hover {
+		background: red;
+	}
+
+	div.title_playlist span.title {
+
+	}
+
+	div.title_playlist div.select_playlist {
+		position: absolute;
+		display: none;
+		background: red;
+		bottom: 29px;
+		padding: 10px;
+		left: -5px;
+	}
+
+	div.title_playlist:hover div.select_playlist {
+		display: block;
+	}
+
+	div.title_playlist div.select_playlist ul li {
+		text-align: left;
+		color: white;
+		width: 250px;
+	}
+
+	div.title_playlist div.select_playlist ul li:hover {
+		background: black;
+	}
+
+	div.show_hide {
+		position: absolute;
+		right: 0px;
+		height: 20px;
+		cursor: pointer;
+		padding: 5px;
+		-moz-user-select: none;
+		user-select: none;
+		-khtml-user-select: none;
+	}
+
+	div.show_hide:hover {
+		background: red;
+	}
+
+	div.show_hide {
+	}
+</style>
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		Playlist.init({
+			list: $('#playlist_list'),
+			playlist: $('#playlist'),
+			slide_button: $('#slide_button'),
+			current_playlist: '<%=@user.current_playlist %>',
+			url: '<%=url_for :controller=> :playlist, :action => :view_playlist %>',
+			select_playlist_ul: $('#playlist').find('div.select_playlist > ul'),
+			title_playlist_span: $('#playlist').find('span.title')
+		});
+	});
+</script>
 </html>

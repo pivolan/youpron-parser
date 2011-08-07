@@ -2,11 +2,11 @@ class PlaylistController < ApplicationController
 	skip_before_filter :login, :only => [:short_url_login, :long_url_login]
 
 	def index
-		@playlists = @user.playlists.all
+		@playlists = @user.playlist.all
 	end
 
 	def create_random
-		@user.playlists.create(
+		@user.playlist.create(
 						{
 										:title => 'vasya',
 										:description => 'hi, how are you?',
@@ -18,39 +18,87 @@ class PlaylistController < ApplicationController
 	def add_random_video
 		if params[:id].present?
 			@video = Video.first
-			@user.playlists.find(params[:id]).push(@video)
+			playlist_id = Integer(params[:id])
+			@user.playlist.find(playlist_id).video.push(@video)
 		end
 	end
 
 	def create_playlist
 		if params[:title].present?
+
 			@playlist = Playlist.create(
 							:_id => Incrementor[:playlist].inc,
 							:title=> params[:title]
 			)
-			@user.playlists.push(@playlist)
+			@user.playlist.push(@playlist)
+			@user.current_playlist = @playlist._id
 			@user.save!
-			render :json => @playlist
+			render :json => {
+							:id => @playlist._id,
+							:title => @playlist.title,
+							:href_view => url_for(:action => :view_playlist, :id=>@playlist._id),
+							:status => true
+			}
+		end
+	end
+
+	def delete_playlist
+		if params[:id]
+			id = Integer(params[:id])
+			Playlist.destroy(id)
+		end
+		redirect_to :back
+	end
+
+	def view_playlist
+		id = Integer(params[:id])
+		@playlist = Playlist.find(id)
+		respond_to do |format|
+			format.html
+			format.json { render :json => @playlist.to_json(:include => :video) }
+		end
+	end
+
+	def select_playlist
+		@user.current_playlist = Integer(params[:id])
+		@user.save!
+		respond_to do |format|
+			format.html
+			format.json { render :json => Integer(params[:id])}
 		end
 	end
 
 	def add_video_to_playlist
-		if params[:playlist_id].present? && params[:video_id].present?
-			video = Video.find(params[:video_id])
+		if params[:video_id].present? && params[:playlist_id].present?
+			video_id = Integer(params[:video_id])
+			video = Video.find(video_id)
 			if video
-				@user.playlists.find(params[:playlist_id]).push(video)
+				playlist_id = Integer(params[:playlist_id])
+				playlist = @user.playlist.find(playlist_id)
+				if playlist
+					playlist.video.push(video)
+				end
 				@video = video
 			end
+		end
+		respond_to do |format|
+			format.html { render :html => @video.to_json }
+			format.json { render :json => @video }
 		end
 	end
 
 	def remove_video_from_playlist
-		if params[:playlist_id].present? && params[:video_id].present?
-			video = Video.find(params[:video_id])
+		playlist_id = Integer(params[:playlist_id])
+		if playlist_id.present? && params[:video_id].present?
+			video_id = Integer(params[:video_id])
+			video = Video.find(video_id)
 			if video
-				@user.playlists.find(params[:playlist_id]).delete(video)
+				@user.playlist.find(playlist_id).video.delete(video_id)
 				@video = video
 			end
+		end
+		respond_to do |format|
+			format.json { render :json => @video }
 		end
 	end
 end

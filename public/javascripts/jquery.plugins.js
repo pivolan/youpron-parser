@@ -29,7 +29,7 @@ var Changer = {
 	},
 	startCounter : function (id)
 	{
-		Changer.intervals[id] = setInterval("Changer.change('"+id+"')", 500);
+		Changer.intervals[id] = setInterval(function(){Changer.change(id)}, 500);
 	},
 	stopCounter : function (id)
 	{

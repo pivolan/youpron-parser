@@ -49,7 +49,18 @@ class ProfileController < ApplicationController
 		end
 	end
 
+	def exit
+		session.delete(:id)
+		cookies.delete(:uid)
+	end
+
 	def vasya
 		render :layout => false
+	end
+
+	def delete_short_url
+		@user.short_url = nil
+		@user.save!
+		redirect_to :action => :index
 	end
 end

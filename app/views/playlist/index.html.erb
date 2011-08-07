@@ -1,4 +1,49 @@
-<% for id, value in @playlists do %>
-	<p><a href="<%= url_for :action=>:add_random_video, :id => id %>">add random video in playlist</a></p>
+<div class="content" id="playlist_content">
+<% for playlist in @user.playlist do %>
+	<p>
+		<span><%= playlist.title %></span>
+		<a href="<%= url_for :action=>:add_random_video, :id => playlist._id %>">add random video in playlist</a>
+		<%= link_to 'delete', :action=>:delete_playlist, :id=> playlist._id %>
+		<%= link_to 'view', :action => :view_playlist, :id=> playlist._id %>
+	</p>
 <% end %>
-<a href="<%= url_for :action=>:create_random %>">create_random playlist</a>
+</div>
+<a id="create_playlist" href="<%= url_for :action=>:create_playlist %>">create playlist</a>
+<input type="text" value="" name="title" id='playlist_title'/>
+<span class="error"></span>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#create_playlist').click(function(evt)
+		{
+			evt.preventDefault();
+			var a = $(this);
+			var url = a.attr('href');
+			var playlist_title = $('#playlist_title').val();
+			var span_error = $('span.error');
+
+			span_error.html('');
+			$.getJSON(url, {title: playlist_title}, function(json)
+			{
+				if(json.status)
+				{
+					var content = $('#playlist_content');
+					var html = $('<p></p>');
+					html.append('<span>'+json.title+'</span>');
+					html.append($('<a>view</a>').attr('href', json.href_view));
+					content.prepend(html);
+				}
+				else
+				{
+					span_error.html(json.error);
+				}
+			});
+			return true;
+		})
+	});
+</script>
+<style type="text/css">
+	.error
+	{
+		color: red;
+	}
+</style>
