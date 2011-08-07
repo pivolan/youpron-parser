@@ -41,6 +41,8 @@ class ApplicationController < ActionController::Base
 			end
 		end
 		@user = user
+		@favorites = user.favorites.as_json
+		@categories = Category.all.sort_by(&:name)
 	end
 
 	def can_view

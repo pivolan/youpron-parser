@@ -1,6 +1,6 @@
-@import "/sites/all/blueprint/lib/reset.css";
+/*@import "/sites/all/blueprint/lib/reset.css";
 @import "/sites/all/blueprint/lib/grid.css";
-@import "../js/jquery.fancybox/jquery.fancybox.css";
+@import "../js/jquery.fancybox/jquery.fancybox.css";&/
 /*
 .container { background: url(/sites/all/blueprint/lib/grid.png); }
 .column {background: pink;}
@@ -626,12 +626,12 @@ div.metadata {
 }
 
 /* tags */
-#content ul.tags,
-#content ul.colors {
+ul.tags,
+ ul.colors {
   margin-top: 0;
 }
 
-#content ul.tags li {
+ ul.tags li {
 	display: block;
 	float: left;
 	margin: 0 3px 3px 0;
@@ -639,7 +639,7 @@ div.metadata {
 	text-transform: lowercase;
 }
 
-#content ul.tags li a {
+ ul.tags li a {
 	display: block;
 	margin: 0;
 	padding: 0 10px 0 10px;
@@ -650,30 +650,31 @@ div.metadata {
   border-radius: 10px;  
 }
 
-#content ul.tags li a:hover {
+ ul.tags li a:hover,
+ ul.tags li a.selected{
   background: #27bcee;
   color: #fff;
 }
 
-#content .links {
+ .links {
 	color: #999;
 	font-weight: normal;
 }
 
 /* color tags */
-#content ul.colors {
+ ul.colors {
   margin-top: 0;
   padding-top: 0;
 }
-#content ul.colors li {
+ ul.colors li {
   list-style-type: none;
 	text-indent: -10000px;
 	float: left;
 	border: 1px solid #ccc; 
 	margin: 0 3px 3px 0;
 }
-#content ul.colors li a:link,
-#content ul.colors li a:visited {
+ ul.colors li a:link,
+ ul.colors li a:visited {
 	display: block;
 	height: 18px;
 	width: 36px;
@@ -3080,7 +3081,7 @@ body.unibg {
 	text-align : center;
 }
 .favorite {
-	display: none;
+	/*display: none;*/
 	position: absolute;
 	right: 0px;
 	top: 5px;
@@ -3093,16 +3094,6 @@ body.unibg {
 	position: relative;
 	margin-right: 5px;
 	background: url('/images/favorite_gray.png') no-repeat;
-	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70); /* IE 5.5+*/
-	-moz-opacity: 0.7; /* Mozilla 1.6 и ниже */
-	-khtml-opacity: 0.7; /* Konqueror 3.1, Safari 1.1 */
-	opacity: 0.7; /* CSS3 - Mozilla 1.7b +, Firefox 0.9 +, Safari 1.2+, Opera 9 */
-}
-.add_favorite:hover {
-	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100); /* IE 5.5+*/
-	-moz-opacity: 1; /* Mozilla 1.6 и ниже */
-	-khtml-opacity: 1; /* Konqueror 3.1, Safari 1.1 */
-	opacity: 1; /* CSS3 - Mozilla 1.7b +, Firefox 0.9 +, Safari 1.2+, Opera 9 */
 }
 .favorited {
 	display: inline-block;
@@ -3111,16 +3102,6 @@ body.unibg {
 	position: relative;
 	margin-right: 5px;
 	background: url('/images/favorite.png') no-repeat;
-	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70); /* IE 5.5+*/
-	-moz-opacity: 0.7; /* Mozilla 1.6 и ниже */
-	-khtml-opacity: 0.7; /* Konqueror 3.1, Safari 1.1 */
-	opacity: 0.7; /* CSS3 - Mozilla 1.7b +, Firefox 0.9 +, Safari 1.2+, Opera 9 */
-}
-.favorited:hover {
-	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100); /* IE 5.5+*/
-	-moz-opacity: 1; /* Mozilla 1.6 и ниже */
-	-khtml-opacity: 1; /* Konqueror 3.1, Safari 1.1 */
-	opacity: 1; /* CSS3 - Mozilla 1.7b +, Firefox 0.9 +, Safari 1.2+, Opera 9 */
 }
 .add_playlist {
 	display: inline-block;
@@ -3129,10 +3110,10 @@ body.unibg {
 	position: relative;
 	margin-right: 5px;
 	background: url('/images/plus.png') no-repeat;
-	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70); /* IE 5.5+*/
-	-moz-opacity: 0.7; /* Mozilla 1.6 и ниже */
-	-khtml-opacity: 0.7; /* Konqueror 3.1, Safari 1.1 */
-	opacity: 0.7; /* CSS3 - Mozilla 1.7b +, Firefox 0.9 +, Safari 1.2+, Opera 9 */
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); /* IE 5.5+*/
+	-moz-opacity: 0.5; /* Mozilla 1.6 и ниже */
+	-khtml-opacity: 0.5; /* Konqueror 3.1, Safari 1.1 */
+	opacity: 0.5; /* CSS3 - Mozilla 1.7b +, Firefox 0.9 +, Safari 1.2+, Opera 9 */
 }
 .add_playlist:hover {
 	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100); /* IE 5.5+*/

@@ -3,9 +3,16 @@
 
 var Common =
 {
-	page : 1,
+	page : 0,
 	per_page : 25,
 	page_blocked : null,
+	favorites : null,
+
+	init : function()
+	{
+		this.initScrolling();
+		this.initCategories();
+	},
 
 	getVideo : function(data) {
 		var i = (Common.page - 1) * Common.per_page + 1;
@@ -20,9 +27,16 @@ var Common =
 											'		<img image_id="img_' + data[id].id + '" class="bluga-thumbnail medium2 circle" src="' + data[id].images[0] + '" data-images=\'' + JSON.stringify(data[id].images) + '\'" />' +
 											'	</a>' +
 											'	<div class="favorite">' +
-											'		<a class="afavorite add_favorite" title="В избранное"></a>' +
-											'		<a class="aplaylist add_playlist" title="В плейлист" data-video="' + data[id].id + '" onclick="Playlist.addVideo($(this))" ></a>' +
-											'	</div>' +
+											'		<a class="aplaylist add_playlist" title="В плейлист" data-video="' + data[id].id + '" onclick="Playlist.addVideo($(this))" ></a>';
+			if (Common.favorites.indexOf(String(data[id].id))!=-1)
+			{
+				result +=			'		<a class="afavorite favorited" title="В избранное"></a>';
+			}
+			else
+			{
+				result +=			'		<a class="afavorite add_favorite" title="В избранное"></a>';
+			}
+			result +=				'	</div>' +
 											'</div>' +
 											'<br/>' +
 											'	<div class="indexlink">' +
@@ -89,12 +103,20 @@ var Common =
 			Common.page += 1;
 			body.data('status', 'loading');
 			$('#loading').css('display', 'block');
-			$.get('/index/video.json', {'page': Common.page}, function(data) {
+			var params = this.getCookieJson('filter');
+			params.page = Common.page;
+			$.get('/index/video.json', params, function(data) {
 				$('#video-list').append(Common.getVideo(data));
 				body.data('status', '');
 				$('#loading').css('display', 'none');
 			}, 'json');
 		}
+	},
+
+	reInitScroll : function() {
+		Common.page = 0;
+		$('#video-list').html('');
+		this.scroll();
 	},
 
 	colorbox : function(elem) {
@@ -104,6 +126,80 @@ var Common =
 	},
 	colorboxResize : function() {
 		$.fn.colorbox.resize()
+	},
+
+	getCookieJson : function(name)
+	{
+		var data = $.cookie(name);
+		if (!data)
+		{
+			return {};
+		}
+		return JSON.parse(data);
+	},
+	setCookieJson : function(name, data)
+	{
+		data = JSON.stringify(data);
+		$.cookie(name, data);
+	},
+	pushCookieJson : function(name, key, value)
+	{
+		var data = this.getCookieJson(name);
+		if (!data[key])
+		{
+			data[key] = [value];
+		}
+		else
+		{
+			var index = data[key].indexOf(String(value));
+			if (index==-1)
+				data[key].push(value);
+		}
+		this.setCookieJson(name, data);
+	},
+	delCookieJson : function(name, key, value)
+	{
+		var data = this.getCookieJson(name);
+		var index = data[key].indexOf(String(value));
+		if (index!=-1)
+		{
+			data[key].splice( index, 1 );
+			this.setCookieJson(name, data);
+		}
+	},
+	addFilterItem : function(name, id)
+	{
+		this.pushCookieJson('filter', name, id);
+	},
+	delFilterItem : function(name, id)
+	{
+		this.delCookieJson('filter',name,id);
+	},
+
+	initCategories : function()
+	{
+		var filters = this.getCookieJson('filter');
+		if (filters.category)
+		{
+			$.each(filters.category, function(index,data){
+	      $('.category[data-id='+data+']').addClass('selected');
+			});
+		}
+		$('.category').click( function(){
+			var elem = $(this);
+			var id = elem.attr('data-id');
+			if (elem.hasClass('selected'))
+			{
+				Common.delFilterItem('category',id);
+				elem.removeClass('selected');
+			}
+			else
+			{
+				Common.addFilterItem('category',id);
+				elem.addClass('selected');
+			}
+			Common.reInitScroll();
+		});
 	}
 };
 

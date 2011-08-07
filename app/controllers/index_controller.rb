@@ -7,18 +7,25 @@ class IndexController < ApplicationController
 	end
 
 	def video
-		@list = Video.fields(:name, :images, :date, :duration).paginate(
-						:order => :_id.desc,
-						:per_page => 24,
-						:page => params[:page]
-		)
-		@list.each do |video, index|
-			@user.seen[String(video._id)] = video._id
-		end
-		@user.save!
-		respond_to do |format|
-			format.html
-			format.json { render :json => @list }
+		if request.xhr? then
+			list = Video.fields(:name, :images, :date, :duration)
+			if (params[:category].present?)
+				list = list.where(:category_ids.in => params[:category].collect{|x| Integer(x)})
+			end
+			@list = list.paginate(
+							:order => :_id.desc,
+							:per_page => 24,
+							:page => params[:page]
+			)
+			@list.each do |video, index|
+				@user.seen[String(video._id)] = video._id
+			end
+			@user.save!
+			#@list = params[:category].collect{|x| Integer(x)}
+			respond_to do |format|
+				format.html
+				format.json { render :json => @list }
+			end
 		end
 	end
 
@@ -26,7 +33,6 @@ class IndexController < ApplicationController
 		id = params[:id]
 		video = Video.find(Integer(id))
 		comments = video.comments.sort_by(&:published).reverse
-
 		if request.post? then
 			result = {'result'=>nil}
 			if !params[:name].blank? && !params[:message].blank? then

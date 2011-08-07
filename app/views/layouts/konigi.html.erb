@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<%= stylesheet_link_tag 'core.css', 'css_4278727a67acd471320c5f6a4f8be004.css', 'reset.css', 'grid.css' %>
 	<%= stylesheet_link_tag 'style.css', 'colorbox.css' %>
-	<%= javascript_include_tag 'jquery-1.6.2.min.js', 'jquery.plugins.js', 'application.js', 'jquery.colorbox.js', 'pure_min', 'jquery.mousewheel.min' %>
+	<%= javascript_include_tag 'jquery-1.6.2.min.js', 'jquery.plugins.js', 'application.js', 'jquery.colorbox.js', 'pure_min', 'jquery.mousewheel.min', 'jquery.cookie.js' %>
 	<script type="text/javascript">
 
 	</script>
@@ -23,10 +23,10 @@
 
 			<div id="main-menu" class="container clear">
 
-				<div id="logo" class="column span-4"><h1><a href="/"><%= image_tag 'logo.png' %></a></h1></div>
+				<div id="logo" class="column"><h1><a href="/"><%= image_tag 'logo.png' %></a></h1></div>
 
 
-				<div id="nav" class="column span-20 last tright">
+				<div id="nav" class="column last tright">
 
 
 					<div id="gnav">
@@ -44,9 +44,16 @@
 							<li id="hdsearch"><a href="/search/google">Search</a></li>
 							<li id="hdcart"><a href="https://www.e-junkie.com/ecom/gb.php?c=cart;cl=48049;ejc=2">Cart</a></li>
 						</ul>
+
 					</div>
-
-
+				</div>
+				<div style="clear:both"></div>
+				<div>
+					<ul class="tags">
+						<% @categories.each do |category| %>
+							<li><a class="category" data-id="<%=category.id%>"><%= category.name %></a></li>
+						<% end %>
+					</ul>
 				</div>
 
 				<!--

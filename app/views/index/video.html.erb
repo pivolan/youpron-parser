@@ -2,14 +2,13 @@
 	<!-- start main content -->
 	<div class="view view-home view-id-home view-display-id-page_1 view-dom-id-1">
 
-
 		<div class="view-content" id="video-list">
 
 		</div>
 		</div>
 <div style="clear:both"></div>
 		<div class="item-list">
-			<%= will_paginate @list %>
+			<%= if @list.present?; will_paginate @list; end %>
 		</div>
 	<div id="loading" class='hidden'>
 		<p>Loading...</p>
@@ -19,7 +18,8 @@
 <script type="text/javascript">
 $(document).ready(function(){
 //Автоподгрузка при скроллинге
-	Common.initScrolling();
+	Common.favorites = <%=raw @favorites.to_json() %>;
+	Common.init();
 	Common.scroll();
 //Добавляем к картинкам кнопки в избранное и в плейлист
 	//$('.show').showdetails();
@@ -36,12 +36,12 @@ $(document).ready(function(){
 		Changer.stopCounter(id);
 	});
 //Кнопки добавить в изюранное и в плейлист
-	$('.img-div').live('mouseover', function(){
-		$(this).children('.favorite').show();
-	});
-	$('.img-div').live('mouseout', function(){
-		$(this).children('.favorite').hide();
-	});
+//	$('.img-div').live('mouseover', function(){
+//		$(this).children('.favorite').children('.add_playlist').show();
+//	});
+//	$('.img-div').live('mouseout', function(){
+//		$(this).children('.favorite').children('.add_playlist').hide();
+//	});
 //  Клик на В избранное
 	$('.afavorite').live('click', function(event){
 		var video = $(this).parent().parent().children('a').attr('data-video');
