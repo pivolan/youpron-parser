@@ -60,11 +60,13 @@ class PlaylistController < ApplicationController
 	end
 
 	def select_playlist
-		@user.current_playlist = Integer(params[:id])
+		id = Integer(params[:id])
+		@user.current_playlist = id
+		@playlist = Playlist.find(id)
 		@user.save!
 		respond_to do |format|
 			format.html
-			format.json { render :json => Integer(params[:id])}
+			format.json { render :json => @playlist.to_json(:include => :video) }
 		end
 	end
 

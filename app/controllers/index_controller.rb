@@ -103,7 +103,7 @@ class IndexController < ApplicationController
 				user_id = session[:id]
 				user = User.find(user_id)
 				user.favorites.delete(id)
-				user.favorites.push(id);
+				user.favorites.push(id)
 				user.save
 				result = true
 			elsif session[:id].present? && act=='del'

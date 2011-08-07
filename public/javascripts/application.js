@@ -17,7 +17,7 @@ var Common =
 											'<div class="thumb">' +
 											'<div class="img-div">' +
 											'	<a href="/index/view/' + data[id].id + '" class="show" onclick="Common.colorbox($(this))" data-video="' + data[id].id + '">' +
-											'		<img id="img_' + data[id].id + '" class="bluga-thumbnail medium2 circle" src="' + data[id].images[0] + '" data-images=\'' + JSON.stringify(data[id].images) + '\'" />' +
+											'		<img image_id="img_' + data[id].id + '" class="bluga-thumbnail medium2 circle" src="' + data[id].images[0] + '" data-images=\'' + JSON.stringify(data[id].images) + '\'" />' +
 											'	</a>' +
 											'	<div class="favorite">' +
 											'		<a class="afavorite add_favorite" title="В избранное"></a>' +
@@ -181,19 +181,21 @@ var Playlist =
 	getVideo: function(video) {
 		if(this.videos[video.id])
 		{
-			result = this.videos[video.id];
+			var result = this.videos[video.id];
 		}
 		else
-		var result = $(
-						'<span class="pl_video">' +
-						'	<a href="/index/view/' + video.id + '" class="view show" onclick="Common.colorbox($(this))" data-video="' + video.id + '">' +
-						'		<img class="" src="' + video.images[0] + '" alt="" height="100" data-images="' + JSON.stringify(video.images) + '" /> ' +
-						'	</a>' +
-						'	<a href="/playlist/remove_video_from_playlist/' + video.id + '" class="delete" data-video="' + video.id + '" onclick="Playlist.removeVideo($(this)); return false;">' +
-						'	</a>'+
-						'</span>'
-		);
-		this.videos[video.id] = result;
+		{
+			var result = $(
+							'<span class="pl_video">' +
+							'	<a href="/index/view/' + video.id + '" class="view show" onclick="Common.colorbox($(this))" data-video="' + video.id + '">' +
+							'		<img image_id="img_' + video.id + '" class="circle" src="' + video.images[0] + '" alt="" height="100" data-images=\'' + JSON.stringify(video.images) + '\' /> ' +
+							'	</a>' +
+							'	<a href="/playlist/remove_video_from_playlist/' + video.id + '" class="delete" data-video="' + video.id + '" onclick="Playlist.removeVideo($(this)); return false;">' +
+							'	</a>'+
+							'</span>'
+			);
+			this.videos[video.id] = result;
+		}
 		return result;
 	},
 	create_playlist: function(){
@@ -206,13 +208,19 @@ var Playlist =
 	select_playlist: function(obj)
 	{
 		var id = obj.attr('data_id');
-		console.log(id);
 		var title = obj.html();
 		this.current_playlist = id;
 		this.title_playlist_span.html(title + '('+id+')');
 		$.getJSON('/playlist/select_playlist/', {id:id}, function(json)
 		{
-
+			var i;
+			var list = Playlist.list;
+			list.html('');
+			for (i in json.video) {
+				var video = json.video[i];
+				var result = Playlist.getVideo(video);
+				list.append(result);
+			}
 		})
 	}
 };

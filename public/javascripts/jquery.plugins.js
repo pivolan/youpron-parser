@@ -6,7 +6,7 @@ var Changer = {
 
 	init : function(elem)
 	{
-		var id = elem.attr('id');
+		var id = elem.attr('image_id');
 		this.elements[id] = elem;
 		this.images[id] = JSON.parse(elem.attr('data-images'));
 	},
