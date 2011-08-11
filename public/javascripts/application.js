@@ -115,6 +115,7 @@ var Common =
 
 	reInitScroll : function() {
 		Common.page = 0;
+		Common.page_blocked = null;
 		$('#video-list').html('');
 		this.scroll();
 	},
