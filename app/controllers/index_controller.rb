@@ -25,6 +25,7 @@ class IndexController < ApplicationController
 			respond_to do |format|
 				format.html
 				format.json { render :json => @list }
+				
 			end
 		end
 	end
