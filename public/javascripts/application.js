@@ -12,8 +12,16 @@ var Common =
 	{
 		this.initScrolling();
 		this.initCategories();
+        this.initGetVideo();
 	},
 
+    initGetVideo : function() {
+        var id = parseInt(window.location.hash.substr(1));
+        if (id)
+        {
+            this.colorbox(null, id);
+        }
+    },
 	getVideo : function(data) {
 		var i = (Common.page - 1) * Common.per_page + 1;
 		var result = '';
@@ -23,7 +31,7 @@ var Common =
 							'<div class="screens-thumbs-index thumb-' + i + '">' +
 											'<div class="thumb">' +
 											'<div class="img-div">' +
-											'	<a href="/index/view/' + data[id].id + '" class="show" onclick="Common.colorbox($(this))" data-video="' + data[id].id + '">' +
+											'	<a href="#' + data[id].id + '" class="show" onclick="Common.colorbox($(this))" data-video="' + data[id].id + '">' +
 											'		<img image_id="img_' + data[id].id + '" class="bluga-thumbnail medium2 circle" src="' + data[id].images[0] + '" data-images=\'' + JSON.stringify(data[id].images) + '\'" />' +
 											'	</a>' +
 											'	<div class="favorite">' +
@@ -40,7 +48,7 @@ var Common =
 											'</div>' +
 											'<br/>' +
 											'	<div class="indexlink">' +
-											'		<a href="/index/view/' + data[id].id + '" rel="bookmark" title="' + data[id].name.slice(0, 1).toUpperCase() + data[id].name.slice(1) + '">' + data[id].name.slice(0, 1).toUpperCase() + data[id].name.slice(1) + '</a>' +
+											'		<a href="#' + data[id].id + '" rel="bookmark" title="' + data[id].name.slice(0, 1).toUpperCase() + data[id].name.slice(1) + '">' + data[id].name.slice(0, 1).toUpperCase() + data[id].name.slice(1) + '</a>' +
 											'		<div class="nodetype"><a>' + data[id].duration + '</a></div>' +
 											'	</div>' +
 											'</div>' +
@@ -89,7 +97,7 @@ var Common =
 			var y = Common.GetScrollPositionY();
 			var mY = Common.GetScrollMaxY();
 			var delta = y / mY;
-			if (delta > 0.8) {
+			if (delta > 0.99) {
 				Common.scroll();
 			}
 		});
@@ -120,9 +128,15 @@ var Common =
 		this.scroll();
 	},
 
-	colorbox : function(elem) {
-		if (!elem.hasClass('cnoxElement')) {
-			elem.colorbox({'width':'680px', 'height': 'auto'});
+	colorbox : function(elem, id) {
+        if (id)
+        {
+            $.colorbox({'width':'680px', 'height': 'auto', 'href':'/index/view/'+id});
+        }
+        else if (!elem.hasClass('cnoxElement')) {
+            var id = elem.attr('data-video');
+            window.location.hash = id;
+			$.colorbox({'width':'680px', 'height': 'auto', 'href':'/index/view/'+id});
 		}
 	},
 	colorboxResize : function() {
