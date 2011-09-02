@@ -12,16 +12,28 @@ var Common =
 	{
 		this.initScrolling();
 		this.initCategories();
-        this.initGetVideo();
+    this.initGetVideo();
+		TagCloud.init();
 	},
 
-    initGetVideo : function() {
-        var id = parseInt(window.location.hash.substr(1));
-        if (id)
-        {
-            this.colorbox(null, id);
-        }
-    },
+	getImage : function(url)
+	{
+		if (url)
+		{
+			return url;
+		}
+		else
+		{
+			return 'http://placekitten.com/225/164'
+		}
+	},
+	initGetVideo : function() {
+			var id = parseInt(window.location.hash.substr(1));
+			if (id)
+			{
+					this.colorbox(null, id);
+			}
+	},
 	getVideo : function(data) {
 		var i = (Common.page - 1) * Common.per_page + 1;
 		var result = '';
@@ -32,7 +44,7 @@ var Common =
 											'<div class="thumb">' +
 											'<div class="img-div">' +
 											'	<a href="#' + data[id].id + '" class="show" onclick="Common.colorbox($(this))" data-video="' + data[id].id + '">' +
-											'		<img image_id="img_' + data[id].id + '" class="bluga-thumbnail medium2 circle" src="' + data[id].images[0] + '" data-images=\'' + JSON.stringify(data[id].images) + '\'" />' +
+											'		<img image_id="img_' + data[id].id + '" class="bluga-thumbnail medium2 circle" src="' + this.getImage(data[id].images[0]) + '" data-images=\'' + JSON.stringify(data[id].images) + '\'" />' +
 											'	</a>' +
 											'	<div class="favorite">' +
 											'		<a class="aplaylist add_playlist" title="В плейлист" data-video="' + data[id].id + '" onclick="Playlist.addVideo($(this))" ></a>';
@@ -136,7 +148,7 @@ var Common =
         else if (!elem.hasClass('cnoxElement')) {
             var id = elem.attr('data-video');
             window.location.hash = id;
-			$.colorbox({'width':'680px', 'height': 'auto', 'href':'/index/view/'+id});
+			$.colorbox({'width':'680px', 'height': 'auto', 'href':'/index/view/'+id, onClosed:function(){window.location.hash = ''}});
 		}
 	},
 	colorboxResize : function() {
@@ -335,3 +347,40 @@ var Playlist =
 		})
 	}
 };
+
+var TagCloud =
+{
+	min_size: 10,
+	max_size: 30,
+	count: 0,
+	sum: 0,
+	avg: 0,
+	elems: {},
+
+	init : function ()
+	{
+		//считаем сумму и количество видео из атрибута
+		$(".category").each(function(){
+			var elem = $(this);
+			var videos = elem.attr('data-videos');
+			var id = elem.attr('data-id');
+			TagCloud.count++;
+			TagCloud.sum = parseInt(TagCloud.sum) + parseInt(videos);
+			TagCloud.elems[id] = {elem:elem, videos:videos};
+		});
+		this.avg = this.sum/this.count;
+		//Меняем размер шрифта
+		$.each(this.elems, function(key, data){
+			var size = data.videos / TagCloud.avg * 15;
+			if (size>TagCloud.max_size)
+			{
+				size = TagCloud.max_size;
+			}
+			else if (size<TagCloud.min_size)
+			{
+				size = TagCloud.min_size;
+			}
+			data.elem.css('font-size', size+'px');
+		});
+	}
+}
