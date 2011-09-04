@@ -52,12 +52,12 @@
 				</div>
 				<div style="clear:both"></div>
 				<div>-->
-				<ul class="tags">
-					<% @categories.each do |category| %>
-						<li><a class="category" data-id="<%= category.id %>"><%= category.name %></a></li>
-					<% end %>
-				</ul>
-			</div>
+					<ul class="tags">
+						<% @categories.each do |category| %>
+							<li><a class="category" data-id="<%=category.id%>" data-videos="<%=category.videos%>" title="<%=category.videos%>"><%= category.name %></a></li>
+						<% end %>
+					</ul>
+				</div>
 
 			<!--
 

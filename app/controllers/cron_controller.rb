@@ -53,7 +53,7 @@ class CronController < ActionController::Base
 							:view => 0,
 							:rating => 0,
 							:duration => video_duration,
-							:url => video_file_link,
+							:url => site+video_url,
 							:xml_url => video_link
 			)
 
@@ -131,9 +131,70 @@ class CronController < ActionController::Base
 						video.date = DateTime.strptime(detail_split[1].strip, "%B %e, %Y")
 				end
 			end
-
+			#Пересчитываем счетчики категорий
+			Category.all.each do |item|
+				item.videos = Video.where(:category_ids => [item._id]).count
+				item.save
+			end
 			video.save
 			@result = 'ok'
+		end
+	end
+
+	def reparse_youporn_dot_com
+		require 'nokogiri'
+		require 'open-uri'
+		cookie = {"Cookie"=>"age_check=1"}
+		#Находим видео без категорий
+		videos = Video.where(:category_ids => {'$size'=>0}).all
+		videos.each do |video|
+			is_change = 0
+			url = video.url.to_s
+			#достаем подробную инфу о видео
+			doc = Nokogiri::HTML(open(url, cookie))
+
+				#детали видео
+			video_tags = []
+			video_categories = []
+			details = doc.css('#details ul li')
+			details.each do |detail, index|
+				detail_split = detail.text.strip.split(':')
+				case detail_split[0].strip.to_s
+					when 'Categories' then
+						categories = detail_split[1].to_s.split(',').collect(&:strip)
+						i = 0
+						categories.each do |category|
+							get_category = Category.where(:name => category.to_s)
+							if (get_category.count>0)
+								video.categorys << get_category.first
+							else
+								new_category_id = Integer(Incrementor[:category].inc)
+								new_category = Category.create(:_id => new_category_id, :name => category.to_s)
+								video.categorys << new_category
+							end
+							i+=1
+						end
+						is_change = 1
+					when 'Tags' then
+						if video.tags.blank? then
+							tags = detail_split[1].to_s.split(',').collect(&:strip)
+							i = 0
+							tags.each do |tag|
+								get_tag = Tag.where(:name => tag.to_s)
+								if (get_tag.count==0)
+									Tag.create(:_id => Integer(Incrementor[:tag].inc), :name=>tag.to_s)
+								end
+								video.tags[i] = tag.to_s
+								i+=1
+							is_change = 1
+							end
+						end
+				end
+			end
+
+			if is_change then
+				video.save
+			end
 		end
 	end
 
