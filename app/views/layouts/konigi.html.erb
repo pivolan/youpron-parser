@@ -15,7 +15,10 @@
 <div class="header">
 	<span><%= session[:from] %></span>
 	<a href="<%= url_for :controller=>:profile, :action=>:get_short_url %>">Получить короткую ссылку для входа на сайт</a>
-	user_id: <a href="/profile/"><%= session[:id] %></a></div>
+	user_id: <a href="/profile/"><%= session[:id] %></a>
+	<%= link_to 'Выход', :controller=>:index, :action=>:logout %>
+</div>
+
 <div id="wrapper">
 
 	<div id="header-wrapper">
@@ -49,73 +52,73 @@
 				</div>
 				<div style="clear:both"></div>
 				<div>-->
-					<ul class="tags">
-						<% @categories.each do |category| %>
-							<li><a class="category" data-id="<%=category.id%>"><%= category.name %></a></li>
-						<% end %>
-					</ul>
-				</div>
-
-				<!--
-
-								 <div id="nav-tools" class="column span-6 last">
-										 <div id="site-search">
-														 </div>
-								 </div>
-								 -->
-
+				<ul class="tags">
+					<% @categories.each do |category| %>
+						<li><a class="category" data-id="<%= category.id %>"><%= category.name %></a></li>
+					<% end %>
+				</ul>
 			</div>
 
+			<!--
+
+											 <div id="nav-tools" class="column span-6 last">
+													 <div id="site-search">
+																	 </div>
+											 </div>
+											 -->
 
 		</div>
+
+
 	</div>
+</div>
 
-	<!-- #main -->
-	<div id="body-wrapper">
-		<div id="body" class="container">
-			<% if @title.present? %>
-				<div id="title" class="container">
-					<h1 class="page-title"><%= @title %></h1>
-				</div>
-			<% end %>
-			<div id="content">
-				<div id="content-main" class="container">
+<!-- #main -->
+<div id="body-wrapper">
+	<div id="body" class="container">
+		<% if @title.present? %>
+			<div id="title" class="container">
+				<h1 class="page-title"><%= @title %></h1>
+			</div>
+		<% end %>
+		<div id="content">
+			<div id="content-main" class="container">
 
-					<%= yield -%>
-
-				</div>
+				<%= yield -%>
 
 			</div>
 
 		</div>
+
 	</div>
+</div>
 
 
-	<!-- #footer -->
-	<div id="footer-wrapper" class="clear">
-		<div id="footer" class="container clear">
-			<div class="column span-12">
-				<span id="ftcopyright">&copy; 2011 <a href="/">XVidos</a></span>
-				<a href="#" onclick="$('#wrapper').addClass('unicorns');$('body').addClass('unibg');">&middot;</a>
+<!-- #footer -->
+<div id="footer-wrapper" class="clear">
+	<div id="footer" class="container clear">
+		<div class="column span-12">
+			<span id="ftcopyright">&copy; 2011 <a href="/">XVidos</a></span>
+			<a href="#" onclick="$('#wrapper').addClass('unicorns');$('body').addClass('unibg');">&middot;</a>
 
-				<a href="/page/about-site">About</a>
-				&middot;
-				<a href="/page/advertising">Advertising</a>
-				&middot;
-				<a href="/sitemap">Tags</a>
-				&middot;
-				<a href="/a-z-index">A-Z</a>
-				&middot;
-				<a href="/muse">Muse</a>
+			<a href="/page/about-site">About</a>
+			&middot;
+			<a href="/page/advertising">Advertising</a>
+			&middot;
+			<a href="/sitemap">Tags</a>
+			&middot;
+			<a href="/a-z-index">A-Z</a>
+			&middot;
+			<a href="/muse">Muse</a>
 
-			</div>
-			<div class="column span-12 last txt-right">
-				<span id="phone">347-010-9880</span>
-				&middot;
-				<span id="ftrss"><a href="<%= url_for :controller => :rss, :action => :index %>">RSS</a></span>
-			</div>
+		</div>
+		<div class="column span-12 last txt-right">
+			<span id="phone">347-010-9880</span>
+			&middot;
+			<span id="ftrss"><a href="<%= url_for :controller => :rss, :action => :index %>">RSS</a></span>
 		</div>
 	</div>
+</div>
 
 
 </div>
@@ -150,7 +153,7 @@
 		background: #E3E3E3;
 		height: 29px;
 		width: 100%;
-		z-index: 4;
+		z-index: 999;
 		padding: 0;
 		margin: 0;
 		font-family: Arial;
@@ -172,25 +175,27 @@
 		padding: 5px 5px 0 0;
 		text-align: left;
 		white-space: nowrap;
-		left:0px;
+		left: 0px;
 	}
 
 	div.playlist_list .pl_video {
 		margin-right: 5px;
 		position: relative;
 	}
-		div.playlist_list .pl_video a.delete {
-			position: absolute;
-			background: url('/images/minus.png');
-			width: 32px;
-			height: 32px;
-			right: 2px;
-			top: -90px;
-			display: none;
-		}
-		div.playlist_list .pl_video:hover a.delete {
-			display: block;
-		}
+
+	div.playlist_list .pl_video a.delete {
+		position: absolute;
+		background: url('/images/minus.png');
+		width: 32px;
+		height: 32px;
+		right: 2px;
+		top: -90px;
+		display: none;
+	}
+
+	div.playlist_list .pl_video:hover a.delete {
+		display: block;
+	}
 
 	div.title_playlist {
 		position: absolute;

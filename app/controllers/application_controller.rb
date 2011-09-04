@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 	layout 'konigi'
 	protect_from_forgery
-	before_filter :login, :can_view
+	before_filter :can_view, :login
 
 	def login
 		if session[:id].present?
@@ -22,15 +22,25 @@ class ApplicationController < ActionController::Base
 									:value=>cookies[:uid],
 									:expires => 1.year.from_now
 					}
+					cookies[:access] = {
+									:value=>true,
+									:expires => 1.year.from_now
+					}
 				else
 					cookies.delete(:uid)
 					session[:id] = nil
 				end
-			else
+			end
+			if !cookies[:uid].present?
 				new_id = User.generate_cookie_id
+				playlist_default = Playlist.create(
+								:_id => Incrementor[:playlist].inc,
+								:title => 'default'
+				)
 				user = User.create(
 								:_id => Incrementor[:user].inc,
-								:cookie_id => new_id
+								:cookie_id => new_id,
+								:playlist => [playlist_default]
 				)
 				@id = session[:id] = user._id
 				cookies[:uid] = {
@@ -46,7 +56,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def can_view
-		if  !@user.access.present? || !@user.access
+		if	!cookies[:access].present? || !cookies[:access]
 			redirect_to :controller => :index, :action => :null_page
 		end
 	end
