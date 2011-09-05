@@ -13,13 +13,26 @@ class IndexController < ApplicationController
 			if (params[:category].present?)
 				list = list.where(:category_ids.in => params[:category].collect{|x| Integer(x)})
 			end
+			if(params[:seen].present? && params[:seen] == 'true')
+				list = list.where(:_id => @user.seen)
+			end
+			if(params[:unseen].present? && params[:unseen] == 'true')
+				list = list.where(:_id.nin => @user.seen)
+			end
+			if(params[:clicked].present? && params[:clicked] == 'true')
+				list = list.where(:_id => @user.clicked)
+			end
+			if(params[:unclicked].present? && params[:unclicked] == 'true')
+				list = list.where(:_id.nin => @user.clicked)
+			end
 			@list = list.paginate(
 							:order => :_id.desc,
-							:per_page => 24,
+							:per_page => 25,
 							:page => params[:page]
 			)
 			@list.each do |video, index|
-				@user.seen[String(video._id)] = video._id
+				@user.seen.delete(video._id)
+				@user.seen.push(video._id)
 			end
 			@user.save!
 			#@list = params[:category].collect{|x| Integer(x)}
@@ -72,7 +85,8 @@ class IndexController < ApplicationController
 			@comments = comments
 			if @video.present?
 				@title = @video.name
-				@user.clicked[id] = Integer(id)
+				@user.clicked.delete(Integer(id))
+				@user.clicked.push(Integer(id))
 				@user.save!
 			end
 			respond_to do |format|
@@ -81,6 +95,13 @@ class IndexController < ApplicationController
 			end
 
 		end
+	end
+
+	def looked
+		video_id = Integer(params[:id])
+		@user.looked.delete(video_id)
+		@user.looked.push(video_id)
+		render :json => true
 	end
 
 	def carousel

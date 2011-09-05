@@ -7,9 +7,10 @@ class User
 	key :lastname, String
 	key :cookie_id, String
 	key :short_url, String
-	key :seen, Hash
-	key :clicked, Hash
-	key :complete, Hash
+	key :seen, Array
+	key :clicked, Array
+	key :complete, Array
+	key :looked, Array
 	key :favorites, Array
 	key :access, Boolean
 

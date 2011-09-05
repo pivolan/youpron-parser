@@ -13,10 +13,19 @@
 </head>
 <body class="top konigi-5-0 home" id="home">
 <div class="header">
+	<div class="left margin_left">
+		<a id="clicked" class="clicked" href="#clicked">clicked</a>
+		<a id="seen" class="seen" href="#seen">seen</a>
+		<a id="unclicked" class="clicked" href="#unclicked">not clicked</a>
+		<a id="unseen" class="seen" href="#unseen">not seen</a>
+		<a id="censored" class="seen" href="#unseen">censore</a>
+	</div>
+	<div class="right margin_right">
 	<span><%= session[:from] %></span>
 	<a href="<%= url_for :controller=>:profile, :action=>:get_short_url %>">Получить короткую ссылку для входа на сайт</a>
 	user_id: <a href="/profile/"><%= session[:id] %></a>
 	<%= link_to 'Выход', :controller=>:index, :action=>:logout %>
+		</div>
 </div>
 
 <div id="wrapper">

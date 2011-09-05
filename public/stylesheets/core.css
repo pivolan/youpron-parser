@@ -639,18 +639,19 @@ ul.tags,
 	text-transform: lowercase;
 }
 
- ul.tags li a {
+ul.tags li a {
 	display: block;
 	margin: 0;
-	padding:3px 10px 3px 10px;
-	font-size: 10px;
+	padding: 3px 10px 3px 10px;
+	font-size: 13px;
+	font-family: Arial;
 	background: #eee;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;  
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
 }
 
- ul.tags li a:hover,
+ul.tags li a:hover,
  ul.tags li a.selected{
   background: #27bcee;
   color: #fff;
@@ -1957,44 +1958,45 @@ body.home #content #content-main {
 }
 
 .screens-thumbs-index .nothumb {
-	height: 225px;
-	width: 225px;
+	height: 160px;
+	width: 160px;
 }
 
 .screens-thumbs-index .thumb {
 	background: #fff;
-	height: 225px;
-	width: 225px;
+	height: 160px;
+	width: 160px;
 	border: 1px solid #eee;
 	position: relative;
 }
 
 .home .screens-thumbs-index .thumb {
-	height: 225px;
+	height: 186px;
 }
 
 .screens-thumbs-index .thumb img {
 	padding: 0;
-	width: 225px;
+	text-align: center;
+	/*width: 160px;*/
 	position:absolute;
-	clip: rect(0px 225px 164px 0px); /* add padding to dimensions; remove commas for IE7 */
+	clip: rect(0px 160px 164px 0px); /* add padding to dimensions; remove commas for IE7 */
 }
 
 .thumb-ad .thumb {
-	width: 225px;
+	width: 160px;
   line-height: 1em;
   padding: 0px !important
 }
 
 .thumb-ad .thumb img {
   position: relative;
-  clip: rect(0px 225px 225px 0px);
+  clip: rect(0px 160px 160px 0px);
 }
 
 .screens-thumbs-index .screen-actions {
   position: absolute;
   background: #3cf;
-  width: 225px;
+  width: 160px;
   height: 59px;
   top: 166px;
   left: 0px;
@@ -2011,13 +2013,13 @@ body.home #content #content-main {
 }
 
 .screens-thumbs-index .indexlink {
-  width: 225px;
+  width: 160px;
   height: 60px;
   padding-top: 0px;
   z-index: 100;
   position: absolute;
   padding: 0;
-  top: 164px;
+  top: 120px;
   left: 0;
 	border-top: 1px solid #ededed;  
   -webkit-box-shadow: 0px -1px 3px rgba(0,0,0,0.05);
@@ -2062,7 +2064,8 @@ body.home #content #content-main {
 
 /* bluga thumbs, when loading */
 .screens-thumbs-index .bluga-thumbnail {
-  width: 225px;
+  /*width: 160px;*/
+	text-align: center;
 }
 
 div.bluga-waiting {
@@ -2076,8 +2079,8 @@ div.bluga-waiting.large {
 }
 
 div.bluga-waiting.medium2 {
-  width: 225px !important;
-  height: 165px !important;
+  /*width: 160px !important;*/
+  /*height: 165px !important;*/
   border: none !important;
 }
 
@@ -2429,7 +2432,7 @@ div.notebook-image img,
 }
 .store .thumb-box img.thumb {
   width: 140px;
-	clip: rect(0px 225px 164px 0px); /* add padding to dimensions; remove commas for IE7 */  
+	clip: rect(0px 160px 164px 0px); /* add padding to dimensions; remove commas for IE7 */  
 }
 .store .thumb-2,
 .store .thumb-4,
@@ -3136,7 +3139,7 @@ a.dotted:hover {
 	margin-bottom: 5px;
 }
 .img-div {
-	width: 225px;
+	width: 160px;
 	height: 164px;
 
 }

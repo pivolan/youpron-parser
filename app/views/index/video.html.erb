@@ -17,6 +17,8 @@
 	<!-- end main content -->
 <script type="text/javascript">
 $(document).ready(function(){
+	// фильтры просмотренного видео
+FilterSeen.init($('#seen'), $('#unseen'), $('#clicked'), $('#unclicked'), $('#censored'));
 //Автоподгрузка при скроллинге
 	Common.favorites = <%=raw @favorites.to_json() %>;
 	Common.init();

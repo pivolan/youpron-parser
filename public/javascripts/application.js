@@ -8,31 +8,30 @@ var Common =
 	page_blocked : null,
 	favorites : null,
 
-	init : function()
-	{
+	init : function() {
 		this.initScrolling();
 		this.initCategories();
-    this.initGetVideo();
+		this.initGetVideo();
 		TagCloud.init();
 	},
 
-	getImage : function(url)
-	{
-		if (url)
-		{
+	getImage : function(url) {
+		var censored = this.getCookieJson('censored');
+		if (censored) {
+			return 'http://placekitten.com/160/120';
+		}
+		if (url) {
 			return url;
 		}
-		else
-		{
-			return 'http://placekitten.com/225/164'
+		else {
+			return 'http://placekitten.com/160/120';
 		}
 	},
 	initGetVideo : function() {
-			var id = parseInt(window.location.hash.substr(1));
-			if (id)
-			{
-					this.colorbox(null, id);
-			}
+		var id = parseInt(window.location.hash.substr(1));
+		if (id) {
+			this.colorbox(null, id);
+		}
 	},
 	getVideo : function(data) {
 		var i = (Common.page - 1) * Common.per_page + 1;
@@ -48,23 +47,21 @@ var Common =
 											'	</a>' +
 											'	<div class="favorite">' +
 											'		'; // todo откатить плейлисты
-			if (Common.favorites.indexOf(String(data[id].id))!=-1)
-			{
-				result +=			'		<a class="afavorite favorited" title="В избранное"></a>';
+			if (Common.favorites.indexOf(String(data[id].id)) != -1) {
+				result += '		<a class="afavorite favorited" title="В избранное"></a>';
 			}
-			else
-			{
-				result +=			'		<a class="afavorite add_favorite" title="В избранное"></a>';
+			else {
+				result += '		<a class="afavorite add_favorite" title="В избранное"></a>';
 			}
-			result +=				'	</div>' +
-											'</div>' +
-											'<br/>' +
-											'	<div class="indexlink">' +
-											'		<a href="#' + data[id].id + '" rel="bookmark" title="' + data[id].name.slice(0, 1).toUpperCase() + data[id].name.slice(1) + '">' + data[id].name.slice(0, 1).toUpperCase() + data[id].name.slice(1) + '</a>' +
-											'		<div class="nodetype"><a>' + data[id].duration + '</a></div>' +
-											'	</div>' +
-											'</div>' +
-											'</div>';
+			result += '	</div>' +
+							'</div>' +
+							'<br/>' +
+							'	<div class="indexlink">' +
+							'		<a href="#' + data[id].id + '" rel="bookmark" title="' + data[id].name.slice(0, 1).toUpperCase() + data[id].name.slice(1) + '">' + data[id].name.slice(0, 1).toUpperCase() + data[id].name.slice(1) + '</a>' +
+							'		<div class="nodetype"><a>' + data[id].duration + '</a></div>' +
+							'	</div>' +
+							'</div>' +
+							'</div>';
 			i += 1;
 			count += 1;
 		}
@@ -141,88 +138,76 @@ var Common =
 	},
 
 	colorbox : function(elem, id) {
-        if (id)
-        {
-            $.colorbox({'width':'680px', 'height': 'auto', 'href':'/index/view/'+id});
-        }
-        else if (!elem.hasClass('cnoxElement')) {
-            var id = elem.attr('data-video');
-            window.location.hash = id;
-			$.colorbox({'width':'680px', 'height': 'auto', 'href':'/index/view/'+id, onClosed:function(){window.location.hash = ''}});
+		if (id) {
+			$.colorbox({'width':'680px', 'height': 'auto', 'href':'/index/view/' + id});
+		}
+		else if (!elem.hasClass('cnoxElement')) {
+			var id = elem.attr('data-video');
+			window.location.hash = id;
+			$.colorbox({'width':'680px', 'height': 'auto', 'href':'/index/view/' + id, onClosed:function() {
+				window.location.hash = 'ready'
+			}});
 		}
 	},
 	colorboxResize : function() {
 		$.fn.colorbox.resize()
 	},
 
-	getCookieJson : function(name)
-	{
+	getCookieJson : function(name) {
 		var data = $.cookie(name);
-		if (!data)
-		{
+		if (!data) {
 			return {};
 		}
 		return JSON.parse(data);
 	},
-	setCookieJson : function(name, data)
-	{
+	setCookieJson : function(name, data) {
 		data = JSON.stringify(data);
 		$.cookie(name, data);
 	},
-	pushCookieJson : function(name, key, value)
-	{
+	pushCookieJson : function(name, key, value) {
 		var data = this.getCookieJson(name);
-		if (!data[key])
-		{
+		if (!data[key]) {
 			data[key] = [value];
 		}
-		else
-		{
+		else {
 			var index = data[key].indexOf(String(value));
-			if (index==-1)
+			if (index == -1) {
 				data[key].push(value);
+			}
 		}
 		this.setCookieJson(name, data);
 	},
-	delCookieJson : function(name, key, value)
-	{
+	delCookieJson : function(name, key, value) {
 		var data = this.getCookieJson(name);
 		var index = data[key].indexOf(String(value));
-		if (index!=-1)
-		{
-			data[key].splice( index, 1 );
+		if (index != -1) {
+			data[key].splice(index, 1);
 			this.setCookieJson(name, data);
 		}
 	},
-	addFilterItem : function(name, id)
-	{
+	addFilterItem : function(name, id) {
 		this.pushCookieJson('filter', name, id);
 	},
-	delFilterItem : function(name, id)
-	{
-		this.delCookieJson('filter',name,id);
+	delFilterItem : function(name, id) {
+		this.delCookieJson('filter', name, id);
 	},
 
-	initCategories : function()
-	{
+	initCategories : function() {
 		var filters = this.getCookieJson('filter');
-		if (filters.category)
-		{
-			$.each(filters.category, function(index,data){
-	      $('.category[data-id='+data+']').addClass('selected');
+		if (filters.category) {
+			$.each(filters.category, function(index, data) {
+				$('.category[data-id=' + data + ']').addClass('selected');
 			});
 		}
-		$('.category').click( function(){
+		$('.category').click(function() {
 			var elem = $(this);
 			var id = elem.attr('data-id');
-			if (elem.hasClass('selected'))
-			{
-				Common.delFilterItem('category',id);
+			if (elem.hasClass('selected')) {
+				Common.delFilterItem('category', id);
 				elem.removeClass('selected');
 			}
-			else
-			{
-				Common.addFilterItem('category',id);
+			else {
+				Common.addFilterItem('category', id);
 				elem.addClass('selected');
 			}
 			Common.reInitScroll();
@@ -260,17 +245,15 @@ var Playlist =
 				Playlist.playlist.addClass('open');
 			}
 		});
-		this.playlist.mousewheel(function(evt, delta){
+		this.playlist.mousewheel(function(evt, delta) {
 			evt.preventDefault();
 			evt.stopPropagation();
 			console.log(delta);
 			var list = Playlist.list;
-			if(delta > 0 && list.position().left < 0)
-			{
+			if (delta > 0 && list.position().left < 0) {
 				list.css('left', '+=100px');
 			}
-			else if(delta < 0)
-			{
+			else if (delta < 0) {
 				list.css('left', '-=100px');
 			}
 		});
@@ -294,7 +277,7 @@ var Playlist =
 			Playlist.list.append(video);
 		});
 	},
-	removeVideo: function(obj){
+	removeVideo: function(obj) {
 		var video_id = obj.attr('data-video');
 		$.getJSON('/playlist/remove_video_from_playlist/', {playlist_id:this.current_playlist, video_id: video_id}, function(json) {
 			Playlist.videos[video_id].remove();
@@ -302,40 +285,36 @@ var Playlist =
 
 	},
 	getVideo: function(video) {
-		if(this.videos[video.id])
-		{
+		if (this.videos[video.id]) {
 			var result = this.videos[video.id];
 		}
-		else
-		{
+		else {
 			var result = $(
 							'<span class="pl_video">' +
-							'	<a href="/index/view/' + video.id + '" class="view show" onclick="Common.colorbox($(this))" data-video="' + video.id + '">' +
-							'		<img image_id="img_' + video.id + '" class="circle" src="' + video.images[0] + '" alt="" height="100" data-images=\'' + JSON.stringify(video.images) + '\' /> ' +
-							'	</a>' +
-							'	<a href="/playlist/remove_video_from_playlist/' + video.id + '" class="delete" data-video="' + video.id + '" onclick="Playlist.removeVideo($(this)); return false;">' +
-							'	</a>'+
-							'</span>'
+											'	<a href="/index/view/' + video.id + '" class="view show" onclick="Common.colorbox($(this))" data-video="' + video.id + '">' +
+											'		<img image_id="img_' + video.id + '" class="circle" src="' + video.images[0] + '" alt="" height="100" data-images=\'' + JSON.stringify(video.images) + '\' /> ' +
+											'	</a>' +
+											'	<a href="/playlist/remove_video_from_playlist/' + video.id + '" class="delete" data-video="' + video.id + '" onclick="Playlist.removeVideo($(this)); return false;">' +
+											'	</a>' +
+											'</span>'
 			);
 			this.videos[video.id] = result;
 		}
 		return result;
 	},
-	create_playlist: function(){
-		$.getJSON('/playlist/create_playlist/', {title:'main playlist'}, function(json){
+	create_playlist: function() {
+		$.getJSON('/playlist/create_playlist/', {title:'main playlist'}, function(json) {
 			Playlist.current_playlist = json.id;
-			Playlist.select_playlist_ul.append('<li data_id="'+json.id+'" onclick="Playlist.select_playlist($(this))">'+json.title+'</li>');
+			Playlist.select_playlist_ul.append('<li data_id="' + json.id + '" onclick="Playlist.select_playlist($(this))">' + json.title + '</li>');
 			Playlist.title_playlist_span.html(json.title);
 		});
 	},
-	select_playlist: function(obj)
-	{
+	select_playlist: function(obj) {
 		var id = obj.attr('data_id');
 		var title = obj.html();
 		this.current_playlist = id;
-		this.title_playlist_span.html(title + '('+id+')');
-		$.getJSON('/playlist/select_playlist/', {id:id}, function(json)
-		{
+		this.title_playlist_span.html(title + '(' + id + ')');
+		$.getJSON('/playlist/select_playlist/', {id:id}, function(json) {
 			var i;
 			var list = Playlist.list;
 			list.html('');
@@ -350,17 +329,16 @@ var Playlist =
 
 var TagCloud =
 {
-	min_size: 10,
+	min_size: 13,
 	max_size: 30,
 	count: 0,
 	sum: 0,
 	avg: 0,
 	elems: {},
 
-	init : function ()
-	{
+	init : function () {
 		//считаем сумму и количество видео из атрибута
-		$(".category").each(function(){
+		$(".category").each(function() {
 			var elem = $(this);
 			var videos = elem.attr('data-videos');
 			var id = elem.attr('data-id');
@@ -368,19 +346,147 @@ var TagCloud =
 			TagCloud.sum = parseInt(TagCloud.sum) + parseInt(videos);
 			TagCloud.elems[id] = {elem:elem, videos:videos};
 		});
-		this.avg = this.sum/this.count;
+		this.avg = this.sum / this.count;
 		//Меняем размер шрифта
-		$.each(this.elems, function(key, data){
+		$.each(this.elems, function(key, data) {
 			var size = data.videos / TagCloud.avg * 15;
-			if (size>TagCloud.max_size)
-			{
+			if (size > TagCloud.max_size) {
 				size = TagCloud.max_size;
 			}
-			else if (size<TagCloud.min_size)
-			{
+			else if (size < TagCloud.min_size) {
 				size = TagCloud.min_size;
 			}
-			data.elem.css('font-size', size+'px');
+			data.elem.css('font-size', size + 'px');
 		});
+	}
+}
+var FilterSeen =
+{
+	seen : null,
+	unseen : null,
+	clicked: null,
+	unclicked: null,
+	censore: null,
+
+	init_seen: function() {
+		var filter = Common.getCookieJson('filter');
+		if (filter.seen) {
+			this.seen.addClass('selected');
+		}
+		this.seen.click(function(evt) {
+			evt.preventDefault();
+			var filter = Common.getCookieJson('filter');
+			if (filter.seen) {
+				delete filter.seen;
+				Common.setCookieJson('filter', filter);
+				$(this).removeClass('selected');
+			}
+			else {
+				filter.seen = true;
+				Common.setCookieJson('filter', filter);
+				$(this).addClass('selected');
+			}
+			Common.reInitScroll();
+		});
+	},
+
+	init_censore : function () {
+		if (Common.getCookieJson('censored')) {
+			this.censore.addClass('selected');
+		}
+		this.censore.click(function(evt) {
+			evt.preventDefault();
+			if (Common.getCookieJson('censored')) {
+				Common.setCookieJson('censored', false);
+				FilterSeen.censore.removeClass('selected');
+			}
+			else {
+				Common.setCookieJson('censored', true);
+				FilterSeen.censore.addClass('selected');
+				$('img[data-images]').attr('src', Common.getImage());
+			}
+		});
+	},
+
+	init_unseen : function () {
+		var filter = Common.getCookieJson('filter');
+		if (filter.unseen) {
+			this.unseen.addClass('selected');
+		}
+		this.unseen.click(function(evt) {
+			evt.preventDefault();
+			var filter = Common.getCookieJson('filter');
+			if (filter.unseen) {
+				delete filter.unseen;
+				Common.setCookieJson('filter', filter);
+				$(this).removeClass('selected');
+			}
+			else {
+				filter.unseen = true;
+				Common.setCookieJson('filter', filter);
+				$(this).addClass('selected');
+			}
+			Common.reInitScroll();
+		});
+	},
+	
+	init_clicked: function ()
+	{
+		var filter = Common.getCookieJson('filter');
+		if (filter.clicked) {
+			this.clicked.addClass('selected');
+		}
+		this.clicked.click(function(evt) {
+			evt.preventDefault();
+			var filter = Common.getCookieJson('filter');
+			if (filter.clicked) {
+				delete filter.clicked;
+				Common.setCookieJson('filter', filter);
+				$(this).removeClass('selected');
+			}
+			else {
+				filter.clicked = true;
+				Common.setCookieJson('filter', filter);
+				$(this).addClass('selected');
+			}
+			Common.reInitScroll();
+		});
+	},
+	init_unclicked: function ()
+	{
+		var filter = Common.getCookieJson('filter');
+		if (filter.unclicked) {
+			this.unclicked.addClass('selected');
+		}
+		this.unclicked.click(function(evt) {
+			evt.preventDefault();
+			var filter = Common.getCookieJson('filter');
+			if (filter.unclicked) {
+				delete filter.unclicked;
+				Common.setCookieJson('filter', filter);
+				$(this).removeClass('selected');
+			}
+			else {
+				filter.unclicked = true;
+				Common.setCookieJson('filter', filter);
+				$(this).addClass('selected');
+			}
+			Common.reInitScroll();
+		});
+	},
+	
+	init: function(s, us, c, uc, censore) {
+		this.seen = s;
+		this.unseen = us;
+		this.clicked = c;
+		this.unclicked = uc;
+		this.censore = censore;
+
+		this.init_censore();
+		this.init_seen();
+		this.init_unseen();
+		this.init_unclicked();
+		this.init_clicked();
+
 	}
 }
