@@ -34,7 +34,7 @@ class IndexController < ApplicationController
 				@user.seen.delete(video._id)
 				@user.seen.push(video._id)
 			end
-			@user.save!
+			@user.save
 			#@list = params[:category].collect{|x| Integer(x)}
 			respond_to do |format|
 				format.html
@@ -61,7 +61,7 @@ class IndexController < ApplicationController
 				video.comments.push(comment)
 				video.save
 				@user.firstname = params[:name]
-				@user.save!
+				@user.save
 				result = {
 								'result'=>'ok',
 								'data' => {
@@ -87,7 +87,7 @@ class IndexController < ApplicationController
 				@title = @video.name
 				@user.clicked.delete(Integer(id))
 				@user.clicked.push(Integer(id))
-				@user.save!
+				@user.save
 			end
 			respond_to do |format|
 				format.html { render :layout => false }
@@ -101,6 +101,7 @@ class IndexController < ApplicationController
 		video_id = Integer(params[:id])
 		@user.looked.delete(video_id)
 		@user.looked.push(video_id)
+		@user.save
 		render :json => true
 	end
 

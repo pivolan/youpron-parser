@@ -16,7 +16,7 @@ var Common =
 	},
 
 	getImage : function(url) {
-		var censored = this.getCookieJson('censored');
+		var censored = $.cookie('censored');
 		if (censored) {
 			return 'http://placekitten.com/160/120';
 		}
@@ -391,17 +391,21 @@ var FilterSeen =
 	},
 
 	init_censore : function () {
-		if (Common.getCookieJson('censored')) {
+		var data = $.cookie('censored');
+		if (data) {
 			this.censore.addClass('selected');
 		}
 		this.censore.click(function(evt) {
+			var data = $.cookie('censored');
 			evt.preventDefault();
-			if (Common.getCookieJson('censored')) {
-				Common.setCookieJson('censored', false);
+			if (data)
+			{
+				$.cookie('censored', false);
 				FilterSeen.censore.removeClass('selected');
 			}
-			else {
-				Common.setCookieJson('censored', true);
+			else
+			{
+				$.cookie('censored', true);
 				FilterSeen.censore.addClass('selected');
 				$('img[data-images]').attr('src', Common.getImage());
 			}
