@@ -9,15 +9,17 @@ var Common =
 	favorites : null,
 
 	init : function() {
+		if (!this.initGetVideo()) {
+			Common.scroll();
+		}
 		this.initScrolling();
 		this.initCategories();
-		this.initGetVideo();
 		TagCloud.init();
 	},
 
 	getImage : function(url) {
-		var censored = $.cookie('censored');
-		if (censored) {
+		var censored = FilterSeen.get_censored_status();
+		if (censored === true) {
 			return 'http://placekitten.com/160/120';
 		}
 		if (url) {
@@ -31,7 +33,9 @@ var Common =
 		var id = parseInt(window.location.hash.substr(1));
 		if (id) {
 			this.colorbox(null, id);
+			return true;
 		}
+		return false;
 	},
 	getVideo : function(data) {
 		var i = (Common.page - 1) * Common.per_page + 1;
@@ -359,7 +363,7 @@ var TagCloud =
 			data.elem.css('font-size', size + 'px');
 		});
 	}
-}
+};
 var FilterSeen =
 {
 	seen : null,
@@ -368,6 +372,36 @@ var FilterSeen =
 	unclicked: null,
 	censore: null,
 
+	get_censored_status: function () {
+		var status = $.cookie('censored');
+		if(status === 'true')
+		{
+			return true
+		}
+		else if(status === 'false')
+		{
+			return false;
+		}
+		else
+		{
+			return null;
+		}
+	},
+	set_censored_status: function (status) {
+		if(status === true)
+		{
+			$.cookie('censored', true);
+		}
+		else if(status === false)
+		{
+			$.cookie('censored', false);
+		}
+		else
+		{
+			return false;
+		}
+		return true;
+	},
 	init_seen: function() {
 		var filter = Common.getCookieJson('filter');
 		if (filter.seen) {
@@ -391,21 +425,19 @@ var FilterSeen =
 	},
 
 	init_censore : function () {
-		var data = $.cookie('censored');
-		if (data) {
+		var data = this.get_censored_status();
+		if (data === true) {
 			this.censore.addClass('selected');
 		}
 		this.censore.click(function(evt) {
-			var data = $.cookie('censored');
+			var data = FilterSeen.get_censored_status();
 			evt.preventDefault();
-			if (data)
-			{
-				$.cookie('censored', false);
+			if (data === true) {
+				FilterSeen.set_censored_status(false);
 				FilterSeen.censore.removeClass('selected');
 			}
-			else
-			{
-				$.cookie('censored', true);
+			else {
+				FilterSeen.set_censored_status(true);
 				FilterSeen.censore.addClass('selected');
 				$('img[data-images]').attr('src', Common.getImage());
 			}
@@ -433,9 +465,8 @@ var FilterSeen =
 			Common.reInitScroll();
 		});
 	},
-	
-	init_clicked: function ()
-	{
+
+	init_clicked: function () {
 		var filter = Common.getCookieJson('filter');
 		if (filter.clicked) {
 			this.clicked.addClass('selected');
@@ -456,8 +487,7 @@ var FilterSeen =
 			Common.reInitScroll();
 		});
 	},
-	init_unclicked: function ()
-	{
+	init_unclicked: function () {
 		var filter = Common.getCookieJson('filter');
 		if (filter.unclicked) {
 			this.unclicked.addClass('selected');
@@ -478,7 +508,7 @@ var FilterSeen =
 			Common.reInitScroll();
 		});
 	},
-	
+
 	init: function(s, us, c, uc, censore) {
 		this.seen = s;
 		this.unseen = us;
@@ -493,4 +523,4 @@ var FilterSeen =
 		this.init_clicked();
 
 	}
-}
+};

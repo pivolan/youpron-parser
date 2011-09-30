@@ -2,7 +2,7 @@
 				"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>pivo.ruby | Porno | <%= session[:id] %></title>
+	<title>XVidos | Porno | <%= session[:login] %></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<%= stylesheet_link_tag 'core.css', 'css_4278727a67acd471320c5f6a4f8be004.css', 'reset.css', 'grid.css' %>
 	<%= stylesheet_link_tag 'style.css', 'colorbox.css' %>
@@ -21,11 +21,12 @@
 		<a id="censored" class="seen" href="#unseen">censore</a>
 	</div>
 	<div class="right margin_right">
-	<span><%= session[:from] %></span>
-	<a href="<%= url_for :controller=>:profile, :action=>:get_short_url %>">Получить короткую ссылку для входа на сайт</a>
-	user_id: <a href="/profile/"><%= session[:id] %></a>
-	<%= link_to 'Выход', :controller=>:index, :action=>:logout %>
-		</div>
+		<span>логин: <span id="nick_container_parent"><span class="nick"><%= @user.nick or 'guest' %></span></span></span>
+		<span><%= session[:from] %></span>
+		<a href="<%= url_for :controller=>:profile, :action=>:get_short_url %>">Получить короткую ссылку для входа на сайт</a>
+		user_id: <a href="/profile/"><%= session[:id] %></a>
+		<%= link_to 'Выход', :controller=>:index, :action=>:logout %>
+	</div>
 </div>
 
 <div id="wrapper">
@@ -61,12 +62,14 @@
 				</div>
 				<div style="clear:both"></div>
 				<div>-->
-					<ul class="tags">
-						<% @categories.each do |category| %>
-							<li><a class="category" data-id="<%=category.id%>" data-videos="<%=category.videos%>" title="<%=category.videos%>"><%= category.name %></a></li>
-						<% end %>
-					</ul>
-				</div>
+				<ul class="tags">
+					<% @categories.each do |category| %>
+						<li>
+							<a class="category" data-id="<%= category.id %>" data-videos="<%= category.videos %>" title="<%= category.videos %>"><%= category.name %></a>
+						</li>
+					<% end %>
+				</ul>
+			</div>
 
 			<!--
 
@@ -142,6 +145,9 @@
 </body>
 <script type="text/javascript">
 	// todo откатить плейлисты
-// здесь были плейлисты
+	// здесь были плейлисты
+</script>
+<script type="text/javascript">
+	
 </script>
 </html>

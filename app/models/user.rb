@@ -4,6 +4,7 @@ class User
   many :playlist
 	key :current_playlist, Integer
 	key :firstname, String
+	key :nick, String
 	key :lastname, String
 	key :cookie_id, String
 	key :short_url, String
