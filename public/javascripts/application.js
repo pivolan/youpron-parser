@@ -3,7 +3,7 @@
 
 var Common =
 {
-	page : 0,
+	page : 1,
 	per_page : 25,
 	page_blocked : null,
 	favorites : null,
@@ -11,7 +11,7 @@ var Common =
 	init : function() {
 		this.initGetVideo();
 //		if (!this.initGetVideo()) {
-			Common.scroll();
+			Common.scroll(true);
 //		}
 		this.initScrolling();
 		this.initCategories();
@@ -122,17 +122,20 @@ var Common =
 			var mY = Common.GetScrollMaxY();
 			var delta = y / mY;
 			if (delta > 0.99) {
-				Common.scroll();
+				Common.scroll(false);
 			}
 		});
 		//Скрываем pagination
 		$('.pagination').css('display', 'none');
 	},
 
-	scroll : function() {
+	scroll : function(is_first) {
 		var body = $('body');
 		if (body.data('status') != 'loading' && Common.page_blocked == null) {
-			Common.page += 1;
+			if (!is_first)
+			{
+				Common.page += 1;
+			}
 			body.data('status', 'loading');
 			$('#loading').css('display', 'block');
 			var params = this.getCookieJson('filter');
@@ -149,12 +152,14 @@ var Common =
 		Common.page = 0;
 		Common.page_blocked = null;
 		$('#video-list').html('');
-		this.scroll();
+		this.scroll(false);
 	},
 
 	colorbox : function(elem, id) {
 		if (id) {
-			$.colorbox({'width':'680px', 'height': 'auto', 'href':'/index/view/' + id});
+			$.colorbox({'width':'680px', 'height': 'auto', 'href':'/index/view/' + id, onClosed:function() {
+				window.location.hash = 'ready'
+			}});
 		}
 		else if (!elem.hasClass('cnoxElement')) {
 			var id = elem.attr('data-video');
@@ -574,7 +579,14 @@ var Recomend =
 		var params = {id: Recomend.video_id, page: Recomend.page};
 		Recomend.div.html('Loading...');
 		$.get('/index/recomend.json', params, function(data) {
-				Recomend.div.html(Common.drawListVideo(i, data));
+				if (data.length)
+				{
+					Recomend.div.html(Common.drawListVideo(i, data));
+				}
+				else
+				{
+					Recomend.div.html('No Recomend video');
+				}
 			}, 'json');
 	}
 }

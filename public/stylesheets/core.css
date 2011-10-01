@@ -1982,7 +1982,7 @@ body.home #content #content-main {
 	padding: 0;
 	text-align: center;
 	/*width: 160px;*/
-	position:absolute;
+	/*position:absolute;*/
 	clip: rect(0px 160px 164px 0px); /* add padding to dimensions; remove commas for IE7 */
 }
 
@@ -3206,4 +3206,23 @@ a.dotted:hover {
 }
 #div_tab3_content {
 	min-height: 390px;
+}
+.tabs {
+	padding-left: 10px;
+}
+.tabs a {
+	display: block;
+	float: left;
+	margin: 0;
+	margin-left: 5px;
+	padding: 3px 10px 3px 10px;
+	font-size: 13px;
+	font-family: Arial;
+	background: #EEE;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+.tabs a.selected{
+	background: #27BCEE;
 }
