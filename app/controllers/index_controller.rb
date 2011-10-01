@@ -52,6 +52,7 @@ class IndexController < ApplicationController
 		id = params[:id]
 		video = Video.find(Integer(id))
 		comments = video.comments.sort_by(&:published).reverse
+		#Комментирование видео
 		if request.post? then
 			result = {'result'=>nil}
 			if !params[:name].blank? && !params[:message].blank? then
@@ -98,6 +99,21 @@ class IndexController < ApplicationController
 				format.json { render :json => @video }
 			end
 
+		end
+	end
+
+	def recomend
+		id = params[:id]
+		page = params[:page]
+		video = Video.fields(:tags).find(Integer(id))
+		list = Video.where(:tags.in => video.tags)
+		@list = list.paginate(
+					:order => :_id.desc,
+					:per_page => 6,
+					:page => params[:page]
+		)
+		respond_to do |format|
+			format.any { render :json => @list}
 		end
 	end
 

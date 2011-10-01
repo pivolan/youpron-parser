@@ -9,9 +9,10 @@ var Common =
 	favorites : null,
 
 	init : function() {
-		if (!this.initGetVideo()) {
+		this.initGetVideo();
+//		if (!this.initGetVideo()) {
 			Common.scroll();
-		}
+//		}
 		this.initScrolling();
 		this.initCategories();
 		TagCloud.init();
@@ -41,6 +42,16 @@ var Common =
 		var i = (Common.page - 1) * Common.per_page + 1;
 		var result = '';
 		var count = 0;
+		result = Common.drawListVideo(i, data);
+		if (result == '') {
+			Common.page_blocked = true;
+		}
+		return result;
+	},
+	drawListVideo : function(i, data)
+	{
+		var result = '';
+		count = 0;
 		for (id in data) {
 			result +=
 							'<div class="screens-thumbs-index thumb-' + i + '">' +
@@ -51,11 +62,14 @@ var Common =
 											'	</a>' +
 											'	<div class="favorite">' +
 											'		'; // todo откатить плейлисты
-			if (Common.favorites.indexOf(String(data[id].id)) != -1) {
-				result += '		<a class="afavorite favorited" title="В избранное"></a>';
-			}
-			else {
-				result += '		<a class="afavorite add_favorite" title="В избранное"></a>';
+			if (Common.favorites)
+			{
+				if (Common.favorites.indexOf(String(data[id].id)) != -1) {
+					result += '		<a class="afavorite favorited" title="В избранное"></a>';
+				}
+				else {
+					result += '		<a class="afavorite add_favorite" title="В избранное"></a>';
+				}
 			}
 			result += '	</div>' +
 							'</div>' +
@@ -68,9 +82,6 @@ var Common =
 							'</div>';
 			i += 1;
 			count += 1;
-		}
-		if (count == 0) {
-			Common.page_blocked = true;
 		}
 		return result;
 	},
@@ -524,3 +535,46 @@ var FilterSeen =
 
 	}
 };
+
+var Recomend =
+{
+	video_id : null,
+	page : 1,
+	div : null,
+	per_page : 6,
+	init : function(id, div, left_nav, right_nav)
+	{
+		this.video_id = id;
+		this.div = div;
+		left_nav.click(function(){
+			Recomend.prev_page();
+		});
+		right_nav.click(function(){
+			Recomend.next_page();
+		});
+		this.show();
+	},
+	next_page : function()
+	{
+		Recomend.page+=1;
+		this.show();
+	},
+	prev_page : function()
+	{
+		Recomend.page-=1;
+		if (Recomend.page < 1)
+		{
+			Recomend.page = 1;
+		}
+		this.show();
+	},
+	show : function()
+	{
+		var i = (Recomend.page - 1) * Recomend.per_page + 1;
+		var params = {id: Recomend.video_id, page: Recomend.page};
+		Recomend.div.html('Loading...');
+		$.get('/index/recomend.json', params, function(data) {
+				Recomend.div.html(Common.drawListVideo(i, data));
+			}, 'json');
+	}
+}

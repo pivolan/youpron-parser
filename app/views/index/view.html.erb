@@ -9,6 +9,7 @@
 	<div class="tabs">
 		<a class="tab2">Info</a>
 		<a class="tab1">Comments</a>
+		<a class="tab3">Recomend</a>
 	</div>
 
 	<div id="div_tab1" class="comments invisible tab">
@@ -153,6 +154,12 @@
 
 	</div>
 
+	<div id="div_tab3" class="recomend invisible tab" style="padding-left:40px">
+		<div id="left_nav" class="left_nav"><div></div></div>
+		<div id="div_tab3_content" class="div_tab3_content"></div>
+		<div id="right_nav" class="right_nav"><div></div></div>
+	</div>
+
 	</div><!-- /.column -->
 
 
@@ -164,6 +171,7 @@
 <!-- /.metadata -->
 
 <script src="/javascripts/jquery.xdomainajax.js"></script>
+<script src="/javascripts/application.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		//Создание флеш плеера с видео
@@ -185,6 +193,7 @@
 				}, 'json');
 			}
 		});
+		Recomend.init(<%=@video.id%>, $(".div_tab3_content"), $(".left_nav"), $(".right_nav"));
 
 		//Скрытие, отображение формы
 		$('a.dotted').click(function(){
@@ -192,12 +201,16 @@
 		});
 
 		$('.tab2').click(function(){
-			$("#div_tab1").hide();
+			$(".tab").hide();
 			$("#div_tab2").show();
 		});
 		$('.tab1').click(function(){
+			$(".tab").hide();
 			$("#div_tab1").show();
-			$("#div_tab2").hide();
+		});
+		$('.tab3').click(function(){
+			$(".tab").hide();
+			$("#div_tab3").show();
 		});
 	});
 	function xml_to_url(url)
