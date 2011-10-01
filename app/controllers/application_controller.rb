@@ -31,12 +31,15 @@ class ApplicationController < ActionController::Base
 					session[:id] = nil
 				end
 			end
+			# если никакой информации об авторизации у пользователя нет, создадим нового пользователя в базе.
 			if !cookies[:uid].present?
 				new_id = User.generate_cookie_id
+				# создадим плейлист пользователю
 				playlist_default = Playlist.create(
 								:_id => Incrementor[:playlist].inc,
 								:title => 'default'
 				)
+				# создадим пользователя
 				user = User.create(
 								:_id => Incrementor[:user].inc,
 								:cookie_id => new_id,

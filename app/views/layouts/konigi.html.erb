@@ -2,7 +2,7 @@
 				"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>pivo.ruby | Porno | <%= session[:id] %></title>
+	<title>XVidos | Porno | <%= session[:login] %></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<meta name="KEYWORDS" content="xvidos,xvidos.org,vidos, x vidos,xvideos,xvideos.com,x videos,x video,porn,video,videos" />
 	<meta name=description content="XVIDOS Free Porn Videos">
@@ -23,10 +23,20 @@
 </head>
 <body class="top konigi-5-0 home" id="home">
 <div class="header">
-	<span><%= session[:from] %></span>
-	<a href="<%= url_for :controller=>:profile, :action=>:get_short_url %>">Получить короткую ссылку для входа на сайт</a>
-	user_id: <a href="/profile/"><%= session[:id] %></a>
-	<%= link_to 'Выход', :controller=>:index, :action=>:logout %>
+	<div class="left margin_left">
+		<a id="clicked" class="clicked" href="#clicked">clicked</a>
+		<a id="seen" class="seen" href="#seen">seen</a>
+		<a id="unclicked" class="clicked" href="#unclicked">not clicked</a>
+		<a id="unseen" class="seen" href="#unseen">not seen</a>
+		<a id="censored" class="seen" href="#unseen">censore</a>
+	</div>
+	<div class="right margin_right">
+		<span>логин: <span id="nick_container_parent"><span class="nick"><%= @user.nick or 'guest' %></span></span></span>
+		<span><%= session[:from] %></span>
+		<a href="<%= url_for :controller=>:profile, :action=>:get_short_url %>">Получить короткую ссылку для входа на сайт</a>
+		user_id: <a href="/profile/"><%= session[:id] %></a>
+		<%= link_to 'Выход', :controller=>:index, :action=>:logout %>
+	</div>
 </div>
 
 <div id="wrapper">
@@ -143,6 +153,9 @@
 </body>
 <script type="text/javascript">
 	// todo откатить плейлисты
-// здесь были плейлисты
+	// здесь были плейлисты
+</script>
+<script type="text/javascript">
+	
 </script>
 </html>

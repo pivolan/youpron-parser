@@ -51,7 +51,9 @@ class ProfileController < ApplicationController
 
 	def exit
 		session.delete(:id)
-		cookies.delete(:uid)
+		cookies.to_hash.each_pair do |k, v|
+			cookies[k.to_sym] = {:value => '', :path => '/', :domain => '.domain.com', :expire => 1.day.ago}
+		end
 	end
 
 	def vasya
@@ -60,6 +62,18 @@ class ProfileController < ApplicationController
 
 	def delete_short_url
 		@user.short_url = nil
+		@user.save!
+		redirect_to :action => :index
+	end
+
+	def clear_seen_list
+		@user.seen = []
+		@user.save!
+		redirect_to :action => :index
+	end
+
+	def clear_clicked_list
+		@user.clicked = []
 		@user.save!
 		redirect_to :action => :index
 	end
