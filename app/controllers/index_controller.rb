@@ -10,7 +10,11 @@ class IndexController < ApplicationController
 		if request.xhr? then
 			list = Video.fields(:name, :images, :date, :duration)
 			if (params[:category].present?)
-				list = list.where(:category_ids.in => params[:category].collect{|x| Integer(x)})
+				if params[:category].include?('0')
+						list = list.where('$or'=>[{'category_ids'=>{'$in'=>params[:category].collect{|x| Integer(x)}}}, {'category_ids'=>{'$size'=>0}}])
+					else
+						list = list.where(:category_ids.in => params[:category].collect{|x| Integer(x)})
+				end
 			end
 			@list = list.paginate(
 							:order => :_id.desc,

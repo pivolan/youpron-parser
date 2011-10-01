@@ -133,7 +133,11 @@ class CronController < ActionController::Base
 			end
 			#Пересчитываем счетчики категорий
 			Category.all.each do |item|
-				item.videos = Video.where(:category_ids => [item._id]).count
+				if item._id==0
+						item.videos = Video.where(:category_ids => {'$size'=>0}).count
+					else
+						item.videos = Video.where(:category_ids => [item._id]).count
+				end
 				item.save
 			end
 			video.save

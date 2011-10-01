@@ -4,6 +4,16 @@
 <head>
 	<title>pivo.ruby | Porno | <%= session[:id] %></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta name="KEYWORDS" content="xvidos,xvidos.org,vidos, x vidos,xvideos,xvideos.com,x videos,x video,porn,video,videos" />
+	<meta name=description content="XVIDOS Free Porn Videos">
+	<meta content=Index name=robots>
+	<meta content=Follow name=robots>
+	<meta content=ALL name=robots>
+	<meta content=General name=rating>
+	<meta content=document name=resource-type>
+	<meta content=GLOBAL name=distribution>
+	<meta content=no-cache http-equiv=Pragma>
+	<meta content=no-cache http-equiv=Cache-Control>
 	<%= stylesheet_link_tag 'core.css', 'css_4278727a67acd471320c5f6a4f8be004.css', 'reset.css', 'grid.css' %>
 	<%= stylesheet_link_tag 'style.css', 'colorbox.css' %>
 	<%= javascript_include_tag 'jquery-1.6.2.min.js', 'jquery.plugins.js', 'application.js', 'jquery.colorbox.js', 'pure_min', 'jquery.mousewheel.min', 'jquery.cookie.js' %>
@@ -51,7 +61,7 @@
 				<div>-->
 					<ul class="tags">
 						<% @categories.each do |category| %>
-							<li><a class="category" data-id="<%=category.id%>" data-videos="<%=category.videos%>" title="<%=category.videos%>"><%= category.name %></a></li>
+							<li><a class="category" data-id="<%=Integer(category.id)%>" data-videos="<%=category.videos%>" title="<%=category.videos%>"><%= category.name %></a></li>
 						<% end %>
 					</ul>
 				</div>
