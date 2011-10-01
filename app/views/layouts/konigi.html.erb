@@ -25,7 +25,10 @@
 <div class="header">
 	<span><%= session[:from] %></span>
 	<a href="<%= url_for :controller=>:profile, :action=>:get_short_url %>">Получить короткую ссылку для входа на сайт</a>
-	user_id: <a href="/profile/"><%= session[:id] %></a></div>
+	user_id: <a href="/profile/"><%= session[:id] %></a>
+	<%= link_to 'Выход', :controller=>:index, :action=>:logout %>
+</div>
+
 <div id="wrapper">
 
 	<div id="header-wrapper">
@@ -66,66 +69,66 @@
 					</ul>
 				</div>
 
-				<!--
+			<!--
 
-								 <div id="nav-tools" class="column span-6 last">
-										 <div id="site-search">
-														 </div>
-								 </div>
-								 -->
-
-			</div>
-
+											 <div id="nav-tools" class="column span-6 last">
+													 <div id="site-search">
+																	 </div>
+											 </div>
+											 -->
 
 		</div>
+
+
 	</div>
+</div>
 
-	<!-- #main -->
-	<div id="body-wrapper">
-		<div id="body" class="container">
-			<% if @title.present? %>
-				<div id="title" class="container">
-					<h1 class="page-title"><%= @title %></h1>
-				</div>
-			<% end %>
-			<div id="content">
-				<div id="content-main" class="container">
+<!-- #main -->
+<div id="body-wrapper">
+	<div id="body" class="container">
+		<% if @title.present? %>
+			<div id="title" class="container">
+				<h1 class="page-title"><%= @title %></h1>
+			</div>
+		<% end %>
+		<div id="content">
+			<div id="content-main" class="container">
 
-					<%= yield -%>
-
-				</div>
+				<%= yield -%>
 
 			</div>
 
 		</div>
+
 	</div>
+</div>
 
 
-	<!-- #footer -->
-	<div id="footer-wrapper" class="clear">
-		<div id="footer" class="container clear">
-			<div class="column span-12">
-				<span id="ftcopyright">&copy; 2011 <a href="/">XVidos</a></span>
-				<a href="#" onclick="$('#wrapper').addClass('unicorns');$('body').addClass('unibg');">&middot;</a>
+<!-- #footer -->
+<div id="footer-wrapper" class="clear">
+	<div id="footer" class="container clear">
+		<div class="column span-12">
+			<span id="ftcopyright">&copy; 2011 <a href="/">XVidos</a></span>
+			<a href="#" onclick="$('#wrapper').addClass('unicorns');$('body').addClass('unibg');">&middot;</a>
 
-				<a href="/page/about-site">About</a>
-				&middot;
-				<a href="/page/advertising">Advertising</a>
-				&middot;
-				<a href="/sitemap">Tags</a>
-				&middot;
-				<a href="/a-z-index">A-Z</a>
-				&middot;
-				<a href="/muse">Muse</a>
+			<a href="/page/about-site">About</a>
+			&middot;
+			<a href="/page/advertising">Advertising</a>
+			&middot;
+			<a href="/sitemap">Tags</a>
+			&middot;
+			<a href="/a-z-index">A-Z</a>
+			&middot;
+			<a href="/muse">Muse</a>
 
-			</div>
-			<div class="column span-12 last txt-right">
-				<span id="phone">347-010-9880</span>
-				&middot;
-				<span id="ftrss"><a href="<%= url_for :controller => :rss, :action => :index %>">RSS</a></span>
-			</div>
+		</div>
+		<div class="column span-12 last txt-right">
+			<span id="phone">347-010-9880</span>
+			&middot;
+			<span id="ftrss"><a href="<%= url_for :controller => :rss, :action => :index %>">RSS</a></span>
 		</div>
 	</div>
+</div>
 
 
 </div>
@@ -136,142 +139,10 @@
 </div>
 
 <div id="stub"></div>
-<div id="playlist" class="playlist">
-	<div class="title_playlist">
-		<span class="title">Playlist</span>
-
-		<div class="select_playlist">
-			<ul>
-				<li onclick="Playlist.create_playlist()">Create +</li>
-				<% @user.playlist.each do |playlist, index| %>
-					<li onclick="Playlist.select_playlist($(this))" data_id="<%= playlist._id %>" class="<%= index==0 ? 'active' :'' %>"><%= playlist.title %></li>
-				<% end %>
-			</ul>
-		</div>
-	</div>
-	<div id="slide_button" class="show_hide">Open</div>
-	<div id="playlist_list" class="playlist_list">
-	</div>
-</div>
-<style type="text/css">
-	div.playlist {
-		position: fixed;
-		bottom: 0px;
-		background: #E3E3E3;
-		height: 29px;
-		width: 100%;
-		z-index: 4;
-		padding: 0;
-		margin: 0;
-		font-family: Arial;
-		font-size: 14px;
-		-moz-user-select: none;
-		user-select: none;
-		-khtml-user-select: none;
-	}
-
-	div.playlist.open {
-		height: 139px;
-	}
-
-	div.playlist_list {
-		background: white;
-		height: 110px;
-		position: absolute;
-		top: 29px;
-		padding: 5px 5px 0 0;
-		text-align: left;
-		white-space: nowrap;
-		left:0px;
-	}
-
-	div.playlist_list .pl_video {
-		margin-right: 5px;
-		position: relative;
-	}
-		div.playlist_list .pl_video a.delete {
-			position: absolute;
-			background: url('/images/minus.png');
-			width: 32px;
-			height: 32px;
-			right: 2px;
-			top: -90px;
-			display: none;
-		}
-		div.playlist_list .pl_video:hover a.delete {
-			display: block;
-		}
-
-	div.title_playlist {
-		position: absolute;
-		left: 0px;
-		height: 29px;
-		cursor: pointer;
-		width: auto;
-		padding: 5px 15px 0 5px;
-	}
-
-	div.title_playlist:hover {
-		background: red;
-	}
-
-	div.title_playlist span.title {
-
-	}
-
-	div.title_playlist div.select_playlist {
-		position: absolute;
-		display: none;
-		background: red;
-		bottom: 29px;
-		padding: 10px;
-		left: -5px;
-	}
-
-	div.title_playlist:hover div.select_playlist {
-		display: block;
-	}
-
-	div.title_playlist div.select_playlist ul li {
-		text-align: left;
-		color: white;
-		width: 250px;
-	}
-
-	div.title_playlist div.select_playlist ul li:hover {
-		background: black;
-	}
-
-	div.show_hide {
-		position: absolute;
-		right: 0px;
-		height: 20px;
-		cursor: pointer;
-		padding: 5px;
-		-moz-user-select: none;
-		user-select: none;
-		-khtml-user-select: none;
-	}
-
-	div.show_hide:hover {
-		background: red;
-	}
-
-	div.show_hide {
-	}
-</style>
+<!-- здесь были плейлисты todo откатить плейлисты-->
 </body>
 <script type="text/javascript">
-	$(document).ready(function() {
-		Playlist.init({
-			list: $('#playlist_list'),
-			playlist: $('#playlist'),
-			slide_button: $('#slide_button'),
-			current_playlist: '<%=@user.current_playlist %>',
-			url: '<%=url_for :controller=> :playlist, :action => :view_playlist %>',
-			select_playlist_ul: $('#playlist').find('div.select_playlist > ul'),
-			title_playlist_span: $('#playlist').find('span.title')
-		});
-	});
+	// todo откатить плейлисты
+// здесь были плейлисты
 </script>
 </html>

@@ -1,6 +1,7 @@
 class IndexController < ApplicationController
 	layout 'konigi'
-	skip_before_filter :can_view, :only => [:null_page, :enter, :exit]
+	skip_before_filter :can_view, :only => [:null_page, :enter, :exit, :logout]
+	skip_before_filter :login, :only => [:null_page, :exit, :logout]
 
 	def index
 
@@ -95,13 +96,21 @@ class IndexController < ApplicationController
 	end
 
 	def enter
-		@user.access = true
-		@user.save!
+		cookies[:access] = {
+						:value=>true,
+						:expires => 1.year.from_now
+		}
 		redirect_to :action=> :video
 	end
 
 	def exit
 		render :layout => false
+	end
+
+	def logout
+		cookies.delete(:uid)
+		session.delete(:id)
+		render :layout => false, :render => false
 	end
 
 	def favorite

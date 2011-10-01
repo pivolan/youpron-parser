@@ -47,7 +47,7 @@ var Common =
 											'		<img image_id="img_' + data[id].id + '" class="bluga-thumbnail medium2 circle" src="' + this.getImage(data[id].images[0]) + '" data-images=\'' + JSON.stringify(data[id].images) + '\'" />' +
 											'	</a>' +
 											'	<div class="favorite">' +
-											'		<a class="aplaylist add_playlist" title="В плейлист" data-video="' + data[id].id + '" onclick="Playlist.addVideo($(this))" ></a>';
+											'		'; // todo откатить плейлисты
 			if (Common.favorites.indexOf(String(data[id].id))!=-1)
 			{
 				result +=			'		<a class="afavorite favorited" title="В избранное"></a>';
