@@ -77,4 +77,10 @@ class ProfileController < ApplicationController
 		@user.save!
 		redirect_to :action => :index
 	end
+
+	def nick
+		@user.nick = params[:nick]
+		@user.save!
+		render :json => @user
+	end
 end

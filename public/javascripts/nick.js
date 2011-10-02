@@ -15,21 +15,31 @@ var user_nick =
 	init: function (nick_container, nick_container_parent) {
 		this.nick_container = nick_container;
 		this.nick_container_parent = nick_container_parent;
-		nick_container.click(function(evt) {
+
+		// замена span на input
+		this.nick_container.click(function(evt) {
+			var _this = $(this);
 			evt.preventDefault();
-			user_nick.nick_input.val(this.text());
-			this.remove();
+			user_nick.nick_input.val(_this.text()).show();
+			_this.hide();
 			nick_container_parent.append(user_nick.nick_input);
+			user_nick.nick_input.focus().select();
 		});
-		this.nick_input.blur(function(evt) {
-			user_nick.update_nick_in_db();
-			nick_container.text(this.val());
-			this.remove();
-			nick_container_parent.append(nick_container);
-			messages.show_popup(' Ваш ник сохранен.');
-		}).keyup(function() {
-			user_nick.set_nick(this.val());
-		});
+
+
+		
+		// замена input на span
+		this.nick_input.blur(function (evt) {
+							var _this = $(this);
+							user_nick.update_nick_in_db();
+							nick_container.text(_this.val());
+							_this.hide();
+							nick_container.show();
+							messages.show_popup(' Ваш ник сохранен.');
+						})
+						.keyup(function() {
+							user_nick.set_nick(this.value);
+						});
 	},
 	set_nick : function (nick) {
 		this.nick = nick;
@@ -38,7 +48,7 @@ var user_nick =
 		return this.nick;
 	},
 	update_nick_in_db: function () {
-		$.getJSON('/profile/nick.json', {nick: this.nick}, function (json) {
+		$.getJSON('/profile/nick', {nick: this.nick}, function (json) {
 
 		});
 	}

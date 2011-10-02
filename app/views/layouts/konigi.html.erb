@@ -16,7 +16,7 @@
 	<meta content=no-cache http-equiv=Cache-Control>
 	<%= stylesheet_link_tag 'core.css', 'css_4278727a67acd471320c5f6a4f8be004.css', 'reset.css', 'grid.css' %>
 	<%= stylesheet_link_tag 'style.css', 'colorbox.css' %>
-	<%= javascript_include_tag 'jquery-1.6.2.min.js', 'jquery.plugins.js', 'application.js', 'jquery.colorbox.js', 'pure_min', 'jquery.mousewheel.min', 'jquery.cookie.js' %>
+	<%= javascript_include_tag 'jquery-1.6.2.min.js', 'jquery.plugins.js', 'application.js', 'jquery.colorbox.js', 'pure_min', 'jquery.mousewheel.min', 'jquery.cookie', 'nick' %>
 	<script type="text/javascript">
 
 	</script>
@@ -150,6 +150,6 @@
 	// здесь были плейлисты
 </script>
 <script type="text/javascript">
-	
+	user_nick.init($('#nick_container_parent').children('span.nick'), $('#nick_container_parent'));
 </script>
 </html>
