@@ -150,7 +150,7 @@ class CronController < ActionController::Base
 		require 'open-uri'
 		cookie = {"Cookie"=>"age_check=1"}
 		#Находим видео без категорий
-		videos = Video.where(:category_ids => {'$size'=>0}).all
+		videos = Video.where(:category_ids => {'$size'=>0}).limit(100).all
 		videos.each do |video|
 			is_change = 0
 			url = video.url.to_s
