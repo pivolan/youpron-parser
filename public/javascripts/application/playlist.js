@@ -60,17 +60,27 @@ var Playlist =
 		});
 	},
 
+	addToStream: function(video)
+	{
+		Playlist.list.append(video);
+	},
+
+	removeFromStream: function(video_id)
+	{
+		Playlist.videos[video_id].remove();
+	},
+
 	addVideo: function(obj) {
 		var video_id = obj.attr('data-video');
 		$.getJSON('/playlist/add_video/', {playlist_id:this.current_playlist, video_id: video_id}, function(json) {
 			var video = Playlist.getVideosList(json);
-			Playlist.list.append(video);
+			Playlist.addToStream(video);
 		});
 	},
 	removeVideo: function(obj) {
 		var video_id = obj.attr('data-video');
 		$.getJSON('/playlist/remove_video/', {playlist_id:this.current_playlist, video_id: video_id}, function(json) {
-			Playlist.videos[video_id].remove();
+			Playlist.removeFromStream(video_id);
 		});
 
 	},
