@@ -1,0 +1,117 @@
+#div_tab3_content {
+	min-height: 390px;
+}
+
+.tabs {
+	padding-left: 10px;
+}
+
+.tabs a {
+	display: block;
+	float: left;
+	margin: 0;
+	margin-left: 5px;
+	padding: 3px 10px 3px 10px;
+	font-size: 13px;
+	font-family: Arial;
+	background: #EEE;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+
+.tabs a.selected {
+	background: #27BCEE;
+}
+
+#loading {
+	text-align: center;
+}
+
+.left_nav {
+	position: absolute;
+	width: 25px;
+	height: 390px;
+	left: 10px;
+	top: 440px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.left_nav div {
+	width: 25px;
+	height: 25px;
+	margin-top: 180px;
+	background: url('/images/controls.png') no-repeat -75px 0px;
+}
+
+.left_nav:hover div {
+	width: 25px;
+	height: 25px;
+	margin-top: 180px;
+	background: url('/images/controls.png') no-repeat -75px -25px;
+}
+
+.right_nav {
+	position: absolute;
+	width: 25px;
+	height: 390px;
+	right: 10px;
+	top: 440px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+.right_nav div {
+	width: 25px;
+	height: 25px;
+	margin-top: 180px;
+	background: url('/images/controls.png') no-repeat -50px 0px;
+}
+
+.right_nav:hover div {
+	width: 25px;
+	height: 25px;
+	margin-top: 180px;
+	background: url('/images/controls.png') no-repeat -50px -25px;
+}
+
+a.dotted {
+	float: right;
+	border-bottom: 1px dotted black;
+	font-size: 12px;
+}
+
+a.dotted:hover {
+	text-decoration: none;
+}
+
+#add_comment form {
+	margin-bottom: 5px;
+}
+
+.invisible {
+	display: none;
+}
+
+.img-div {
+	width: 160px;
+	height: 164px;
+
+}
+
+.mb10 {
+	margin-bottom: 10px;
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/*
+ .tab {
+	 height: 280px;
+	 overflow-y: scroll;
+	 overflow-x: hidden;
+ }*/

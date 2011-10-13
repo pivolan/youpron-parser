@@ -22,7 +22,7 @@
 					<%= hidden_field_tag('id', @video.id) %>
 					<div class="row">
 						<%= label_tag(:name, "Name:") %>
-						<%= text_field_tag(:name) %>
+						<%= text_field_tag(:name, @user.nick) %>
 					</div>
 					<div class="row">
 						<%= label_tag(:message, "Message:") %>
@@ -170,9 +170,6 @@
 </div>
 -->
 <!-- /.metadata -->
-
-<script src="/javascripts/jquery.xdomainajax.js"></script>
-<script src="/javascripts/application.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		//Создание флеш плеера с видео
@@ -183,7 +180,7 @@
 			if ($.trim($('#name').val())!='' && $.trim($('#message').val())!='')
 			{
 				$(this).attr('disabled','disabled');
-				$.post('/index/view.json', data, function(result){
+				$.post('/video/comment.json', data, function(result){
 					if (result.result=='ok')
 					{
 						$('.comments_list').prepend(Common.getComment(result.data));
@@ -194,7 +191,7 @@
 				}, 'json');
 			}
 		});
-		Recomend.init(<%=@video.id%>, $(".div_tab3_content"), $(".left_nav"), $(".right_nav"));
+		Recomend.init('<%=@video.id%>', $(".div_tab3_content"), $(".left_nav"), $(".right_nav"));
 
 		//Скрытие, отображение формы
 		$('a.dotted').click(function(){

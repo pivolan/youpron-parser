@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 	layout 'konigi'
 	protect_from_forgery
-	before_filter :can_view, :login
+	before_filter :login
 
 	def login
 		if session[:id].present?

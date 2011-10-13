@@ -2928,10 +2928,13 @@ hr {
 
 #content table thead th {
 	border-bottom: 3px solid #eee;
+	border-left: 1px solid #eee;
+	font-weight: bold;
 }
 
 #content table td {
 	border-bottom: 1px solid #eee;
+	border-left: 1px solid #eee;
 	padding: .5em 0;
 }
 
@@ -3085,144 +3088,4 @@ body.unibg {
 }
 #wrapper.unicorns.evil {
   background: #000 url(/sites/konigi.com/img/evil.jpg) no-repeat 50% 0;
-}
-#loading {
-	text-align : center;
-}
-.favorite {
-	/*display: none;*/
-	position: absolute;
-	right: 0px;
-	top: 5px;
-	width: auto;
-}
-.add_favorite {
-	display: inline-block;
-	width: 16px;
-	height: 15px;
-	position: relative;
-	margin-right: 5px;
-	background: url('/images/favorite_gray.png') no-repeat;
-}
-.favorited {
-	display: inline-block;
-	width: 16px;
-	height: 15px;
-	position: relative;
-	margin-right: 5px;
-	background: url('/images/favorite.png') no-repeat;
-}
-.add_playlist {
-	display: inline-block;
-	width: 16px;
-	height: 15px;
-	position: relative;
-	margin-right: 5px;
-	background: url('/images/plus.png') no-repeat;
-	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); /* IE 5.5+*/
-	-moz-opacity: 0.5; /* Mozilla 1.6 и ниже */
-	-khtml-opacity: 0.5; /* Konqueror 3.1, Safari 1.1 */
-	opacity: 0.5; /* CSS3 - Mozilla 1.7b +, Firefox 0.9 +, Safari 1.2+, Opera 9 */
-}
-.add_playlist:hover {
-	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100); /* IE 5.5+*/
-	-moz-opacity: 1; /* Mozilla 1.6 и ниже */
-	-khtml-opacity: 1; /* Konqueror 3.1, Safari 1.1 */
-	opacity: 1; /* CSS3 - Mozilla 1.7b +, Firefox 0.9 +, Safari 1.2+, Opera 9 */
-}
-a.dotted {
-	float: right;
-	border-bottom: 1px dotted black;
-	font-size: 12px;
-}
-a.dotted:hover {
-	text-decoration: none;
-}
-.invisible {
-	display: none;
-}
-#add_comment form {
-	margin-bottom: 5px;
-}
-.img-div {
-	width: 160px;
-	height: 164px;
-
-}
-.mb10 {
-	margin-bottom: 10px;
-}
-.center {
-	margin-left: auto;
-	margin-right: auto;
-}
-/*
-.tab {
-	height: 280px;
-	overflow-y: scroll;
-	overflow-x: hidden;
-}*/
-.left_nav {
-	position: absolute;
-	width: 25px;
-	height: 390px;
-	left: 10px;
-	top: 440px;
-	vertical-align: middle;
-	cursor: pointer;
-}
-.left_nav div {
-	width: 25px;
-	height: 25px;
-	margin-top: 180px;
-	background: url('/images/controls.png') no-repeat -75px 0px;
-}
-.left_nav:hover div {
-	width: 25px;
-	height: 25px;
-	margin-top: 180px;
-	background: url('/images/controls.png') no-repeat -75px -25px;
-}
-.right_nav {
-	position: absolute;
-	width: 25px;
-	height: 390px;
-	right: 10px;
-	top: 440px;
-	vertical-align: middle;
-	cursor: pointer;
-}
-.right_nav div {
-	width: 25px;
-	height: 25px;
-	margin-top: 180px;
-	background: url('/images/controls.png') no-repeat -50px 0px;
-}
-.right_nav:hover div {
-	width: 25px;
-	height: 25px;
-	margin-top: 180px;
-	background: url('/images/controls.png') no-repeat -50px -25px;
-}
-#div_tab3_content {
-	min-height: 390px;
-}
-.tabs {
-	padding-left: 10px;
-}
-.tabs a {
-	display: block;
-	float: left;
-	margin: 0;
-	margin-left: 5px;
-	padding: 3px 10px 3px 10px;
-	font-size: 13px;
-	font-family: Arial;
-	background: #EEE;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-}
-.tabs a.selected{
-	background: #27BCEE;
 }
