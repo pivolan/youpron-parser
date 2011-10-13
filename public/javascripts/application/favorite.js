@@ -7,28 +7,32 @@
  */
 //  Клик на В избранное
 var Favorite = {
-	init: function()
-	{
+	init: function() {
 		$('.afavorite').live('click', function(event) {
-			var video = $(this).parent().parent().children('a').attr('data-video');
+			var video_id = $(this).parent().parent().children('a').attr('data-video');
 			// добавим видео в фаворит
 			if ($(this).hasClass('add_favorite')) {
-				$.post('/video/favorite', {'id':video, 'act':'add'}, function(data) {
-					console.log(data);
-				});
+				Favorite.add(video_id);
 				$(this).addClass('favorited').removeClass('add_favorite');
 			}
 			// удалим видео из фаворитов
 			else {
-				$.post('/video/favorite', {'id':video, 'act':'del'}, function(data) {
-					console.log(data);
-					var json = JSON.parse(data);
-					var video_render = Playlist.getVideosList(json);
-					Playlist.addVideo(video_render);
-				});
+				Favorite.del(video_id);
 				$(this).addClass('add_favorite').removeClass('favorited');
 			}
 			event.preventDefault();
 		});
+	},
+	del: function (video_id) {
+		$.post('/video/favorite', {'id':video_id, 'act':'del'}, function(data) {
+			Playlist.removeVideoFavorite(video_id);
+		});
+	},
+	add: function(video_id) {
+		$.ajax('/video/favorite', {data:{'id':video_id, 'act':'add'}, dataType:"json",type:'post', success: function(json) {
+			console.log(json);
+
+			Playlist.addVideoFavorite(json);
+		}});
 	}
 };

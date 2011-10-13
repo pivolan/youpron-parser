@@ -169,7 +169,7 @@
 			list: $('#playlist_list'),
 			playlist: $('#playlist'),
 			slide_button: $('#slide_button'),
-			current_playlist: '<%=@user.current_playlist %>',
+			current_playlist_id: '<%=@user.current_playlist %>',
 			url: '<%=url_for :controller=> :playlist, :action => :view %>',
 			select_playlist_ul: $('#playlist').find('div.select_playlist > ul'),
 			title_playlist_span: $('#playlist').find('span.title')

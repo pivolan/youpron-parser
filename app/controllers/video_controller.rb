@@ -141,24 +141,26 @@ class VideoController < ApplicationController
 	end
 
 	def favorite
-		result = false
+		result = {}
 		if request.post? then
 			id = params[:id]
 			act = params[:act]
-			video = Video.where(:id => Integer(id)).count
-			if video==1 && session[:id].present? && act=='add'
+			video = Video.find(Integer(id))
+			if video && session[:id].present? && act=='add'
 				user_id = session[:id]
 				user = User.find(user_id)
-				user.favorites.delete(id)
-				user.favorites.push(id)
-				user.save
-				result = true
+				if !user.favorites.include?(id)
+					user.favorites.push(id)
+					user.save
+				end
+				result = video
+				result[:status] = true
 			elsif session[:id].present? && act=='del'
 				user_id = session[:id]
 				user = User.find(user_id)
 				user.favorites.delete(id)
 				user.save
-				result = true
+				result[:status] = true
 			end
 		end
 		respond_to do |format|

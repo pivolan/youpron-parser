@@ -53,11 +53,11 @@ class PlaylistController < ApplicationController
 	end
 
 	def select_favorite
-		video_ids = @user.favorites
+		video_ids = @user.favorites.collect { |x| Integer(x) }
 		@videos = Video.find(video_ids)
 		respond_to do |format|
 			format.html
-			format.json { render :json => video_ids }
+			format.json { render :json => {'video'=> @videos} }
 		end
 	end
 
