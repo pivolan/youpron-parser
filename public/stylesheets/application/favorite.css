@@ -1,0 +1,23 @@
+.favorite {
+	/*display: none;*/
+	position: absolute;
+	right: 0px;
+	top: 5px;
+	width: auto;
+}
+.add_favorite {
+	display: inline-block;
+	width: 16px;
+	height: 15px;
+	position: relative;
+	margin-right: 5px;
+	background: url('/images/favorite_gray.png') no-repeat;
+}
+.favorited {
+	display: inline-block;
+	width: 16px;
+	height: 15px;
+	position: relative;
+	margin-right: 5px;
+	background: url('/images/favorite.png') no-repeat;
+}

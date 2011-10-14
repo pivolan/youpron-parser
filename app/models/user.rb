@@ -2,7 +2,7 @@ class User
   include MongoMapper::Document
 
   many :playlist
-	key :current_playlist, Integer
+	key :current_playlist_id, Integer
 	key :firstname, String
 	key :nick, String
 	key :lastname, String

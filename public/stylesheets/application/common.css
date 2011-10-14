@@ -40,14 +40,3 @@ div.header div.left a.selected {
 	background: #27BCEE;
 	color: #000;
 }
-
-span.nick {
-	font-weight: bold;
-	cursor: pointer;
-	border: 1px solid #CCCCCC;
-	background: #eee;
-}
-
-span.nick:hover {
-	background: white;
-}

@@ -5,25 +5,7 @@ class PlaylistController < ApplicationController
 		@playlists = @user.playlist.all
 	end
 
-	def create_random
-		@user.playlist.create(
-						{
-										:title => 'vasya',
-										:description => 'hi, how are you?',
-						}
-		)
-		redirect_to :back
-	end
-
-	def add_random_video
-		if params[:id].present?
-			@video = Video.first
-			playlist_id = Integer(params[:id])
-			@user.playlist.find(playlist_id).video.push(@video)
-		end
-	end
-
-	def create_playlist
+	def create
 		if params[:title].present?
 
 			@playlist = Playlist.create(
@@ -36,13 +18,13 @@ class PlaylistController < ApplicationController
 			render :json => {
 							:id => @playlist._id,
 							:title => @playlist.title,
-							:href_view => url_for(:action => :view_playlist, :id=>@playlist._id),
+							:href_view => url_for(:action => :view, :id=>@playlist._id),
 							:status => true
 			}
 		end
 	end
 
-	def delete_playlist
+	def delete
 		if params[:id]
 			id = Integer(params[:id])
 			Playlist.destroy(id)
@@ -50,7 +32,7 @@ class PlaylistController < ApplicationController
 		redirect_to :back
 	end
 
-	def view_playlist
+	def view
 		id = Integer(params[:id])
 		@playlist = Playlist.find(id)
 		respond_to do |format|
@@ -59,7 +41,7 @@ class PlaylistController < ApplicationController
 		end
 	end
 
-	def select_playlist
+	def select
 		id = Integer(params[:id])
 		@user.current_playlist = id
 		@playlist = Playlist.find(id)
@@ -70,7 +52,16 @@ class PlaylistController < ApplicationController
 		end
 	end
 
-	def add_video_to_playlist
+	def select_favorite
+		video_ids = @user.favorites.collect { |x| Integer(x) }
+		@videos = Video.find(video_ids)
+		respond_to do |format|
+			format.html
+			format.json { render :json => {'video'=> @videos} }
+		end
+	end
+
+	def add_video
 		if params[:video_id].present? && params[:playlist_id].present?
 			video_id = Integer(params[:video_id])
 			video = Video.find(video_id)
@@ -89,7 +80,7 @@ class PlaylistController < ApplicationController
 		end
 	end
 
-	def remove_video_from_playlist
+	def remove_video
 		playlist_id = Integer(params[:playlist_id])
 		if playlist_id.present? && params[:video_id].present?
 			video_id = Integer(params[:video_id])

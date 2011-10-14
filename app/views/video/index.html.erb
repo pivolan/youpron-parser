@@ -1,0 +1,50 @@
+<div class="column span-24 last">
+  <!-- start main content -->
+  <div class="view view-home view-id-home view-display-id-page_1 view-dom-id-1">
+
+    <div class="view-content" id="video-list">
+
+    </div>
+  </div>
+  <div style="clear:both"></div>
+  <div class="item-list">
+    <%= if @list.present?;
+	        will_paginate @list;
+        end %>
+  </div>
+  <div id="loading" class='hidden'>
+    <p>Loading...</p>
+  </div>
+</div>
+<!-- end main content -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		// фильтры просмотренного видео
+		FilterSeen.init($('#seen'), $('#unseen'), $('#clicked'), $('#unclicked'), $('#censored'));
+//Автоподгрузка при скроллинге
+		Common.favorites = <%=raw @favorites.to_json() %>;
+		Common.init();
+
+//Добавляем к картинкам кнопки в избранное и в плейлист
+		//$('.show').showdetails();
+//прокрутка картинок
+		$('.circle').live('mouseover', function() {
+			Changer.init($(this));
+			var id = $(this).attr('image_id');
+			Changer.startCounter(id);
+		});
+		$('.circle').live('mouseout', function() {
+			var id = $(this).attr('image_id');
+			Changer.stopCounter(id);
+		});
+//Кнопки добавить в изюранное и в плейлист
+//	$('.img-div').live('mouseover', function(){
+//		$(this).children('.favorite').children('.add_playlist').show();
+//	});
+//	$('.img-div').live('mouseout', function(){
+//		$(this).children('.favorite').children('.add_playlist').hide();
+//	});
+		// клик для добавления favorite
+		Favorite.init();
+	});
+</script>

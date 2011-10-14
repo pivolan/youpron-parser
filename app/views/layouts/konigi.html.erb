@@ -14,9 +14,10 @@
 	<meta content=GLOBAL name=distribution>
 	<meta content=no-cache http-equiv=Pragma>
 	<meta content=no-cache http-equiv=Cache-Control>
-	<%= stylesheet_link_tag 'core.css', 'css_4278727a67acd471320c5f6a4f8be004.css', 'reset.css', 'grid.css' %>
-	<%= stylesheet_link_tag 'style.css', 'colorbox.css' %>
-	<%= javascript_include_tag 'jquery-1.6.2.min.js', 'jquery.plugins.js', 'application.js', 'jquery.colorbox.js', 'pure_min', 'jquery.mousewheel.min', 'jquery.cookie.js' %>
+	<%= stylesheet_link_tag collect_css('layout/konigi/*', 'colorbox/*', 'application/*') %>
+
+	<%= javascript_include_tag collect_js('jquery/*')%>
+	<%= javascript_include_tag collect_js('application/*')%>
 	<script type="text/javascript">
 
 	</script>
@@ -24,17 +25,18 @@
 <body class="top konigi-5-0 home" id="home">
 <div class="header">
 	<div class="left margin_left">
-		<a id="clicked" class="clicked" href="#clicked">clicked</a>
-		<a id="seen" class="seen" href="#seen">seen</a>
-		<a id="unclicked" class="clicked" href="#unclicked">not clicked</a>
-		<a id="unseen" class="seen" href="#unseen">not seen</a>
-		<a id="censored" class="seen" href="#unseen">censore</a>
+		фильтры:
+		<a id="clicked" class="clicked" href="#clicked" title=" Нажмите чтобы выбрать все просмотренное вами видео">clicked</a>
+		<a id="seen" class="seen" href="#seen" title="Все предпросмотренное видео. Показанные ранее превьюшки.">seen</a>
+		<a id="unclicked" class="clicked" href="#unclicked" title="Видео которое ниразу не нажимали.">not clicked</a>
+		<a id="unseen" class="seen" href="#unseen" title="Видео не показанное ниразу в превьюшках.">not seen</a>
+		<a id="censored" class="seen" href="#unseen" title="Цензура. Нажмите и все иконки заменятся.">censore</a>
 	</div>
 	<div class="right margin_right">
+		<span><a href="<%= url_for :controller=>:profile %>">Ваш профиль</a></span>
 		<span>логин: <span id="nick_container_parent"><span class="nick"><%= @user.nick or 'guest' %></span></span></span>
-		<span><%= session[:from] %></span>
 		<a href="<%= url_for :controller=>:profile, :action=>:get_short_url %>">Получить короткую ссылку для входа на сайт</a>
-		user_id: <a href="/profile/"><%= session[:id] %></a>
+		<span>user_id: <%= session[:id] %></span>
 		<%= link_to 'Выход', :controller=>:index, :action=>:logout %>
 	</div>
 </div>
@@ -137,17 +139,42 @@
 
 </div>
 <!-- /#wrapper -->
-
 <div id="footer-links-wrapper" class="clear">
 
 </div>
 
 <div id="stub"></div>
-<!-- здесь были плейлисты todo откатить плейлисты-->
+<div id="playlist" class="playlist">
+	<div class="title_playlist">
+		<span class="title">Playlist</span>
+
+		<div class="select_playlist">
+			<ul>
+				<li onclick="Playlist.create_playlist()">Create +</li>
+				<li onclick="Playlist.select_playlist_favorite($(this))">Favorite</li>
+				<% @user.playlist.each do |playlist, index| %>
+					<li onclick="Playlist.select_playlist($(this))" data_id="<%= playlist._id %>" class="<%= index==0 ? 'active' :'' %>"><%= playlist.title %></li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+	<div id="slide_button" class="show_hide">Open</div>
+	<div id="playlist_list" class="playlist_list">
+	</div>
+</div>
 </body>
 <script type="text/javascript">
-	// todo откатить плейлисты
-	// здесь были плейлисты
+	$(document).ready(function() {
+		Playlist.init({
+			list: $('#playlist_list'),
+			playlist: $('#playlist'),
+			slide_button: $('#slide_button'),
+			current_playlist_id: '<%=@user.current_playlist %>',
+			url: '<%=url_for :controller=> :playlist, :action => :view %>',
+			select_playlist_ul: $('#playlist').find('div.select_playlist > ul'),
+			title_playlist_span: $('#playlist').find('span.title')
+		});
+	});
 </script>
 <script type="text/javascript">
 	//Счетчик гугла, не удалять
@@ -161,5 +188,6 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
+	user_nick.init($('#nick_container_parent').children('span.nick'), $('#nick_container_parent'));
 </script>
 </html>

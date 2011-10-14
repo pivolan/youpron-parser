@@ -1,0 +1,17 @@
+span.nick {
+	font-weight: bold;
+	cursor: pointer;
+	border: 1px solid #CCCCCC;
+	background: #eee;
+}
+
+span.nick:hover {
+	background: white;
+}
+#nick_container_parent input.nick
+{
+	height: 14px;
+	padding: 0;
+	margin: 0;
+	font-size: 14px;
+}

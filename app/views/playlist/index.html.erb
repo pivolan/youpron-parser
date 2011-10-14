@@ -2,13 +2,12 @@
 <% for playlist in @user.playlist do %>
 	<p>
 		<span><%= playlist.title %></span>
-		<a href="<%= url_for :action=>:add_random_video, :id => playlist._id %>">add random video in playlist</a>
-		<%= link_to 'delete', :action=>:delete_playlist, :id=> playlist._id %>
-		<%= link_to 'view', :action => :view_playlist, :id=> playlist._id %>
+		<%= link_to 'delete', :action=>:delete, :id=> playlist._id %>
+		<%= link_to 'view', :action => :view, :id=> playlist._id %>
 	</p>
 <% end %>
 </div>
-<a id="create_playlist" href="<%= url_for :action=>:create_playlist %>">create playlist</a>
+<a id="create_playlist" href="<%= url_for :action=>:create %>">create playlist</a>
 <input type="text" value="" name="title" id='playlist_title'/>
 <span class="error"></span>
 <script type="text/javascript">

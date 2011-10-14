@@ -1,0 +1,132 @@
+div.playlist {
+	position: fixed;
+	bottom: 0px;
+	background: #E3E3E3;
+	height: 29px;
+	width: 100%;
+	z-index: 999;
+	padding: 0;
+	margin: 0;
+	font-family: Arial;
+	font-size: 14px;
+	-moz-user-select: none;
+	user-select: none;
+	-khtml-user-select: none;
+}
+
+div.playlist.open {
+	height: 139px;
+}
+
+div.playlist_list {
+	background: white;
+	height: 110px;
+	position: absolute;
+	top: 29px;
+	padding: 5px 5px 0 0;
+	text-align: left;
+	white-space: nowrap;
+	left: 0px;
+}
+
+div.playlist_list .pl_video {
+	margin-right: 5px;
+	position: relative;
+}
+
+div.playlist_list .pl_video a.delete {
+	position: absolute;
+	background: url('/images/minus.png');
+	width: 32px;
+	height: 32px;
+	right: 2px;
+	top: -90px;
+	display: none;
+}
+
+div.playlist_list .pl_video:hover a.delete {
+	display: block;
+}
+
+div.title_playlist {
+	position: absolute;
+	left: 0px;
+	height: 29px;
+	cursor: pointer;
+	width: auto;
+	padding: 5px 15px 0 5px;
+}
+
+div.title_playlist:hover {
+	background: red;
+}
+
+div.title_playlist span.title {
+
+}
+
+div.title_playlist div.select_playlist {
+	position: absolute;
+	display: none;
+	background: red;
+	bottom: 29px;
+	padding: 10px;
+	left: -5px;
+}
+
+div.title_playlist:hover div.select_playlist {
+	display: block;
+}
+
+div.title_playlist div.select_playlist ul li {
+	text-align: left;
+	color: white;
+	width: 250px;
+}
+
+div.title_playlist div.select_playlist ul li:hover {
+	background: black;
+}
+
+div.show_hide {
+	position: absolute;
+	right: 0px;
+	height: 20px;
+	cursor: pointer;
+	padding: 5px;
+	-moz-user-select: none;
+	user-select: none;
+	-khtml-user-select: none;
+}
+
+div.show_hide:hover {
+	background: red;
+}
+
+div.show_hide {
+}
+.add_playlist {
+	display: inline-block;
+	width: 16px;
+	height: 15px;
+	position: relative;
+	margin-right: 5px;
+	background: url('/images/plus.png') no-repeat;
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); /* IE 5.5+*/
+	-moz-opacity: 0.5; /* Mozilla 1.6 и ниже */
+	-khtml-opacity: 0.5; /* Konqueror 3.1, Safari 1.1 */
+	opacity: 0.5; /* CSS3 - Mozilla 1.7b +, Firefox 0.9 +, Safari 1.2+, Opera 9 */
+}
+.add_playlist.selected
+{
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100); /* IE 5.5+*/
+	-moz-opacity: 1; /* Mozilla 1.6 и ниже */
+	-khtml-opacity: 1; /* Konqueror 3.1, Safari 1.1 */
+	opacity: 1; /* CSS3 - Mozilla 1.7b +, Firefox 0.9 +, Safari 1.2+, Opera 9 */
+}
+.add_playlist:hover {
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100); /* IE 5.5+*/
+	-moz-opacity: 1; /* Mozilla 1.6 и ниже */
+	-khtml-opacity: 1; /* Konqueror 3.1, Safari 1.1 */
+	opacity: 1; /* CSS3 - Mozilla 1.7b +, Firefox 0.9 +, Safari 1.2+, Opera 9 */
+}

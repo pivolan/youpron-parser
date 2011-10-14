@@ -3,7 +3,7 @@ class ProfileController < ApplicationController
 	skip_before_filter :can_view, :only => [:short_url_login, :long_url_login]
 
 	def index
-
+		
 	end
 
 	def all
@@ -46,24 +46,14 @@ class ProfileController < ApplicationController
 		else
 			@short_url = @user.generate_short_url
 			@user.save!
+			redirect_to :back			
 		end
-	end
-
-	def exit
-		session.delete(:id)
-		cookies.to_hash.each_pair do |k, v|
-			cookies[k.to_sym] = {:value => '', :path => '/', :domain => '.domain.com', :expire => 1.day.ago}
-		end
-	end
-
-	def vasya
-		render :layout => false
 	end
 
 	def delete_short_url
 		@user.short_url = nil
 		@user.save!
-		redirect_to :action => :index
+		redirect_to :back
 	end
 
 	def clear_seen_list
@@ -77,4 +67,19 @@ class ProfileController < ApplicationController
 		@user.save!
 		redirect_to :action => :index
 	end
+
+	def nick
+		if params[:nick] != nil
+			@user.nick = params[:nick]
+			@user.save!
+		end
+		render :json => @user
+	end
+
+	def logout
+		cookies.delete(:uid)
+		session.delete(:id)
+		render :layout => false, :render => false
+	end
+
 end
