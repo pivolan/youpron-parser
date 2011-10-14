@@ -488,7 +488,7 @@
 		function modalDimensions(that) {
 			// loading overlay height has to be explicitly set for IE6.
 			$topBorder[0].style.width = $bottomBorder[0].style.width = $content[0].style.width = that.style.width;
-			$loadingOverlay[0].style.height = $loadingOverlay[1].style.height = $content[0].style.height = $leftBorder[0].style.height = $rightBorder[0].style.height = that.style.height;
+			$loadingOverlay[0].style.height = $loadingOverlay[1].style.height = $content[0].style.height = $leftBorder[0].style.height = $rightBorder[0].style.height = that.style.height = "auto";
 		}
 		
 		$box.dequeue().animate({width: settings.w + loadedWidth, height: settings.h + loadedHeight, top: top, left: left}, {
@@ -568,7 +568,7 @@
 		$loaded.hide()
 		.appendTo($loadingBay.show())// content has to be appended to the DOM for accurate size calculations.
 		.css({width: getWidth(), overflow: settings.scrolling ? 'auto' : 'hidden'})
-		.css({height: getHeight()})// sets the height independently from the width in case the new width influences the value of height.
+		.css({height: "auto"})// sets the height independently from the width in case the new width influences the value of height.
 		.prependTo($content);
 		
 		$loadingBay.hide();
@@ -708,9 +708,10 @@
 		
 		trigger(event_load, settings.onLoad);
 		
-		settings.h = settings.height ?
-				setSize(settings.height, 'y') - loadedHeight - interfaceHeight :
-				settings.innerHeight && setSize(settings.innerHeight, 'y');
+		settings.h = "auto";
+//						settings.height ?
+//				setSize(settings.height, 'y') - loadedHeight - interfaceHeight :
+//				settings.innerHeight && setSize(settings.innerHeight, 'y');
 		
 		settings.w = settings.width ?
 				setSize(settings.width, 'x') - loadedWidth - interfaceWidth :

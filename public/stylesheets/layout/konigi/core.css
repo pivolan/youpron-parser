@@ -572,6 +572,7 @@ dl dd {
 div.metadata {
 	width: 600px;
 	margin: 0 auto;
+	min-height:200px;
 }
 
 #notebook-latest .metadata {
