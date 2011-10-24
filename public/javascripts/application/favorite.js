@@ -7,6 +7,8 @@
  */
 //  Клик на В избранное
 var Favorite = {
+	favorites: null,
+
 	init: function() {
 		$('.afavorite').live('click', function(event) {
 			var video_id = $(this).parent().parent().children('a').attr('data-video');
@@ -26,13 +28,23 @@ var Favorite = {
 	del: function (video_id) {
 		$.post('/video/favorite', {'id':video_id, 'act':'del'}, function(data) {
 			Playlist.removeVideoFavorite(video_id);
+			var index = Favorite.favorites.indexOf(video_id);
+			if(index != -1)
+			{
+				Favorite.favorites.splice(index, 1);
+			}
 		});
 	},
 	add: function(video_id) {
 		$.ajax('/video/favorite', {data:{'id':video_id, 'act':'add'}, dataType:"json",type:'post', success: function(json) {
-			console.log(json);
-
 			Playlist.addVideoFavorite(json);
+			var index = Favorite.favorites.indexOf(video_id);
+			if(index != -1)
+			{
+				Favorite.favorites.splice(index, 1);
+			}
+			Favorite.favorites.push(video_id);
+			console.log(Favorite.favorites);
 		}});
 	}
 };

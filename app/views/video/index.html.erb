@@ -22,7 +22,7 @@
 		// фильтры просмотренного видео
 		FilterSeen.init($('#seen'), $('#unseen'), $('#clicked'), $('#unclicked'), $('#censored'));
 //Автоподгрузка при скроллинге
-		Common.favorites = <%=raw @favorites.to_json() %>;
+		Favorite.favorites = <%=raw @favorites.to_json() %>;
 		Common.init();
 
 //Добавляем к картинкам кнопки в избранное и в плейлист

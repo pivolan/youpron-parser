@@ -6,7 +6,6 @@ var Common =
 	page : 1,
 	per_page : 25,
 	page_blocked : null,
-	favorites : null,
 
 	init : function() {
 		this.initGetVideo();
@@ -61,8 +60,8 @@ var Common =
 											'	</a>' +
 											'	<div class="favorite">' +
 											'		<a class="aplaylist add_playlist" title="В плейлист" data-video="' + data[id].id + '" onclick="Playlist.addVideo($(this))" ></a>';
-			if (Common.favorites) {
-				if (Common.favorites.indexOf(String(data[id].id)) != -1) {
+			if (Favorite.favorites) {
+				if (Favorite.favorites.indexOf(String(data[id].id)) != -1) {
 					result += '		<a class="afavorite favorited" title="В избранное"></a>';
 				}
 				else {
