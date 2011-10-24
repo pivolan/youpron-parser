@@ -44,7 +44,6 @@ var Favorite = {
 				Favorite.favorites.splice(index, 1);
 			}
 			Favorite.favorites.push(video_id);
-			console.log(Favorite.favorites);
 		}});
 	}
 };
